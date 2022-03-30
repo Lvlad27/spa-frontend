@@ -1,0 +1,45 @@
+@import url(/assets/fonts/inter.css);
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: "Inter", Courier, sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  min-height: 100vh; }
+
+header {
+  text-align: center;
+  background-color: #2b4560; }
+  header .nav {
+    display: flex;
+    justify-content: center; }
+
+.main {
+  flex: 1;
+  display: flex; }
+  .main .section-menu {
+    flex: 0 0 20vw;
+    background-color: #e1e7e0;
+    text-align: center; }
+  .main .section-content {
+    flex: 1 0 65vw;
+    background-color: #6aa4b0;
+    text-align: center; }
+  .main .section-ads {
+    flex: 0 0 15vw;
+    background-color: #e1e7e0; }
+
+.footer {
+  text-align: center;
+  background-color: #2b4560; }
