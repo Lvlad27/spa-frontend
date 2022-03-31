@@ -4,8 +4,14 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
         <link rel="stylesheet" href="/css/style.css" />
         <title>Title</title>
+
+        <script
+            src="https://kit.fontawesome.com/426a99cbec.js"
+            crossorigin="anonymous"
+        ></script>
     </head>
     <body>
         <header>
@@ -24,9 +30,28 @@
                     <li>5</li>
                 </ul>
             </nav>
+
             <section class="section section-content">
-                <p>Col-2</p>
+                <div class="container">
+                    <h2>Please login</h2>
+                    <form class="form">
+                        <div class="form__control">
+                            <input type="email" required />
+                            <label>Email</label>
+                        </div>
+                        <div class="form__control">
+                            <input type="password" required />
+                            <label>Password</label>
+                        </div>
+
+                        <button class="btn">Login</button>
+                        <p class="text">
+                            Don't have an account? <a href="#">Register</a>
+                        </p>
+                    </form>
+                </div>
             </section>
+
             <aside class="section section-ads">
                 <p>Col-3</p>
             </aside>
