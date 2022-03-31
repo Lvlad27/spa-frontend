@@ -12,7 +12,9 @@
             src="https://kit.fontawesome.com/426a99cbec.js"
             crossorigin="anonymous"
         ></script>
+        <script defer src="./js/loginForm.js"></script>
     </head>
+
     <body>
         <header>
             <nav class="nav">
@@ -21,7 +23,27 @@
         </header>
 
         <main class="main">
-            <nav class="section section-menu">
+            <div class="container container__login">
+                <h2 class="container__login-title">Please login</h2>
+                <form class="form form__login">
+                    <div class="form__login-control">
+                        <input type="email" required />
+                        <label>Email</label>
+                    </div>
+                    <div class="form__login-control">
+                        <input type="password" required />
+                        <label>Password</label>
+                    </div>
+
+                    <button class="form__login-btn">Login</button>
+                    <p class="form__login-text">
+                        Don't have an account?
+                        <a class="form__login-text--link" href="#">Register</a>
+                    </p>
+                </form>
+            </div>
+
+            <nav class="section section__menu">
                 <ul>
                     <li>1</li>
                     <li>2</li>
@@ -31,28 +53,9 @@
                 </ul>
             </nav>
 
-            <section class="section section-content">
-                <div class="container">
-                    <h2>Please login</h2>
-                    <form class="form">
-                        <div class="form__control">
-                            <input type="email" required />
-                            <label>Email</label>
-                        </div>
-                        <div class="form__control">
-                            <input type="password" required />
-                            <label>Password</label>
-                        </div>
+            <section class="section section__content"></section>
 
-                        <button class="btn">Login</button>
-                        <p class="text">
-                            Don't have an account? <a href="#">Register</a>
-                        </p>
-                    </form>
-                </div>
-            </section>
-
-            <aside class="section section-ads">
+            <aside class="section section__ads">
                 <p>Col-3</p>
             </aside>
         </main>

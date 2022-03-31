@@ -19,28 +19,74 @@ header {
 .main {
   flex: 1;
   display: flex; }
-  .main .section-menu {
+  .main .container__login {
+    z-index: 99;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #2f6d80;
+    padding: 2rem 4rem;
+    border-radius: 5px; }
+    .main .container__login-title {
+      text-align: center;
+      margin-bottom: 3rem; }
+    .main .container__login a {
+      text-decoration: none;
+      color: #e1e7e0; }
+    .main .container__login .form__login-btn {
+      width: 100%;
+      display: inline-block;
+      padding: 1.5rem;
+      cursor: pointer;
+      background: #6aa4b0;
+      font-family: inherit;
+      border: 0;
+      border-radius: 5px; }
+      .main .container__login .form__login-btn:focus {
+        outline: 0; }
+      .main .container__login .form__login-btn:active {
+        transform: scale(0.98); }
+    .main .container__login .form__login-text {
+      margin-top: 3rem; }
+    .main .container__login .form__login-control {
+      position: relative;
+      margin: 2rem 0 4rem;
+      width: 30rem; }
+      .main .container__login .form__login-control input {
+        background-color: transparent;
+        border: 0;
+        border-bottom: 2px white solid;
+        display: block;
+        width: 100%;
+        padding: 1.5rem 0;
+        font-size: 2rem;
+        color: white; }
+        .main .container__login .form__login-control input:focus, .main .container__login .form__login-control input:valid {
+          outline: 0;
+          border-bottom-color: lightblue; }
+      .main .container__login .form__login-control label {
+        position: absolute;
+        top: 1.5rem;
+        left: 0;
+        pointer-events: none; }
+        .main .container__login .form__login-control label span {
+          display: inline-block;
+          font-size: 2rem;
+          min-width: 5px; }
+      .main .container__login .form__login-control input:focus + label span,
+      .main .container__login .form__login-control input:valid + label span {
+        color: lightblue;
+        transform: translateY(-3rem);
+        transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+  .main .section__menu {
     flex: 0 0 20vw;
     background-color: #e1e7e0; }
-  .main .section-content {
+  .main .section__content {
     display: flex;
     flex: 1 0 65vw;
     background-color: #6aa4b0; }
-    .main .section-content .container {
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background-color: rgba(0, 0, 0, 0.4);
-      padding: 2rem 4rem; }
-      .main .section-content .container h2 {
-        text-align: center;
-        margin-bottom: 3rem; }
-      .main .section-content .container a {
-        text-decoration: none;
-        color: lightblue; }
-  .main .section-ads {
+  .main .section__ads {
     flex: 0 0 15vw;
     background-color: #e1e7e0; }
 
