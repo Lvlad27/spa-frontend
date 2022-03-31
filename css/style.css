@@ -30,7 +30,8 @@ header {
     border-radius: 5px; }
     .main .container__login-title {
       text-align: center;
-      margin-bottom: 3rem; }
+      margin-bottom: 3rem;
+      color: white; }
     .main .container__login a {
       text-decoration: none;
       color: #e1e7e0; }
@@ -63,7 +64,7 @@ header {
         color: white; }
         .main .container__login .form__login-control input:focus, .main .container__login .form__login-control input:valid {
           outline: 0;
-          border-bottom-color: lightblue; }
+          border-bottom-color: white; }
         .main .container__login .form__login-control input::placeholder {
           color: #2b4560;
           font-weight: 100; }
@@ -78,7 +79,8 @@ header {
     border-radius: 5px; }
     .main .container__registration-title {
       text-align: center;
-      margin-bottom: 3rem; }
+      margin-bottom: 3rem;
+      color: white; }
     .main .container__registration a {
       text-decoration: none;
       color: #e1e7e0; }
@@ -111,7 +113,7 @@ header {
         color: white; }
         .main .container__registration .form__registration-control input:focus, .main .container__registration .form__registration-control input:valid {
           outline: 0;
-          border-bottom-color: lightblue; }
+          border-bottom-color: white; }
         .main .container__registration .form__registration-control input::placeholder {
           color: #2b4560;
           font-weight: 100; }

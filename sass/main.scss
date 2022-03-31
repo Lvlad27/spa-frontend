@@ -1,26 +1,8 @@
 @import url(/assets/fonts/inter.css);
 @import url(/css/reset.css);
+@import '__variables';
+@import '__mixins';
 
-// FONTS
-$font-primary: 'Inter', Courier, sans-serif;
-
-$default-font-size: 1.6rem;
-$medium-font-size: 2rem;
-$large-font-size: 4rem;
-// COLOR VARIABLES
-// $color-primary: #fe6d73;
-// $color-secondary: #fef9ef;
-// $color-tertiary: #227c9d;
-
-$color-1: #2b4560;
-$color-2: #e1e7e0;
-$color-3: #6aa4b0;
-$color-4: #2f6d80;
-
-// FONT VARIABLES
-// ANIMATIONS32
-
-// BASE
 html {
     font-size: 62.5%; // 10px/16px = 62.5% -> 1rem = 10px;
 }
@@ -39,82 +21,6 @@ header {
     .nav {
         display: flex;
         justify-content: center;
-    }
-}
-
-@mixin form($type, $zindex) {
-    &__#{$type} {
-        z-index: $zindex;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-
-        background-color: $color-4;
-        padding: 2rem 4rem;
-        border-radius: 5px;
-
-        &-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        a {
-            text-decoration: none;
-            color: $color-2;
-        }
-
-        .form {
-            &__#{$type} {
-                &-btn {
-                    width: 100%;
-                    display: inline-block;
-                    padding: 1.5rem;
-                    margin-bottom: 1.5rem;
-                    cursor: pointer;
-                    background: $color-3;
-                    font-family: inherit;
-                    border: 0;
-                    border-radius: 5px;
-
-                    &:focus {
-                        outline: 0;
-                    }
-
-                    &:active {
-                        transform: scale(0.98);
-                    }
-                }
-
-                &-control {
-                    position: relative;
-                    margin: 2rem 0 4rem;
-                    width: 30rem;
-
-                    input {
-                        background-color: transparent;
-                        border: 0;
-                        border-bottom: 2px white solid;
-                        display: block;
-                        width: 100%;
-                        padding: 1.5rem 0 5px;
-                        font-size: $medium-font-size;
-                        color: white;
-
-                        &:focus,
-                        &:valid {
-                            outline: 0;
-                            border-bottom-color: lightblue;
-                        }
-
-                        &::placeholder {
-                            color: $color-1;
-                            font-weight: 100;
-                        }
-                    }
-                }
-            }
-        }
     }
 }
 
