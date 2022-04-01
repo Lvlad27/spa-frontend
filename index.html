@@ -12,7 +12,7 @@
             src="https://kit.fontawesome.com/426a99cbec.js"
             crossorigin="anonymous"
         ></script>
-        <script defer src="./js/loginForm.js"></script>
+        <script defer src="./js/app.js"></script>
     </head>
 
     <body>
@@ -25,19 +25,30 @@
         <main class="main">
             <div class="container container__login">
                 <h2 class="container__login-title">Please login</h2>
-                <form class="form form__login">
+                <form action="#" class="form form__login" id="loginAccount">
                     <div class="form__login-control">
-                        <input type="email" placeholder="Email" required />
+                        <input
+                            id="loginUserName"
+                            type="email"
+                            placeholder="Email"
+                            required
+                        />
                     </div>
                     <div class="form__login-control">
                         <input
+                            id="loginPass"
                             type="password"
                             placeholder="Password"
                             required
                         />
                     </div>
 
-                    <button class="form__login-btn">Login</button>
+                    <input
+                        id="loginBtn"
+                        class="form__login-btn"
+                        type="submit"
+                        value="Login"
+                    />
                     <p class="form__login-text">
                         Don't have an account?
                         <a class="form__login-text--link" href="#">Sign Up!</a>
@@ -47,21 +58,34 @@
 
             <div class="container container__registration">
                 <h2 class="container__registration-title">Sign Up</h2>
-                <form class="form form__registration">
+                <form
+                    action="#"
+                    class="form form__registration"
+                    id="registerAccount"
+                >
                     <div class="form__registration-control">
-                        <input type="email" placeholder="Email" required />
+                        <input
+                            id="signUpEmail"
+                            type="email"
+                            placeholder="Email"
+                            required
+                        />
                     </div>
                     <div class="form__registration-control">
                         <input
+                            id="signUpPass"
                             type="password"
                             placeholder="Password"
                             required
                         />
                     </div>
 
-                    <button class="form__registration-btn">
-                        Create Account
-                    </button>
+                    <input
+                        id="createAccountBtn"
+                        class="form__registration-btn"
+                        type="submit"
+                        value="Create account"
+                    />
                 </form>
             </div>
 
@@ -75,7 +99,38 @@
                 </ul>
             </nav>
 
-            <section class="section section__content"></section>
+            <section class="section section__content">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Blanditiis saepe sit minus numquam ab inventore, iure ipsa
+                    tenetur repudiandae iusto reiciendis quibusdam enim facilis
+                    minima ex libero quos natus quas!
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Blanditiis saepe sit minus numquam ab inventore, iure ipsa
+                    tenetur repudiandae iusto reiciendis quibusdam enim facilis
+                    minima ex libero quos natus quas!
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Blanditiis saepe sit minus numquam ab inventore, iure ipsa
+                    tenetur repudiandae iusto reiciendis quibusdam enim facilis
+                    minima ex libero quos natus quas!
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Blanditiis saepe sit minus numquam ab inventore, iure ipsa
+                    tenetur repudiandae iusto reiciendis quibusdam enim facilis
+                    minima ex libero quos natus quas!
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Blanditiis saepe sit minus numquam ab inventore, iure ipsa
+                    tenetur repudiandae iusto reiciendis quibusdam enim facilis
+                    minima ex libero quos natus quas!
+                </p>
+            </section>
 
             <aside class="section section__ads">
                 <p>Col-3</p>

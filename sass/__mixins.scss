@@ -70,6 +70,12 @@
                             color: $color-1;
                             font-weight: 100;
                         }
+
+                        &:-webkit-autofill {
+                            background-clip: text;
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: white !important;
+                        }
                     }
                 }
             }

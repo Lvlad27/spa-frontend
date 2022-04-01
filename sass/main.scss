@@ -30,8 +30,20 @@ header {
     display: flex;
 
     .container {
-        @include form(login, 99);
-        @include form(registration, -1);
+        @include form(login, 1);
+        @include form(registration, 1);
+
+        &__login {
+            top: 50%;
+            left: 50%;
+            transform: translate(-100%, -50%);
+        }
+
+        &__registration {
+            top: 50%;
+            left: 50%;
+            transform: translate(25%, -50%);
+        }
 
         .form__login-text {
             text-align: center;
@@ -45,7 +57,6 @@ header {
         }
 
         &__content {
-            display: flex;
             flex: 1 0 65vw;
             background-color: $color-3;
         }

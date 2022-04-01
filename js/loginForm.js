@@ -1,7 +1,3 @@
-const loginFormAnimation = function (formType) {
-    if(formType === )
-}
-
 const labels = document.querySelectorAll('.form__login-control label');
 
 labels.forEach(label => {
