@@ -46,57 +46,24 @@ function addUser() {
 }
 
 function checkLoginData() {
-    let users = Storage.getUsers();
-    let storedUserName = Storage.getUsers()[0].userName;
-    let storedPassword = Storage.getUsers()[0].password;
+    const users = Storage.getUsers();
+    let storedUserNames = [];
+    let storedPasswords = [];
 
-    console.log(users);
-
-    /*
-    
-    if (
-        loginUserName.value === storedUserName &&
-        loginPass.value === storedPass
-    ) {
-        alert('You are loged in.');
-    } else {
-        alert('ERROR.');
+    for (let i = 0; i < users.length; i++) {
+        storedUserNames.push(users[i].userName);
+        storedPasswords.push(users[i].password);
     }
-    */
+
+    if (
+        storedUserNames.includes(loginUserName.value) &&
+        storedPasswords.includes(loginPassword.value)
+    ) {
+        alert('Welcome! You are logged in.');
+    } else {
+        alert('Error! Please enter valid credentials.');
+    }
 }
 
 registerForm.addEventListener('submit', addUser);
 loginBtn.addEventListener('click', checkLoginData);
-
-/*
-// Storing input from register form
-function registerFormStorage() {
-    localStorage.setItem('userName', userName.value);
-    localStorage.setItem('password', password.value);
-}
-
-// check if stored data from register form is equal to entered data in the login form
-function checkUserLoginData() {
-    // stored data from register form
-    let storedUserName = localStorage.getItem('userName');
-    let storedPassword = localStorage.getItem('password');
-
-    // entered data from login form
-    let loginUserName = document.getElementById('loginUserName');
-    let loginPassword = document.getElementById('loginPassword');
-
-    // actual check
-    if (
-        loginUserName.value == storedUserName &&
-        loginPass.value == storedPass
-    ) {
-        alert('You are loged in.');
-    } else {
-        alert('ERROR.');
-    }
-}
-
-// EVENT LISTENERS
-createAccountBtn.addEventListener('submit', registerFormStorage);
-loginBtn.addEventListener('click', checkUserLoginData);
-*/
