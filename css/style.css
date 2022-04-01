@@ -16,11 +16,38 @@ header {
     display: flex;
     justify-content: center; }
 
+.overlay {
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: 0 blur(3px);
+  z-index: 5; }
+  .overlay--hidden {
+    display: none;
+    overflow: hidden; }
+
+.hide-element {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+
 .main {
   flex: 1;
   display: flex; }
   .main .container__login {
-    z-index: 1;
+    z-index: 99;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -75,7 +102,7 @@ header {
           -webkit-background-clip: text;
           -webkit-text-fill-color: white !important; }
   .main .container__registration {
-    z-index: 1;
+    z-index: 99;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -129,14 +156,6 @@ header {
           background-clip: text;
           -webkit-background-clip: text;
           -webkit-text-fill-color: white !important; }
-  .main .container__login {
-    top: 50%;
-    left: 50%;
-    transform: translate(-100%, -50%); }
-  .main .container__registration {
-    top: 50%;
-    left: 50%;
-    transform: translate(25%, -50%); }
   .main .container .form__login-text {
     text-align: center; }
   .main .section__menu {
