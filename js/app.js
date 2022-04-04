@@ -39,34 +39,41 @@ const signUpLink = document.getElementById('signUpLink');
 const createAccountBtn = document.getElementById('createAccountBtn');
 const overlay = document.getElementById('overlay');
 
+const storage = new Storage();
 
 class App {
-    
     constructor() {
-
         // Attach event listeners
-        window.addEventListener('DOMContentLoaded', function() {
-            overlay.classList.remove('overlay--hidden');
-            this.hideForm(loginForm);
-            this.showForm(registerForm);
-        }.bind(this));
+        window.addEventListener(
+            'DOMContentLoaded',
+            function () {
+                overlay.classList.remove('overlay--hidden');
+                this.hideForm(loginForm);
+                this.showForm(registerForm);
+            }.bind(this)
+        );
 
-        createAccountBtn.addEventListener('click', function () {
-            alert("You've been registered!");
-            this.hideForm(registerForm);
-            this.showForm(loginForm);
-        }.bind(this));
+        createAccountBtn.addEventListener(
+            'click',
+            this.checkRegistrationData.bind(this).bind(this)
+        );
 
-        signUpLink.addEventListener('click', function () {
-            this.hideForm(loginForm);
-            this.showForm(registerForm);
-        }.bind(this));
-        
-        loginLink.addEventListener('click', function () {
-            this.showForm(loginForm);
-            this.hideForm(registerForm);
-        }.bind(this));
-        
+        signUpLink.addEventListener(
+            'click',
+            function () {
+                this.hideForm(loginForm);
+                this.showForm(registerForm);
+            }.bind(this)
+        );
+
+        loginLink.addEventListener(
+            'click',
+            function () {
+                this.showForm(loginForm);
+                this.hideForm(registerForm);
+            }.bind(this)
+        );
+
         registerForm.addEventListener('submit', this.addUser.bind(this));
         loginBtn.addEventListener('click', this.checkLoginData.bind(this));
     }
@@ -74,24 +81,21 @@ class App {
     hideForm(formName) {
         formName.classList.add('hide-element');
     }
-    
+
     showForm(formName) {
         formName.classList.remove('hide-element');
     }
 
     addUser() {
         const user = new User(userName.value, password.value);
-        const storage = new Storage();
-    
+
         if (user != '') {
             storage.storeUser(user);
-            console.log('user');
         }
     }
 
-// TODO make a sign up function validation check
+    // TODO make a sign up function validation check
     checkLoginData() {
-        const storage = new Storage();
         const users = storage.getUsers();
         let storedUserNames = [];
         let storedPasswords = [];
@@ -100,7 +104,7 @@ class App {
             storedUserNames.push(users[i].userName);
             storedPasswords.push(users[i].password);
         }
-    
+
         if (
             storedUserNames.includes(loginUserName.value) &&
             storedPasswords.includes(loginPassword.value)
@@ -109,12 +113,19 @@ class App {
             overlay.classList.add('overlay--hidden');
             this.hideForm(loginForm);
         } else {
-            alert('Error! Please enter valid credentials.');
+            alert('Error! Please enter your email and password.');
         }
-    } 
+    }
+
+    checkRegistrationData() {
+        if (userName.checkValidity() && password.checkValidity()) {
+            alert('Your account has been registered!');
+            this.showForm(loginForm);
+            this.hideForm(registerForm);
+        } else {
+            alert('Something is wrong with your email or password!');
+        }
+    }
 }
 
 const app = new App();
-
-
-

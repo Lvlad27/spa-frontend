@@ -167,13 +167,15 @@ header {
     text-align: center; }
   .main .section__menu {
     flex: 0 0 20vw;
-    background-color: white; }
+    background-color: #1e293b;
+    color: white; }
   .main .section__content {
     flex: 1 0 65vw;
     background-color: #78dce8; }
   .main .section__ads {
     flex: 0 0 15vw;
-    background-color: white; }
+    background-color: #1e293b;
+    color: white; }
 
 .footer {
   text-align: center;
