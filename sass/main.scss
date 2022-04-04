@@ -16,11 +16,12 @@ body {
 
 header {
     text-align: center;
-    background-color: $color-1;
+    background-color: $color-dark;
 
     .nav {
         display: flex;
         justify-content: center;
+        color: $color-3;
     }
 }
 
@@ -73,22 +74,23 @@ header {
     .section {
         &__menu {
             flex: 0 0 20vw;
-            background-color: $color-2;
+            background-color: $color-light;
         }
 
         &__content {
             flex: 1 0 65vw;
-            background-color: $color-3;
+            background-color: $color-5;
         }
 
         &__ads {
             flex: 0 0 15vw;
-            background-color: $color-2;
+            background-color: $color-light;
         }
     }
 }
 
 .footer {
     text-align: center;
-    background-color: $color-1;
+    background-color: $color-dark;
+    color: $color-3;
 }

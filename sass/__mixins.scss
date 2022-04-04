@@ -6,19 +6,19 @@
         left: 50%;
         transform: translate(-50%, -50%);
 
-        background-color: $color-4;
+        background-color: $color-dark;
         padding: 2rem 4rem;
         border-radius: 5px;
 
         &-title {
             text-align: center;
             margin-bottom: 3rem;
-            color: $color-light;
+            color: $color-3;
         }
 
         a {
             text-decoration: none;
-            color: $color-2;
+            color: $color-6;
         }
 
         .form {
@@ -29,12 +29,12 @@
                     padding: 1.5rem;
                     margin-bottom: 1.5rem;
                     cursor: pointer;
-                    background: $color-3;
+                    background: $color-2;
                     font-family: inherit;
                     font-weight: 600;
                     border: 0;
                     border-radius: 5px;
-                    color: $color-1;
+                    color: $color-dark;
 
                     &:focus {
                         outline: 0;
@@ -63,7 +63,7 @@
                         &:focus,
                         &:valid {
                             outline: 0;
-                            border-bottom-color: $color-light;
+                            border-bottom-color: $color-6;
                         }
 
                         &::placeholder {
@@ -74,9 +74,14 @@
                         &:-webkit-autofill {
                             background-clip: text;
                             -webkit-background-clip: text;
-                            -webkit-text-fill-color: white !important;
+                            -webkit-text-fill-color: $color-light !important;
                         }
                     }
+                }
+
+                &-text {
+                    color: $color-light;
+                    text-align: center;
                 }
             }
         }

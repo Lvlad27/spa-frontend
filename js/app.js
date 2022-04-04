@@ -1,7 +1,31 @@
 'use strict';
 
 ////////////////////////////////////////////////////////////////////
-// Name and password from register form
+class User {
+    constructor(userName, password) {
+        this.userName = userName;
+        this.password = password;
+    }
+}
+
+class Storage {
+    getUsers() {
+        let users = [];
+        if (localStorage.getItem('users') !== null) {
+            users = JSON.parse(localStorage.getItem('users'));
+        }
+        return users;
+    }
+
+    storeUser(user) {
+        const storage = new Storage();
+        const users = storage.getUsers();
+        users.push(user);
+        localStorage.setItem('users', JSON.stringify(users));
+    }
+}
+
+/////////////////////////////////////////
 const loginForm = document.getElementById('loginAccount');
 const registerForm = document.getElementById('registerAccount');
 const userName = document.getElementById('signUpEmail');
@@ -15,94 +39,82 @@ const signUpLink = document.getElementById('signUpLink');
 const createAccountBtn = document.getElementById('createAccountBtn');
 const overlay = document.getElementById('overlay');
 
-class User {
-    constructor(userName, password) {
-        this.userName = userName;
-        this.password = password;
-    }
-}
 
-class Storage {
-    _getUsers() {
-        let users = [];
-        if (localStorage.getItem('users') !== null) {
-            users = JSON.parse(localStorage.getItem('users'));
+class App {
+    
+    constructor() {
+
+        // Attach event listeners
+        window.addEventListener('DOMContentLoaded', function() {
+            overlay.classList.remove('overlay--hidden');
+            this.hideForm(loginForm);
+            this.showForm(registerForm);
+        }.bind(this));
+
+        createAccountBtn.addEventListener('click', function () {
+            alert("You've been registered!");
+            this.hideForm(registerForm);
+            this.showForm(loginForm);
+        }.bind(this));
+
+        signUpLink.addEventListener('click', function () {
+            this.hideForm(loginForm);
+            this.showForm(registerForm);
+        }.bind(this));
+        
+        loginLink.addEventListener('click', function () {
+            this.showForm(loginForm);
+            this.hideForm(registerForm);
+        }.bind(this));
+        
+        registerForm.addEventListener('submit', this.addUser.bind(this));
+        loginBtn.addEventListener('click', this.checkLoginData.bind(this));
+    }
+
+    hideForm(formName) {
+        formName.classList.add('hide-element');
+    }
+    
+    showForm(formName) {
+        formName.classList.remove('hide-element');
+    }
+
+    addUser() {
+        const user = new User(userName.value, password.value);
+        const storage = new Storage();
+    
+        if (user != '') {
+            storage.storeUser(user);
+            console.log('user');
         }
-        return users;
     }
-    _storeUser(user) {
-        const users = Storage.getUsers();
-        users.push(user);
-        localStorage.setItem('users', JSON.stringify(users));
-    }
-}
-
-class App {}
-
-function addUser() {
-    const user = new User(userName.value, password.value);
-
-    if (user != '') {
-        Storage.storeUser(user);
-    }
-}
 
 // TODO make a sign up function validation check
+    checkLoginData() {
+        const storage = new Storage();
+        const users = storage.getUsers();
+        let storedUserNames = [];
+        let storedPasswords = [];
 
-function checkLoginData() {
-    const users = Storage.getUsers();
-    let storedUserNames = [];
-    let storedPasswords = [];
-
-    for (let i = 0; i < users.length; i++) {
-        storedUserNames.push(users[i].userName);
-        storedPasswords.push(users[i].password);
-    }
-
-    if (
-        storedUserNames.includes(loginUserName.value) &&
-        storedPasswords.includes(loginPassword.value)
-    ) {
-        alert('Welcome! You are logged in.');
-        overlay.classList.add('overlay--hidden');
-        hideForm(loginForm);
-    } else {
-        alert('Error! Please enter valid credentials.');
-    }
+        for (let i = 0; i < users.length; i++) {
+            storedUserNames.push(users[i].userName);
+            storedPasswords.push(users[i].password);
+        }
+    
+        if (
+            storedUserNames.includes(loginUserName.value) &&
+            storedPasswords.includes(loginPassword.value)
+        ) {
+            alert('Welcome! You are logged in.');
+            overlay.classList.add('overlay--hidden');
+            this.hideForm(loginForm);
+        } else {
+            alert('Error! Please enter valid credentials.');
+        }
+    } 
 }
 
-function hideForm(formName) {
-    formName.classList.add('hide-element');
-}
-
-function showForm(formName) {
-    formName.classList.remove('hide-element');
-}
-
-// Event listeners
-signUpLink.addEventListener('click', function () {
-    hideForm(loginForm);
-    showForm(registerForm);
-});
-
-loginLink.addEventListener('click', function () {
-    showForm(loginForm);
-    hideForm(registerForm);
-});
-
-createAccountBtn.addEventListener('click', function () {
-    alert('Welcome! You are logged in.');
-    hideForm(registerForm);
-    showForm(loginForm);
-});
-
-
-window.addEventListener('DOMContentLoaded', function() {
-    overlay.classList.remove('overlay--hidden');
-    hideForm(loginForm);
-    showForm(registerForm);
-});
-
-registerForm.addEventListener('submit', addUser);
-loginBtn.addEventListener('click', checkLoginData);
 const app = new App();
+
+
+

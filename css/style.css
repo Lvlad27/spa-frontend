@@ -11,10 +11,11 @@ body {
 
 header {
   text-align: center;
-  background-color: #2b4560; }
+  background-color: #222222; }
   header .nav {
     display: flex;
-    justify-content: center; }
+    justify-content: center;
+    color: #ffd866; }
 
 .overlay {
   position: fixed;
@@ -52,28 +53,28 @@ header {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #2f6d80;
+    background-color: #222222;
     padding: 2rem 4rem;
     border-radius: 5px; }
     .main .container__login-title {
       text-align: center;
       margin-bottom: 3rem;
-      color: white; }
+      color: #ffd866; }
     .main .container__login a {
       text-decoration: none;
-      color: #e1e7e0; }
+      color: #ab9df2; }
     .main .container__login .form__login-btn {
       width: 100%;
       display: inline-block;
       padding: 1.5rem;
       margin-bottom: 1.5rem;
       cursor: pointer;
-      background: #6aa4b0;
+      background: #fc9867;
       font-family: inherit;
       font-weight: 600;
       border: 0;
       border-radius: 5px;
-      color: #2b4560; }
+      color: #222222; }
       .main .container__login .form__login-btn:focus {
         outline: 0; }
       .main .container__login .form__login-btn:active {
@@ -93,42 +94,45 @@ header {
         color: white; }
         .main .container__login .form__login-control input:focus, .main .container__login .form__login-control input:valid {
           outline: 0;
-          border-bottom-color: white; }
+          border-bottom-color: #ab9df2; }
         .main .container__login .form__login-control input::placeholder {
-          color: #2b4560;
+          color: #ff6188;
           font-weight: 100; }
         .main .container__login .form__login-control input:-webkit-autofill {
           background-clip: text;
           -webkit-background-clip: text;
           -webkit-text-fill-color: white !important; }
+    .main .container__login .form__login-text {
+      color: white;
+      text-align: center; }
   .main .container__registration {
     z-index: 99;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #2f6d80;
+    background-color: #222222;
     padding: 2rem 4rem;
     border-radius: 5px; }
     .main .container__registration-title {
       text-align: center;
       margin-bottom: 3rem;
-      color: white; }
+      color: #ffd866; }
     .main .container__registration a {
       text-decoration: none;
-      color: #e1e7e0; }
+      color: #ab9df2; }
     .main .container__registration .form__registration-btn {
       width: 100%;
       display: inline-block;
       padding: 1.5rem;
       margin-bottom: 1.5rem;
       cursor: pointer;
-      background: #6aa4b0;
+      background: #fc9867;
       font-family: inherit;
       font-weight: 600;
       border: 0;
       border-radius: 5px;
-      color: #2b4560; }
+      color: #222222; }
       .main .container__registration .form__registration-btn:focus {
         outline: 0; }
       .main .container__registration .form__registration-btn:active {
@@ -148,26 +152,30 @@ header {
         color: white; }
         .main .container__registration .form__registration-control input:focus, .main .container__registration .form__registration-control input:valid {
           outline: 0;
-          border-bottom-color: white; }
+          border-bottom-color: #ab9df2; }
         .main .container__registration .form__registration-control input::placeholder {
-          color: #2b4560;
+          color: #ff6188;
           font-weight: 100; }
         .main .container__registration .form__registration-control input:-webkit-autofill {
           background-clip: text;
           -webkit-background-clip: text;
           -webkit-text-fill-color: white !important; }
+    .main .container__registration .form__registration-text {
+      color: white;
+      text-align: center; }
   .main .container .form__login-text {
     text-align: center; }
   .main .section__menu {
     flex: 0 0 20vw;
-    background-color: #e1e7e0; }
+    background-color: white; }
   .main .section__content {
     flex: 1 0 65vw;
-    background-color: #6aa4b0; }
+    background-color: #78dce8; }
   .main .section__ads {
     flex: 0 0 15vw;
-    background-color: #e1e7e0; }
+    background-color: white; }
 
 .footer {
   text-align: center;
-  background-color: #2b4560; }
+  background-color: #222222;
+  color: #ffd866; }
