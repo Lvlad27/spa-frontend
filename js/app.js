@@ -1,46 +1,21 @@
-'use strict';
+import User from './user.js';
+import Storage from './storage.js';
 
 ////////////////////////////////////////////////////////////////////
-class User {
-    constructor(userName, password) {
-        this.userName = userName;
-        this.password = password;
-    }
-}
+export const loginForm = document.getElementById('loginAccount');
+export const registerForm = document.getElementById('registerAccount');
+export const userName = document.getElementById('signUpEmail');
+export const password = document.getElementById('signUpPass');
+export const loginUserName = document.getElementById('loginUserName');
+export const loginPassword = document.getElementById('loginPassword');
+export const loginBtn = document.getElementById('loginBtn');
+export const signUpBtn = document.getElementById('createAccountBtn');
+export const loginLink = document.getElementById('loginLink');
+export const signUpLink = document.getElementById('signUpLink');
+export const createAccountBtn = document.getElementById('createAccountBtn');
+export const overlay = document.getElementById('overlay');
 
-class Storage {
-    getUsers() {
-        let users = [];
-        if (localStorage.getItem('users') !== null) {
-            users = JSON.parse(localStorage.getItem('users'));
-        }
-        return users;
-    }
-
-    storeUser(user) {
-        const storage = new Storage();
-        const users = storage.getUsers();
-        users.push(user);
-        localStorage.setItem('users', JSON.stringify(users));
-    }
-}
-
-/////////////////////////////////////////
-const loginForm = document.getElementById('loginAccount');
-const registerForm = document.getElementById('registerAccount');
-const userName = document.getElementById('signUpEmail');
-const password = document.getElementById('signUpPass');
-const loginUserName = document.getElementById('loginUserName');
-const loginPassword = document.getElementById('loginPassword');
-const loginBtn = document.getElementById('loginBtn');
-const signUpBtn = document.getElementById('createAccountBtn');
-const loginLink = document.getElementById('loginLink');
-const signUpLink = document.getElementById('signUpLink');
-const createAccountBtn = document.getElementById('createAccountBtn');
-const overlay = document.getElementById('overlay');
-
-const storage = new Storage();
-
+////////////////////////////////////////////////////////////////////
 class App {
     constructor() {
         // Attach event listeners
@@ -53,10 +28,7 @@ class App {
             }.bind(this)
         );
 
-        createAccountBtn.addEventListener(
-            'click',
-            this.checkRegistrationData.bind(this).bind(this)
-        );
+        createAccountBtn.addEventListener('click', this.checkRegistrationData.bind(this));
 
         signUpLink.addEventListener(
             'click',
@@ -87,39 +59,30 @@ class App {
     }
 
     addUser() {
+        const storage = new Storage();
         const user = new User(userName.value, password.value);
-
         if (user != '') {
             storage.storeUser(user);
         }
     }
 
-    // TODO make a sign up function validation check
     checkLoginData() {
-        const users = storage.getUsers();
-        let storedUserNames = [];
-        let storedPasswords = [];
+        const userStorage = Storage.getUsers();
+        console.log(userStorage);
 
-        for (let i = 0; i < users.length; i++) {
-            storedUserNames.push(users[i].userName);
-            storedPasswords.push(users[i].password);
-        }
-
-        if (
-            storedUserNames.includes(loginUserName.value) &&
-            storedPasswords.includes(loginPassword.value)
-        ) {
+        if (userStorage[loginUserName.value]) {
             alert('Welcome! You are logged in.');
             overlay.classList.add('overlay--hidden');
             this.hideForm(loginForm);
         } else {
-            alert('Error! Please enter your email and password.');
+            alert('Sorry! Incorrect email and password.');
         }
     }
 
     checkRegistrationData() {
         if (userName.checkValidity() && password.checkValidity()) {
             alert('Your account has been registered!');
+            document.querySelector('form').reset();
             this.showForm(loginForm);
             this.hideForm(registerForm);
         } else {
@@ -128,4 +91,4 @@ class App {
     }
 }
 
-const app = new App();
+export default App;
