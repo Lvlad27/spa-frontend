@@ -26,6 +26,7 @@ header {
 }
 
 //////////////////////////////////////////
+@import '__animations';
 
 .overlay {
     position: fixed;
@@ -47,6 +48,7 @@ header {
 }
 
 .hide-element {
+    // opacity: 0;
     border: 0;
     clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
     clip: rect(1px, 1px, 1px, 1px);
@@ -58,6 +60,10 @@ header {
     width: 1px;
 }
 
+.show-element {
+    opacity: 1;
+}
+
 .main {
     flex: 1;
     display: flex;
@@ -65,10 +71,6 @@ header {
     .container {
         @include form(login, 99);
         @include form(registration, 99);
-
-        .form__login-text {
-            text-align: center;
-        }
     }
 
     .section {
@@ -87,7 +89,6 @@ header {
             flex: 0 0 15vw;
             background-color: $color-7;
             color: $color-light;
-
         }
     }
 }

@@ -1,6 +1,6 @@
-@mixin form($type, $zindex) {
+@mixin form($type, $z-index) {
     &__#{$type} {
-        z-index: $zindex;
+        z-index: $z-index;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -63,7 +63,7 @@
                         &:focus,
                         &:valid {
                             outline: 0;
-                            border-bottom-color: $color-6;
+                            border-bottom-color: $color-2;
                         }
 
                         &::placeholder {
@@ -76,6 +76,33 @@
                             -webkit-background-clip: text;
                             -webkit-text-fill-color: $color-light !important;
                         }
+                    }
+
+                    .fas,
+                    .far {
+                        position: absolute;
+                        margin-top: -3rem;
+                        // padding-bottom: 3rem;
+                    }
+
+                    .success-icon,
+                    .failure-icon {
+                        right: 0;
+                        // top: -5;
+                        // opacity: 0;
+                    }
+
+                    .failure-icon,
+                    .error {
+                        color: $color-2;
+                    }
+
+                    .success-icon {
+                        color: $color-3;
+                    }
+
+                    .error {
+                        margin-top: 5px;
                     }
                 }
 

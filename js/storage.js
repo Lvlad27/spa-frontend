@@ -1,5 +1,5 @@
 class Storage {
-    static getUsers() {
+    getUsers() {
         let userStorage = {};
         if (localStorage.getItem('userStorage') !== null) {
             userStorage = JSON.parse(localStorage.getItem('userStorage'));
@@ -8,7 +8,7 @@ class Storage {
     }
 
     storeUser(user) {
-        let userStorage = Storage.getUsers();
+        let userStorage = this.getUsers();
         userStorage[user.userName] = user;
         localStorage.setItem('userStorage', JSON.stringify(userStorage));
     }

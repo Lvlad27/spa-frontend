@@ -17,6 +17,24 @@ header {
     justify-content: center;
     color: #ffd866; }
 
+@keyframes FadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes FadeOut {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+.FadeIn {
+  animation: FadeIn 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both; }
+
+.FadeOut {
+  animation: FadeOut 0.3s cubic-bezier(0.39, 0.575, 0.565, 1) both; }
+
 .overlay {
   position: fixed;
   overflow: hidden;
@@ -43,6 +61,9 @@ header {
   padding: 0;
   position: absolute;
   width: 1px; }
+
+.show-element {
+  opacity: 1; }
 
 .main {
   flex: 1;
@@ -94,7 +115,7 @@ header {
         color: white; }
         .main .container__login .form__login-control input:focus, .main .container__login .form__login-control input:valid {
           outline: 0;
-          border-bottom-color: #ab9df2; }
+          border-bottom-color: #fc9867; }
         .main .container__login .form__login-control input::placeholder {
           color: #ff6188;
           font-weight: 100; }
@@ -102,6 +123,20 @@ header {
           background-clip: text;
           -webkit-background-clip: text;
           -webkit-text-fill-color: white !important; }
+      .main .container__login .form__login-control .fas,
+      .main .container__login .form__login-control .far {
+        position: absolute;
+        margin-top: -3rem; }
+      .main .container__login .form__login-control .success-icon,
+      .main .container__login .form__login-control .failure-icon {
+        right: 0; }
+      .main .container__login .form__login-control .failure-icon,
+      .main .container__login .form__login-control .error {
+        color: #fc9867; }
+      .main .container__login .form__login-control .success-icon {
+        color: #ffd866; }
+      .main .container__login .form__login-control .error {
+        margin-top: 5px; }
     .main .container__login .form__login-text {
       color: white;
       text-align: center; }
@@ -152,7 +187,7 @@ header {
         color: white; }
         .main .container__registration .form__registration-control input:focus, .main .container__registration .form__registration-control input:valid {
           outline: 0;
-          border-bottom-color: #ab9df2; }
+          border-bottom-color: #fc9867; }
         .main .container__registration .form__registration-control input::placeholder {
           color: #ff6188;
           font-weight: 100; }
@@ -160,11 +195,23 @@ header {
           background-clip: text;
           -webkit-background-clip: text;
           -webkit-text-fill-color: white !important; }
+      .main .container__registration .form__registration-control .fas,
+      .main .container__registration .form__registration-control .far {
+        position: absolute;
+        margin-top: -3rem; }
+      .main .container__registration .form__registration-control .success-icon,
+      .main .container__registration .form__registration-control .failure-icon {
+        right: 0; }
+      .main .container__registration .form__registration-control .failure-icon,
+      .main .container__registration .form__registration-control .error {
+        color: #fc9867; }
+      .main .container__registration .form__registration-control .success-icon {
+        color: #ffd866; }
+      .main .container__registration .form__registration-control .error {
+        margin-top: 5px; }
     .main .container__registration .form__registration-text {
       color: white;
       text-align: center; }
-  .main .container .form__login-text {
-    text-align: center; }
   .main .section__menu {
     flex: 0 0 20vw;
     background-color: #1e293b;

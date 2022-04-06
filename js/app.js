@@ -2,34 +2,28 @@ import User from './user.js';
 import Storage from './storage.js';
 
 ////////////////////////////////////////////////////////////////////
-export const loginForm = document.getElementById('loginAccount');
-export const registerForm = document.getElementById('registerAccount');
-export const userName = document.getElementById('signUpEmail');
-export const password = document.getElementById('signUpPass');
-export const loginUserName = document.getElementById('loginUserName');
-export const loginPassword = document.getElementById('loginPassword');
-export const loginBtn = document.getElementById('loginBtn');
-export const signUpBtn = document.getElementById('createAccountBtn');
-export const loginLink = document.getElementById('loginLink');
-export const signUpLink = document.getElementById('signUpLink');
-export const createAccountBtn = document.getElementById('createAccountBtn');
-export const overlay = document.getElementById('overlay');
+export let id = id => document.getElementById(id);
+
+export const loginForm = id('loginAccount'),
+    registerForm = id('registerAccount'),
+    userName = id('signUpEmail'),
+    password = id('signUpPass'),
+    loginUserName = id('loginUserName'),
+    loginPassword = id('loginPassword'),
+    loginBtn = id('loginBtn'),
+    signUpBtn = id('createAccountBtn'),
+    loginLink = id('loginLink'),
+    signUpLink = id('signUpLink'),
+    createAccountBtn = id('createAccountBtn'),
+    overlay = id('overlay');
 
 ////////////////////////////////////////////////////////////////////
 class App {
-    constructor() {
+    constructor(storage) {
+        this.storage = storage;
         // Attach event listeners
-        window.addEventListener(
-            'DOMContentLoaded',
-            function () {
-                overlay.classList.remove('overlay--hidden');
-                this.hideForm(loginForm);
-                this.showForm(registerForm);
-            }.bind(this)
-        );
-
+        window.addEventListener('DOMContentLoaded', this.pageLoadEvent.bind(this));
         createAccountBtn.addEventListener('click', this.checkRegistrationData.bind(this));
-
         signUpLink.addEventListener(
             'click',
             function () {
@@ -58,8 +52,26 @@ class App {
         formName.classList.remove('hide-element');
     }
 
+    pageLoadEvent() {
+        overlay.classList.remove('overlay--hidden');
+        this.hideForm(loginForm);
+        this.showForm(registerForm);
+        // this.animateFadeIn(registerForm);
+    }
+
+    /*
+    animateFadeIn(element) {
+        element.classList.remove('FadeOut');
+        element.classList.add('FadeIn');
+    }
+
+    animateFadeOut(element) {
+        element.classList.remove('FadeIn');
+        element.classList.add('FadeOut');
+    }
+    */
+
     addUser() {
-        const storage = new Storage();
         const user = new User(userName.value, password.value);
         if (user != '') {
             storage.storeUser(user);
