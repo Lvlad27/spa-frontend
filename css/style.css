@@ -128,14 +128,14 @@ header {
         position: absolute;
         margin-top: -3rem; }
       .main .container__login .form__login-control .success-icon,
-      .main .container__login .form__login-control .failure-icon {
+      .main .container__login .form__login-control .error-icon {
         right: 0; }
-      .main .container__login .form__login-control .failure-icon,
-      .main .container__login .form__login-control .error {
+      .main .container__login .form__login-control .error-icon,
+      .main .container__login .form__login-control .error-message {
         color: #fc9867; }
       .main .container__login .form__login-control .success-icon {
         color: #ffd866; }
-      .main .container__login .form__login-control .error {
+      .main .container__login .form__login-control .error-message {
         margin-top: 5px; }
     .main .container__login .form__login-text {
       color: white;
@@ -200,14 +200,14 @@ header {
         position: absolute;
         margin-top: -3rem; }
       .main .container__registration .form__registration-control .success-icon,
-      .main .container__registration .form__registration-control .failure-icon {
+      .main .container__registration .form__registration-control .error-icon {
         right: 0; }
-      .main .container__registration .form__registration-control .failure-icon,
-      .main .container__registration .form__registration-control .error {
+      .main .container__registration .form__registration-control .error-icon,
+      .main .container__registration .form__registration-control .error-message {
         color: #fc9867; }
       .main .container__registration .form__registration-control .success-icon {
         color: #ffd866; }
-      .main .container__registration .form__registration-control .error {
+      .main .container__registration .form__registration-control .error-message {
         margin-top: 5px; }
     .main .container__registration .form__registration-text {
       color: white;

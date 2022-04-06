@@ -1,5 +1,6 @@
 import User from './user.js';
 import Storage from './storage.js';
+import FormValidation from './formValidation.js';
 
 ////////////////////////////////////////////////////////////////////
 export let id = id => document.getElementById(id);
@@ -15,7 +16,12 @@ export const loginForm = id('loginAccount'),
     loginLink = id('loginLink'),
     signUpLink = id('signUpLink'),
     createAccountBtn = id('createAccountBtn'),
-    overlay = id('overlay');
+    overlay = id('overlay'),
+    form = document.querySelector('.form'),
+    formInput = ['email', 'password', 'passwordConfirmation'],
+    successIcon = formInput.parentElement.querySelector('.success-icon'),
+    errorIcon = formInput.parentElement.querySelector('.error-icon'),
+    errorMessage = field.parentElement.querySelector('.error-message');
 
 ////////////////////////////////////////////////////////////////////
 class App {

@@ -60,9 +60,8 @@
                         font-size: $medium-font-size;
                         color: $color-light;
 
-                        &:focus,
-                        &:valid {
-                            outline: 0;
+                        &:focus {
+                            outline: none;
                             border-bottom-color: $color-2;
                         }
 
@@ -86,14 +85,14 @@
                     }
 
                     .success-icon,
-                    .failure-icon {
+                    .error-icon {
                         right: 0;
                         // top: -5;
                         // opacity: 0;
                     }
 
-                    .failure-icon,
-                    .error {
+                    .error-icon,
+                    .error-message {
                         color: $color-2;
                     }
 
@@ -101,9 +100,17 @@
                         color: $color-3;
                     }
 
-                    .error {
+                    .error-message {
+                        font-size: $small-font-size;
                         margin-top: 5px;
                     }
+
+                    &.input-error {
+                        border: 1px solid $color-2;
+                
+                        &:focus {
+                            border: 1px solid $color-2;
+                        }
                 }
 
                 &-text {

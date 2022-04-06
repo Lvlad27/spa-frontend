@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link rel="stylesheet" href="/css/style.css" />
-        <title>Title</title>
+        <title>Connex</title>
     </head>
 
     <body>
@@ -19,22 +19,22 @@
 
         <main class="main">
             <!-- ----------------------------- LOGIN FORM ------------------------------ -->
-
             <div class="container container__login" id="loginAccount">
                 <h2 class="container__login-title">Login</h2>
                 <form action="#" class="form form__login">
+                    <!-- Email -->
                     <div class="form__login-control">
                         <input id="loginUserName" type="email" placeholder="Email" required />
-                        <i class="fas fa-exclamation-circle failure-icon"></i>
+                        <i class="fas fa-exclamation-circle error-icon"></i>
                         <i class="far fa-check-circle success-icon"></i>
-                        <div class="error"></div>
+                        <small class="error-message"></small>
                     </div>
-
+                    <!-- Password -->
                     <div class="form__login-control">
                         <input id="loginPassword" type="password" placeholder="Password" required />
-                        <i class="fas fa-exclamation-circle failure-icon"></i>
+                        <i class="fas fa-exclamation-circle error-icon"></i>
                         <i class="far fa-check-circle success-icon"></i>
-                        <div class="error"></div>
+                        <small class="error-message"></small>
                     </div>
 
                     <input id="loginBtn" class="form__login-btn" type="submit" value="Login" />
@@ -44,35 +44,37 @@
                     </p>
                 </form>
             </div>
-
             <!-- ----------------------------------------------------------------------- -->
 
             <!-- -------------------------- REGISTRATION FORM -------------------------- -->
-
             <div class="container container__registration" id="registerAccount">
                 <h2 class="container__registration-title">Sign Up</h2>
                 <form action="#" class="form form__registration">
                     <div class="form__registration-control">
+                        <!-- Email -->
                         <input id="signUpEmail" type="email" placeholder="Email" required />
-                        <i class="fas fa-exclamation-circle failure-icon"></i>
+                        <i class="fas fa-exclamation-circle error-icon"></i>
                         <i class="far fa-check-circle success-icon"></i>
-                        <div class="error"></div>
+                        <div class="error-message"></div>
                     </div>
 
                     <div class="form__registration-control">
+                        <!-- Password -->
                         <input id="signUpPass" type="password" placeholder="Password" required />
-                        <i class="fas fa-exclamation-circle failure-icon"></i>
+                        <i class="fas fa-exclamation-circle error-icon"></i>
                         <i class="far fa-check-circle success-icon"></i>
-                        <div class="error"></div>
+                        <small class="error-message"></small>
+
+                        <!-- Confirm Password -->
                         <input
                             id="confirmPass"
                             type="password"
                             placeholder="Confirm Password"
                             required
                         />
-                        <i class="fas fa-exclamation-circle failure-icon"></i>
+                        <i class="fas fa-exclamation-circle error-icon"></i>
                         <i class="far fa-check-circle success-icon"></i>
-                        <div class="error"></div>
+                        <small class="error-message"></small>
                     </div>
 
                     <input
@@ -87,7 +89,6 @@
                     </p>
                 </form>
             </div>
-
             <!-- ----------------------------------------------------------------------- -->
 
             <nav class="section section__menu">
