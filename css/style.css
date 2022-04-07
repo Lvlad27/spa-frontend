@@ -113,9 +113,9 @@ header {
         padding: 1.5rem 0 5px;
         font-size: 2rem;
         color: white; }
-        .main .container__login .form__login-control input:focus, .main .container__login .form__login-control input:valid {
-          outline: 0;
-          border-bottom-color: #fc9867; }
+        .main .container__login .form__login-control input:focus {
+          outline: none;
+          border-bottom-color: white; }
         .main .container__login .form__login-control input::placeholder {
           color: #ff6188;
           font-weight: 100; }
@@ -136,7 +136,12 @@ header {
       .main .container__login .form__login-control .success-icon {
         color: #ffd866; }
       .main .container__login .form__login-control .error-message {
+        font-size: 1.3rem;
         margin-top: 5px; }
+      .main .container__login .form__login-control.input-error {
+        border: 1px solid #fc9867; }
+        .main .container__login .form__login-control.input-error:focus {
+          border: 1px solid #fc9867; }
     .main .container__login .form__login-text {
       color: white;
       text-align: center; }
@@ -185,9 +190,9 @@ header {
         padding: 1.5rem 0 5px;
         font-size: 2rem;
         color: white; }
-        .main .container__registration .form__registration-control input:focus, .main .container__registration .form__registration-control input:valid {
-          outline: 0;
-          border-bottom-color: #fc9867; }
+        .main .container__registration .form__registration-control input:focus {
+          outline: none;
+          border-bottom-color: white; }
         .main .container__registration .form__registration-control input::placeholder {
           color: #ff6188;
           font-weight: 100; }
@@ -208,7 +213,12 @@ header {
       .main .container__registration .form__registration-control .success-icon {
         color: #ffd866; }
       .main .container__registration .form__registration-control .error-message {
+        font-size: 1.3rem;
         margin-top: 5px; }
+      .main .container__registration .form__registration-control.input-error {
+        border: 1px solid #fc9867; }
+        .main .container__registration .form__registration-control.input-error:focus {
+          border: 1px solid #fc9867; }
     .main .container__registration .form__registration-text {
       color: white;
       text-align: center; }

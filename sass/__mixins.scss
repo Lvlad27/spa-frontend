@@ -62,7 +62,7 @@
 
                         &:focus {
                             outline: none;
-                            border-bottom-color: $color-2;
+                            border-bottom-color: $color-light;
                         }
 
                         &::placeholder {
@@ -107,10 +107,11 @@
 
                     &.input-error {
                         border: 1px solid $color-2;
-                
+
                         &:focus {
                             border: 1px solid $color-2;
                         }
+                    }
                 }
 
                 &-text {

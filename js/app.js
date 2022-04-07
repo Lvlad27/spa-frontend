@@ -1,14 +1,14 @@
 import User from './user.js';
 import Storage from './storage.js';
-import FormValidation from './formValidation.js';
 
 ////////////////////////////////////////////////////////////////////
 export let id = id => document.getElementById(id);
 
-export const loginForm = id('loginAccount'),
-    registerForm = id('registerAccount'),
+export const loginFormContainer = id('loginAccount'),
+    registerFormContainer = id('registerAccount'),
     userName = id('signUpEmail'),
     password = id('signUpPass'),
+    passwordConfirm = id('passwordConfirm'),
     loginUserName = id('loginUserName'),
     loginPassword = id('loginPassword'),
     loginBtn = id('loginBtn'),
@@ -17,11 +17,8 @@ export const loginForm = id('loginAccount'),
     signUpLink = id('signUpLink'),
     createAccountBtn = id('createAccountBtn'),
     overlay = id('overlay'),
-    form = document.querySelector('.form'),
-    formInput = ['email', 'password', 'passwordConfirmation'],
-    successIcon = formInput.parentElement.querySelector('.success-icon'),
-    errorIcon = formInput.parentElement.querySelector('.error-icon'),
-    errorMessage = field.parentElement.querySelector('.error-message');
+    loginFormInputs = ['loginUserName', 'loginPassword'],
+    signUpFormInputs = ['signUpEmail', 'signUpPass', 'passwordConfirm'];
 
 ////////////////////////////////////////////////////////////////////
 class App {
@@ -29,25 +26,25 @@ class App {
         this.storage = storage;
         // Attach event listeners
         window.addEventListener('DOMContentLoaded', this.pageLoadEvent.bind(this));
-        createAccountBtn.addEventListener('click', this.checkRegistrationData.bind(this));
+        // createAccountBtn.addEventListener('click', this.checkRegistrationData.bind(this));
         signUpLink.addEventListener(
             'click',
             function () {
-                this.hideForm(loginForm);
-                this.showForm(registerForm);
+                this.hideForm(loginFormContainer);
+                this.showForm(registerFormContainer);
             }.bind(this)
         );
 
         loginLink.addEventListener(
             'click',
             function () {
-                this.showForm(loginForm);
-                this.hideForm(registerForm);
+                this.showForm(loginFormContainer);
+                this.hideForm(registerFormContainer);
             }.bind(this)
         );
 
-        registerForm.addEventListener('submit', this.addUser.bind(this));
-        loginBtn.addEventListener('click', this.checkLoginData.bind(this));
+        registerFormContainer.addEventListener('submit', this.addUser.bind(this));
+        // loginBtn.addEventListener('click', this.checkLoginData.bind(this));
     }
 
     hideForm(formName) {
@@ -60,8 +57,8 @@ class App {
 
     pageLoadEvent() {
         overlay.classList.remove('overlay--hidden');
-        this.hideForm(loginForm);
-        this.showForm(registerForm);
+        this.hideForm(loginFormContainer);
+        this.showForm(registerFormContainer);
         // this.animateFadeIn(registerForm);
     }
 
@@ -80,10 +77,11 @@ class App {
     addUser() {
         const user = new User(userName.value, password.value);
         if (user != '') {
-            storage.storeUser(user);
+            this.storage.storeUser(user);
         }
     }
 
+    /*
     checkLoginData() {
         const userStorage = Storage.getUsers();
         console.log(userStorage);
@@ -107,6 +105,7 @@ class App {
             alert('Something is wrong with your email or password!');
         }
     }
+    */
 }
 
 export default App;
