@@ -56,13 +56,13 @@
                         border-bottom: 2px $color-light solid;
                         display: block;
                         width: 100%;
-                        padding: 1.5rem 0 5px;
+                        // padding: 5px 0 5px;
                         font-size: $medium-font-size;
                         color: $color-light;
 
                         &:focus {
                             outline: none;
-                            border-bottom-color: $color-light;
+                            border-bottom-color: $color-6;
                         }
 
                         &::placeholder {

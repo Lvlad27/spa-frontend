@@ -24,17 +24,17 @@
                 <form action="#" class="form form__login">
                     <!-- Email -->
                     <div class="form__login-control">
-                        <input id="loginUserName" type="email" placeholder="Email" />
+                        <input id="loginUserName" type="text" placeholder="Email" />
                         <i class="fas fa-exclamation-circle error-icon hide-element"></i>
                         <i class="far fa-check-circle success-icon hide-element"></i>
-                        <!-- <small class="error-message"></small> -->
+                        <small class="error-message"></small>
                     </div>
                     <!-- Password -->
                     <div class="form__login-control">
                         <input id="loginPassword" type="password" placeholder="Password" />
                         <i class="fas fa-exclamation-circle error-icon hide-element"></i>
                         <i class="far fa-check-circle success-icon hide-element"></i>
-                        <!-- <small class="error-message"></small> -->
+                        <small class="error-message"></small>
                     </div>
 
                     <input id="loginBtn" class="form__login-btn" type="submit" value="Login" />
@@ -50,30 +50,32 @@
             <div class="container container__registration" id="registerAccount">
                 <h2 class="container__registration-title">Sign Up</h2>
                 <form action="#" class="form form__registration">
+                    <!-- Email -->
                     <div class="form__registration-control">
-                        <!-- Email -->
-                        <input id="signUpEmail" type="email" placeholder="Email" />
+                        <input id="signUpEmail" type="text" placeholder="Email" />
                         <i class="fas fa-exclamation-circle error-icon hide-element"></i>
                         <i class="far fa-check-circle success-icon hide-element"></i>
-                        <div class="error-message"></div>
+                        <small class="error-message"></small>
                     </div>
 
+                    <!-- Password -->
                     <div class="form__registration-control">
-                        <!-- Password -->
                         <input id="signUpPass" type="password" placeholder="Password" />
                         <i class="fas fa-exclamation-circle error-icon hide-element"></i>
                         <i class="far fa-check-circle success-icon hide-element"></i>
-                        <!-- <small class="error-message"></small> -->
+                        <small class="error-message"></small>
+                    </div>
 
-                        <!-- Confirm Password -->
+                    <!-- Confirm Password -->
+                    <div class="form__registration-control">
                         <input
                             id="passwordConfirm"
                             type="password"
-                            placeholder="Confirm Password"
+                            placeholder="Password Confirmation"
                         />
                         <i class="fas fa-exclamation-circle error-icon hide-element"></i>
                         <i class="far fa-check-circle success-icon hide-element"></i>
-                        <!-- <small class="error-message"></small> -->
+                        <small class="error-message"></small>
                     </div>
 
                     <input

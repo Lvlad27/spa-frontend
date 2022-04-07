@@ -110,12 +110,11 @@ header {
         border-bottom: 2px white solid;
         display: block;
         width: 100%;
-        padding: 1.5rem 0 5px;
         font-size: 2rem;
         color: white; }
         .main .container__login .form__login-control input:focus {
           outline: none;
-          border-bottom-color: white; }
+          border-bottom-color: #ab9df2; }
         .main .container__login .form__login-control input::placeholder {
           color: #ff6188;
           font-weight: 100; }
@@ -187,12 +186,11 @@ header {
         border-bottom: 2px white solid;
         display: block;
         width: 100%;
-        padding: 1.5rem 0 5px;
         font-size: 2rem;
         color: white; }
         .main .container__registration .form__registration-control input:focus {
           outline: none;
-          border-bottom-color: white; }
+          border-bottom-color: #ab9df2; }
         .main .container__registration .form__registration-control input::placeholder {
           color: #ff6188;
           font-weight: 100; }

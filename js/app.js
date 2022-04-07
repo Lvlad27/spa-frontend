@@ -8,7 +8,6 @@ export const loginFormContainer = id('loginAccount'),
     registerFormContainer = id('registerAccount'),
     userName = id('signUpEmail'),
     password = id('signUpPass'),
-    passwordConfirm = id('passwordConfirm'),
     loginUserName = id('loginUserName'),
     loginPassword = id('loginPassword'),
     loginBtn = id('loginBtn'),
@@ -44,7 +43,7 @@ class App {
         );
 
         registerFormContainer.addEventListener('submit', this.addUser.bind(this));
-        // loginBtn.addEventListener('click', this.checkLoginData.bind(this));
+        loginBtn.addEventListener('click', this.checkLoginData.bind(this));
     }
 
     hideForm(formName) {
@@ -76,33 +75,30 @@ class App {
 
     addUser() {
         const user = new User(userName.value, password.value);
-        if (user != '') {
+        if (user.userName !== '' && user.password !== '') {
             this.storage.storeUser(user);
         }
     }
 
-    /*
     checkLoginData() {
-        const userStorage = Storage.getUsers();
-        console.log(userStorage);
+        const storedUserData = this.storage.getUsers();
+        const email = storedUserData[loginUserName.value];
+        const password = storedUserData[loginUserName.value].password;
 
-        if (userStorage[loginUserName.value]) {
+        if (email && password === loginPassword.value) {
             alert('Welcome! You are logged in.');
             overlay.classList.add('overlay--hidden');
-            this.hideForm(loginForm);
-        } else {
-            alert('Sorry! Incorrect email and password.');
+            this.hideForm(loginFormContainer);
         }
     }
 
+    /*
     checkRegistrationData() {
         if (userName.checkValidity() && password.checkValidity()) {
             alert('Your account has been registered!');
             document.querySelector('form').reset();
             this.showForm(loginForm);
             this.hideForm(registerForm);
-        } else {
-            alert('Something is wrong with your email or password!');
         }
     }
     */
