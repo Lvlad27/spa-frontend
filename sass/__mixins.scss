@@ -62,7 +62,7 @@
 
                         &:focus {
                             outline: none;
-                            border-bottom-color: $color-6;
+                            border-bottom-color: $color-4;
                         }
 
                         &::placeholder {
@@ -97,7 +97,7 @@
                     }
 
                     .success-icon {
-                        color: $color-3;
+                        color: $color-4;
                     }
 
                     .error-message {
