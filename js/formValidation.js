@@ -99,12 +99,13 @@ class FormValidation {
 
         // Check for password confirmation
         if (formInput.id === 'passwordConfirm') {
-            const passwordInput = this.form.querySelector('#password');
+            const passwordInput = this.form.querySelector('#signUpPass');
+            console.log(this.form);
             if (formInput.value.trim() == '') {
                 this.setStatus(formInput, 'Confirmation required', 'error');
                 formInput.style.borderBottom = '2px #ff6188 solid';
-            } else if (formInput.value !== passwordConfirm.value) {
-                this.setStatus(formInput, "Doesn't match", 'error');
+            } else if (formInput.value !== passwordInput.value) {
+                this.setStatus(formInput, "Password doesn't match", 'error');
                 formInput.style.borderBottom = '2px #ff6188 solid';
             } else {
                 this.setStatus(formInput, null, 'success');
