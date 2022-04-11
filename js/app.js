@@ -1,5 +1,6 @@
 import User from './user.js';
 import Storage from './storage.js';
+import FormValidation from './formValidation.js';
 
 ////////////////////////////////////////////////////////////////////
 export let id = id => document.getElementById(id);
@@ -24,41 +25,52 @@ export const loginFormContainer = id('loginAccount'),
 class App {
     constructor(storage) {
         this.storage = storage;
+        // this.loginFormValidation = loginFormValidation;
+        // this.signUpFormValidation = signUpFormValidation;
+
         // Attach event listeners
         window.addEventListener('DOMContentLoaded', this.pageLoadEvent.bind(this));
         // createAccountBtn.addEventListener('click', this.checkRegistrationData.bind(this));
+        // signUpLink.addEventListener(
+        //     'click',
+        //     this.toggleFormVisibility(loginFormContainer, registerFormContainer).bind(this)
+        // );
+
+        // loginLink.addEventListener(
+        //     'click',
+        //     this.toggleFormVisibility(loginFormContainer, registerFormContainer).bind(this)
+        // );
+
         signUpLink.addEventListener(
             'click',
-            function () {
-                this.hideForm(loginFormContainer);
-                this.showForm(registerFormContainer);
-            }.bind(this)
+            this.toggleFormVisibility(loginFormContainer, registerFormContainer).bind(this)
         );
 
         loginLink.addEventListener(
             'click',
-            function () {
-                this.showForm(loginFormContainer);
-                this.hideForm(registerFormContainer);
-            }.bind(this)
+            this.toggleFormVisibility(registerFormContainer, loginFormContainer).bind(this)
         );
 
         registerFormContainer.addEventListener('submit', this.addUser.bind(this));
         loginBtn.addEventListener('click', this.checkLoginData.bind(this));
     }
 
-    hideForm(formName) {
-        formName.classList.add('hide-element');
-    }
+    toggleFormVisibility(hidden, visible) {
+        const hideform = e => {
+            e.classList.add('hide-element');
+        };
 
-    showForm(formName) {
-        formName.classList.remove('hide-element');
+        const showForm = e => {
+            e.classList.remove('hide-element');
+        };
+
+        hideform(hidden);
+        showForm(visible);
     }
 
     pageLoadEvent() {
         overlay.classList.remove('overlay--hidden');
-        this.hideForm(loginFormContainer);
-        this.showForm(registerFormContainer);
+        this.toggleFormVisibility(loginFormContainer, registerFormContainer);
         // this.animateFadeIn(registerForm);
     }
 
@@ -76,6 +88,7 @@ class App {
 
     addUser() {
         const user = new User(userName.value, password.value);
+
         if (user.userName !== '' && user.password !== '') {
             this.storage.storeUser(user);
         }
@@ -89,20 +102,18 @@ class App {
         if (email && password === loginPassword.value) {
             alert('Welcome! You are logged in.');
             overlay.classList.add('overlay--hidden');
-            this.hideForm(loginFormContainer);
+            // this.hideForm(loginFormContainer);
         }
     }
 
-    /*
-    checkRegistrationData() {
-        if (userName.checkValidity() && password.checkValidity()) {
-            alert('Your account has been registered!');
-            document.querySelector('form').reset();
-            this.showForm(loginForm);
-            this.hideForm(registerForm);
-        }
-    }
-    */
+    // checkRegistrationData() {
+    //     if (userName.checkValidity() && password.checkValidity()) {
+    //         alert('Your account has been registered!');
+    //         document.querySelector('form').reset();
+    //         this.showForm(loginForm);
+    //         this.hideForm(registerForm);
+    //     }
+    // }
 }
 
 export default App;
