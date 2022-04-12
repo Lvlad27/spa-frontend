@@ -141,6 +141,44 @@ header {
         border: 1px solid #fc9867; }
         .main .container__login .form__login-control.input-error:focus {
           border: 1px solid #fc9867; }
+    .main .container__login .form__login-control--error {
+      position: relative;
+      margin: 2rem 0 4rem;
+      width: 30rem; }
+      .main .container__login .form__login-control--error input {
+        background-color: transparent;
+        border: 0;
+        border-bottom: 2px white solid;
+        display: block;
+        width: 100%;
+        font-size: 2rem;
+        color: white; }
+        .main .container__login .form__login-control--error input:focus {
+          outline: none;
+          border-bottom-color: #a9dc76; }
+        .main .container__login .form__login-control--error input::placeholder {
+          color: #ff6188;
+          font-weight: 100; }
+        .main .container__login .form__login-control--error input:-webkit-autofill {
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: white !important; }
+      .main .container__login .form__login-control--error .fas,
+      .main .container__login .form__login-control--error .far {
+        position: absolute;
+        margin-top: -3rem; }
+      .main .container__login .form__login-control--error .error-icon {
+        right: 0; }
+      .main .container__login .form__login-control--error .error-icon,
+      .main .container__login .form__login-control--error .error-message {
+        color: #fc9867; }
+      .main .container__login .form__login-control--error .error-message {
+        font-size: 1.3rem;
+        margin-top: 5px; }
+      .main .container__login .form__login-control--error.input-error {
+        border: 1px solid #fc9867; }
+        .main .container__login .form__login-control--error.input-error:focus {
+          border: 1px solid #fc9867; }
     .main .container__login .form__login-text {
       color: white;
       text-align: center; }
@@ -216,6 +254,44 @@ header {
       .main .container__registration .form__registration-control.input-error {
         border: 1px solid #fc9867; }
         .main .container__registration .form__registration-control.input-error:focus {
+          border: 1px solid #fc9867; }
+    .main .container__registration .form__registration-control--error {
+      position: relative;
+      margin: 2rem 0 4rem;
+      width: 30rem; }
+      .main .container__registration .form__registration-control--error input {
+        background-color: transparent;
+        border: 0;
+        border-bottom: 2px white solid;
+        display: block;
+        width: 100%;
+        font-size: 2rem;
+        color: white; }
+        .main .container__registration .form__registration-control--error input:focus {
+          outline: none;
+          border-bottom-color: #a9dc76; }
+        .main .container__registration .form__registration-control--error input::placeholder {
+          color: #ff6188;
+          font-weight: 100; }
+        .main .container__registration .form__registration-control--error input:-webkit-autofill {
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: white !important; }
+      .main .container__registration .form__registration-control--error .fas,
+      .main .container__registration .form__registration-control--error .far {
+        position: absolute;
+        margin-top: -3rem; }
+      .main .container__registration .form__registration-control--error .error-icon {
+        right: 0; }
+      .main .container__registration .form__registration-control--error .error-icon,
+      .main .container__registration .form__registration-control--error .error-message {
+        color: #fc9867; }
+      .main .container__registration .form__registration-control--error .error-message {
+        font-size: 1.3rem;
+        margin-top: 5px; }
+      .main .container__registration .form__registration-control--error.input-error {
+        border: 1px solid #fc9867; }
+        .main .container__registration .form__registration-control--error.input-error:focus {
           border: 1px solid #fc9867; }
     .main .container__registration .form__registration-text {
       color: white;

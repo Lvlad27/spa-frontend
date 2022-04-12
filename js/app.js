@@ -23,24 +23,16 @@ export const loginFormContainer = id('loginAccount'),
 
 ////////////////////////////////////////////////////////////////////
 class App {
-    constructor(storage) {
+    constructor(storage, loginFormValidation, signUpFormValidation) {
         this.storage = storage;
-        // this.loginFormValidation = loginFormValidation;
-        // this.signUpFormValidation = signUpFormValidation;
+        this.loginFormValidation = loginFormValidation;
+        this.signUpFormValidation = signUpFormValidation;
 
         // Attach event listeners
         window.addEventListener('DOMContentLoaded', this.pageLoadEvent.bind(this));
         // createAccountBtn.addEventListener('click', this.checkRegistrationData.bind(this));
-        // signUpLink.addEventListener(
-        //     'click',
-        //     this.toggleFormVisibility(loginFormContainer, registerFormContainer).bind(this)
-        // );
 
-        // loginLink.addEventListener(
-        //     'click',
-        //     this.toggleFormVisibility(loginFormContainer, registerFormContainer).bind(this)
-        // );
-
+        /*
         signUpLink.addEventListener(
             'click',
             this.toggleFormVisibility(loginFormContainer, registerFormContainer).bind(this)
@@ -50,11 +42,31 @@ class App {
             'click',
             this.toggleFormVisibility(registerFormContainer, loginFormContainer).bind(this)
         );
+        */
+
+        signUpLink.addEventListener(
+            'click',
+
+            function () {
+                this.hideForm(loginFormContainer);
+                this.showForm(registerFormContainer);
+            }.bind(this)
+        );
+
+        loginLink.addEventListener(
+            'click',
+
+            function () {
+                this.hideForm(registerFormContainer);
+                this.showForm(loginFormContainer);
+            }.bind(this)
+        );
 
         registerFormContainer.addEventListener('submit', this.addUser.bind(this));
         loginBtn.addEventListener('click', this.checkLoginData.bind(this));
     }
 
+    /*
     toggleFormVisibility(hidden, visible) {
         const hideform = e => {
             e.classList.add('hide-element');
@@ -67,10 +79,13 @@ class App {
         hideform(hidden);
         showForm(visible);
     }
+    */
 
     pageLoadEvent() {
         overlay.classList.remove('overlay--hidden');
-        this.toggleFormVisibility(loginFormContainer, registerFormContainer);
+        // this.toggleFormVisibility(loginFormContainer, registerFormContainer);
+        this.hideForm(loginFormContainer);
+        this.showForm(registerFormContainer);
         // this.animateFadeIn(registerForm);
     }
 
@@ -86,10 +101,18 @@ class App {
     }
     */
 
+    hideForm(formName) {
+        formName.classList.add('hide-element');
+    }
+
+    showForm(formName) {
+        formName.classList.remove('hide-element');
+    }
+
     addUser() {
         const user = new User(userName.value, password.value);
 
-        if (user.userName !== '' && user.password !== '') {
+        if (this.signUpFormValidation.validateOnSubmit()) {
             this.storage.storeUser(user);
         }
     }

@@ -10,5 +10,4 @@ const loginFormValidation = new FormValidation(loginForm, loginFormInputs);
 const signUpFormValidation = new FormValidation(signUpForm, signUpFormInputs);
 
 const storage = new Storage();
-const app = new App(storage);
-// const app = new App(storage, loginFormValidation, signUpFormValidation);
+const app = new App(storage, loginFormValidation, signUpFormValidation);

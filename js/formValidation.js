@@ -4,7 +4,123 @@ class FormValidation {
         this.formInputs = formInputs;
 
         this.validateOnEntry();
-        this.validateOnSubmit();
+    }
+
+    validateOnEntry() {
+        this.formInputs.forEach(index => {
+            const input = document.querySelector(`#${index}`);
+            input.addEventListener(
+                'input',
+                function () {
+                    this.validateFormInputs(input);
+                }.bind(this)
+            );
+        });
+    }
+
+    validateOnSubmit() {
+        let inputState = [];
+        for (let i = 0; i < this.formInputs.length; i++) {
+            let input = document.querySelector(`#${this.formInputs[i]}`);
+            inputState.push(this.validateFormInputs(input));
+        }
+        const formState = inputState.every(index => index === true);
+        return formState;
+    }
+
+    // This functions receives an input and returns true if one condition returns true.
+    validateFormInputs(formInput) {
+        // Check if any values exist
+        const noValuesCheck = () => {
+            if (formInput.value.trim() === '') {
+                this.setStatus(formInput, `Please fill in ${formInput.placeholder}`, 'error');
+            } else {
+                this.setStatus(formInput, null, 'success');
+                return true;
+            }
+        };
+
+        // Check for a valid email address
+        const emailCheck = () => {
+            if (formInput.type === 'text') {
+                const mailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+                if (mailRegEx.test(formInput.value)) {
+                    this.setStatus(formInput, null, 'success');
+                    return true;
+                } else {
+                    this.setStatus(formInput, 'Please enter valid email address', 'error');
+                }
+            }
+        };
+
+        // Check for valid sign up password
+        const passCheck = () => {
+            if (formInput.type === 'password') {
+                const stringOne = 'Should contain at least a digit and a letter',
+                    stringTwo = `Should contain at least 3 characters`,
+                    regexOne = /^(?=.*[a-zA-Z]).{0,3}$/,
+                    regexTwo = /^(?=.*[a-zA-Z]).{3,}$/,
+                    regexThree = /(?=.*[0-9]).{0,3}$/,
+                    regexFour = /(?=.*[0-9]).{3,}$/,
+                    regexFive = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+).{0,3}$/,
+                    regexSix = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+).{2,}$/;
+
+                // case1 - only letters and less than 3
+                // case3 - only numbers and less than 3
+                if (regexOne.test(formInput.value) || regexThree.test(formInput.value)) {
+                    this.setStatus(formInput, `${stringOne}\n${stringTwo}`, 'error');
+                }
+
+                // case2 - only letters and more than 3
+                // case4 - only numbers and more than 3
+                if (regexTwo.test(formInput.value) || regexFour.test(formInput.value)) {
+                    this.setStatus(formInput, `${stringOne}`, 'error');
+                }
+
+                // case5 - smaller than 3 but with numbers and letters
+                if (regexFive.test(formInput.value)) {
+                    this.setStatus(formInput, `${stringTwo}`, 'error');
+                }
+
+                // case6 - success
+                if (regexSix.test(formInput.value)) {
+                    this.setStatus(formInput, null, 'success');
+
+                    return true;
+                }
+            }
+        };
+
+        // Check for password confirmation
+        const passConfirmCheck = () => {
+            if (formInput.id === 'passwordConfirm') {
+                const passwordInput = this.form.querySelector('#signUpPass');
+                if (formInput.value.trim() == '') {
+                    this.setStatus(formInput, 'Confirmation required', 'error');
+                } else if (formInput.value !== passwordInput.value) {
+                    this.setStatus(formInput, "Password doesn't match", 'error');
+                } else {
+                    this.setStatus(formInput, null, 'success');
+                    return true;
+                }
+            }
+        };
+
+        const conditions = [emailCheck(), passCheck(), passConfirmCheck()];
+
+        // Check for no values condition first
+        noValuesCheck();
+
+        // If there are input values entered, return true if for a given input any one condition is true.
+        if (noValuesCheck()) {
+            emailCheck(), passCheck(), passConfirmCheck();
+
+            let isValid = conditions.some(condition => condition == true);
+            return isValid;
+        } else {
+            return false;
+        }
     }
 
     setStatus(indexInput, message, status) {
@@ -41,183 +157,6 @@ class FormValidation {
 
         successState();
         errorState();
-    }
-
-    validateFormInputs(formInput) {
-        // Check if any values exist
-        const noValuesCheck = () => {
-            if (formInput.value.trim() === '') {
-                this.setStatus(formInput, `Please fill in ${formInput.placeholder}`, 'error');
-                formInput.style.borderBottom = '2px #ff6188 solid';
-            } else {
-                this.setStatus(formInput, null, 'success');
-                // console.log(true);
-                return true;
-            }
-        };
-
-        // Check for a valid email address
-
-        const emailCheck = () => {
-            if (formInput.type === 'text') {
-                const mailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-                if (mailRegEx.test(formInput.value)) {
-                    this.setStatus(formInput, null, 'success');
-                    formInput.style.borderBottom = '2px #ff6188 solid';
-                    // console.log(true);
-                    return true;
-                } else {
-                    this.setStatus(formInput, 'Please enter valid email address', 'error');
-                    formInput.style.borderBottom = '2px #ff6188 solid';
-                }
-            }
-        };
-
-        // Check for valid sign up password
-        const passCheck = () => {
-            if (formInput.type === 'password') {
-                const stringOne = 'Should contain at least a digit and a letter',
-                    stringTwo = `Should contain at least 3 characters`,
-                    regexOne = /^(?=.*[a-zA-Z]).{0,3}$/,
-                    regexTwo = /^(?=.*[a-zA-Z]).{3,}$/,
-                    regexThree = /(?=.*[0-9]).{0,3}$/,
-                    regexFour = /(?=.*[0-9]).{3,}$/,
-                    regexFive = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+).{0,3}$/,
-                    regexSix = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+).{2,}$/;
-
-                // case1 - only letters and less than 3
-                // case3 - only numbers and less than 3
-                if (regexOne.test(formInput.value) || regexThree.test(formInput.value)) {
-                    this.setStatus(formInput, `${stringOne}\n${stringTwo}`, 'error');
-                    formInput.style.borderBottom = '2px #ff6188 solid';
-                }
-
-                // case2 - only letters and more than 3
-                // case4 - only numbers and more than 3
-                if (regexTwo.test(formInput.value) || regexFour.test(formInput.value)) {
-                    this.setStatus(formInput, `${stringOne}`, 'error');
-                    formInput.style.borderBottom = '2px #ff6188 solid';
-                }
-
-                // case5 - smaller than 3 but with numbers and letters
-                if (regexFive.test(formInput.value)) {
-                    this.setStatus(formInput, `${stringTwo}`, 'error');
-                    formInput.style.borderBottom = '2px #ff6188 solid';
-                }
-
-                // case6 - success
-                if (regexSix.test(formInput.value)) {
-                    this.setStatus(formInput, null, 'success');
-                    formInput.style.borderBottom = '2px #a9dc76 solid';
-                    // console.log(true);
-                    return true;
-                }
-            }
-
-            /*if (!l1 || !l2 || !l3) {
-                return false;
-            } else return true;
-
-            if (!(l1 && l2 && l3)) return false;
-            else return true;
-
-            return l1 && l2 && l3;*/
-        };
-
-        // Check for password confirmation
-        const passConfirmCheck = () => {
-            if (formInput.id === 'passwordConfirm') {
-                const passwordInput = this.form.querySelector('#signUpPass');
-                if (formInput.value.trim() == '') {
-                    this.setStatus(formInput, 'Confirmation required', 'error');
-                    formInput.style.borderBottom = '2px #ff6188 solid';
-                } else if (formInput.value !== passwordInput.value) {
-                    this.setStatus(formInput, "Password doesn't match", 'error');
-                    formInput.style.borderBottom = '2px #ff6188 solid';
-                } else {
-                    this.setStatus(formInput, null, 'success');
-                    // console.log(true);
-                    return true;
-                }
-            }
-        };
-
-        // Check for valid login password
-        const loginPassCheck = () => {
-            if (formInput.type === 'password' && formInput.id === 'loginPassword') {
-                if (formInput.value.trim() === '') {
-                    this.setStatus(formInput, `Please fill in ${formInput.placeholder}`, 'error');
-                    formInput.style.borderBottom = '2px #ff6188 solid';
-                } else {
-                    this.setStatus(formInput, null, 'success');
-                    // console.log(true);
-                    return true;
-                }
-            }
-        };
-
-        noValuesCheck();
-        emailCheck();
-        passCheck();
-        passConfirmCheck();
-        loginPassCheck();
-
-        const state =
-            noValuesCheck() &&
-            emailCheck() &&
-            passCheck() &&
-            passConfirmCheck() &&
-            loginPassCheck();
-
-        console.log(state);
-
-        if (state) {
-            console.log('good');
-            return state;
-        }
-
-        //     let result = true;
-
-        //     const conditions = [
-        //         noValuesCheck(),
-        //         emailCheck(),
-        //         passCheck(),
-        //         passConfirmCheck(),
-        //         loginPassCheck(),
-        //     ];
-
-        //     for (let i = 0; i < conditions.length; i++) {
-        //         result = result && conditions[i];
-        //     }
-
-        //     console.log(result);
-        //     return result;
-    }
-
-    validateOnEntry() {
-        this.formInputs.forEach(index => {
-            const input = document.querySelector(`#${index}`);
-            input.addEventListener(
-                'input',
-                function () {
-                    this.validateFormInputs(input);
-                }.bind(this)
-            );
-        });
-    }
-
-    validateOnSubmit() {
-        this.form.addEventListener(
-            'submit',
-            function (e) {
-                e.preventDefault();
-                this.formInputs.forEach(index => {
-                    const input = document.querySelector(`#${index}`);
-                    this.validateFormInputs(input);
-                });
-            }.bind(this)
-        );
     }
 }
 
