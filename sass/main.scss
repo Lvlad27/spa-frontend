@@ -73,7 +73,6 @@ header {
         @include form(registration, 99);
 
         &__userdata {
-            width: 50%;
             z-index: 99;
             position: absolute;
             top: 50%;
