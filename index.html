@@ -92,6 +92,116 @@
             </div>
             <!-- ----------------------------------------------------------------------- -->
 
+            <!-- --------------------------- USER DATA FORM ---------------------------- -->
+            <div class="container container__userdata">
+                <h2 class="container__userdata-title">Edit User Data</h2>
+                <form action="#" class="form form__userdata" id="userDataForm">
+                    <div class="usernames">
+                        <!-- First Name -->
+                        <div class="form__userdata-control">
+                            <label class="firstname" for="firstname" id="firstname-label"
+                                >First Name</label
+                            >
+                            <input
+                                type="text"
+                                name="firstname"
+                                id="firstName"
+                                class="input"
+                                placeholder="Enter your First Name"
+                            />
+                        </div>
+                        <!-- Last Name -->
+                        <div class="form__userdata-control">
+                            <label for="lastname" id="lastname-label">Last Name</label>
+                            <input
+                                type="text"
+                                name="lastname"
+                                id="lastName"
+                                class="input"
+                                placeholder="Enter your Last Name"
+                            />
+                        </div>
+                        <!-- Age -->
+                        <div class="form__userdata-control">
+                            <label for="age" id="age-label">Age</label>
+                            <input
+                                type="number"
+                                name="age"
+                                id="age"
+                                min="0"
+                                max="99"
+                                class="input"
+                                placeholder="Enter your Age"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Date of birth -->
+                    <div class="form__userdata-control">
+                        <label for="birthday" id="age-label">Date of birth</label>
+                        <input
+                            type="date"
+                            name="birthday"
+                            id="birthday"
+                            min="1950-01-01"
+                            max="2022-12-31"
+                            class="input"
+                        />
+                    </div>
+                    <!-- Gender -->
+                    <div class="form__userdata-control">
+                        <p>What is your gender?</p>
+                        <label>
+                            <input type="radio" name="male" value="Male" class="radio" />Male
+                        </label>
+                        <label>
+                            <input type="radio" name="female" value="Female" class="radio" />Female
+                        </label>
+                    </div>
+
+                    <div class="form__userdata-control">
+                        <p>What kind of hobbies are you interested in?</p>
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="prefer"
+                                value="sports"
+                                class="checkbox"
+                            />Sports
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="prefer"
+                                value="gaming"
+                                class="checkbox"
+                            />Gaming
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="prefer"
+                                value="arts"
+                                class="checkbox"
+                            />Arts & Crafts
+                        </label>
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="prefer"
+                                value="traveling"
+                                class="checkbox"
+                            />Traveling & Outdoors
+                        </label>
+                    </div>
+
+                    <div class="form__userdata-control">
+                        <button type="submit" id="submit" class="form__userdata-btn">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <!-- ----------------------------------------------------------------------- -->
+
             <nav class="section section__menu">
                 <ul>
                     <li>1</li>
@@ -103,31 +213,15 @@
             </nav>
 
             <section class="section section__content">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis saepe sit
-                    minus numquam ab inventore, iure ipsa tenetur repudiandae iusto reiciendis
-                    quibusdam enim facilis minima ex libero quos natus quas!
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis saepe sit
-                    minus numquam ab inventore, iure ipsa tenetur repudiandae iusto reiciendis
-                    quibusdam enim facilis minima ex libero quos natus quas!
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis saepe sit
-                    minus numquam ab inventore, iure ipsa tenetur repudiandae iusto reiciendis
-                    quibusdam enim facilis minima ex libero quos natus quas!
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis saepe sit
-                    minus numquam ab inventore, iure ipsa tenetur repudiandae iusto reiciendis
-                    quibusdam enim facilis minima ex libero quos natus quas!
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis saepe sit
-                    minus numquam ab inventore, iure ipsa tenetur repudiandae iusto reiciendis
-                    quibusdam enim facilis minima ex libero quos natus quas!
-                </p>
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Password</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userList"></tbody>
+                </table>
             </section>
 
             <aside class="section section__ads">

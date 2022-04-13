@@ -12,7 +12,7 @@ class FormValidation {
             input.addEventListener(
                 'input',
                 function () {
-                    this.validateFormInputs(input);
+                    this.validateRegistrationInputs(input);
                 }.bind(this)
             );
         });
@@ -22,14 +22,14 @@ class FormValidation {
         let inputState = [];
         for (let i = 0; i < this.formInputs.length; i++) {
             let input = document.querySelector(`#${this.formInputs[i]}`);
-            inputState.push(this.validateFormInputs(input));
+            inputState.push(this.validateRegistrationInputs(input));
         }
         const formState = inputState.every(index => index === true);
         return formState;
     }
 
     // This functions receives an input and returns true if one condition returns true.
-    validateFormInputs(formInput) {
+    validateRegistrationInputs(formInput) {
         // Check if any values exist
         const noValuesCheck = () => {
             if (formInput.value.trim() === '') {
@@ -107,6 +107,8 @@ class FormValidation {
             }
         };
 
+        // Check for valid login password
+
         const conditions = [emailCheck(), passCheck(), passConfirmCheck()];
 
         // Check for no values condition first
@@ -122,6 +124,25 @@ class FormValidation {
             return false;
         }
     }
+
+    // validateLoginInputs(formInput) {
+    //     const storedUserData = this.storage.getUsers();
+    //     const email = storedUserData[loginUserName.value];
+    //     const password = storedUserData[loginUserName.value].password;
+
+    //     if (formInput.type === 'password' && formInput.id === 'loginPassword') {
+    //         if (formInput.value.trim() === '') {
+    //             this.setStatus(formInput, `Please fill in ${formInput.placeholder}`, 'error');
+    //         }
+
+    //         if()
+
+    //         else {
+    //             this.setStatus(formInput, null, 'success');
+    //             return true;
+    //         }
+    //     }
+    // }
 
     setStatus(indexInput, message, status) {
         const errorIcon = indexInput.parentElement.querySelector('.error-icon'),

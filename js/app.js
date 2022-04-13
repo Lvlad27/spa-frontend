@@ -1,6 +1,7 @@
-import User from './user.js';
-import Storage from './storage.js';
-import FormValidation from './formValidation.js';
+import User from './User.js';
+import Storage from './Storage.js';
+import FormValidation from './FormValidation.js';
+import UserInterface from './UserInterface.js';
 
 ////////////////////////////////////////////////////////////////////
 export let id = id => document.getElementById(id);
@@ -19,18 +20,21 @@ export const loginFormContainer = id('loginAccount'),
     createAccountBtn = id('createAccountBtn'),
     overlay = id('overlay'),
     loginFormInputs = ['loginUserName', 'loginPassword'],
-    signUpFormInputs = ['signUpEmail', 'signUpPass', 'passwordConfirm'];
+    signUpFormInputs = ['signUpEmail', 'signUpPass', 'passwordConfirm'],
+    userList = document.getElementById('userList');
 
 ////////////////////////////////////////////////////////////////////
 class App {
-    constructor(storage, loginFormValidation, signUpFormValidation) {
+    constructor(storage, loginFormValidation, signUpFormValidation, userInterface) {
         this.storage = storage;
         this.loginFormValidation = loginFormValidation;
         this.signUpFormValidation = signUpFormValidation;
+        this.userInterface = userInterface;
 
         // Attach event listeners
-        window.addEventListener('DOMContentLoaded', this.pageLoadEvent.bind(this));
-        // createAccountBtn.addEventListener('click', this.checkRegistrationData.bind(this));
+        document.addEventListener('DOMContentLoaded', this.pageLoadEvent.bind(this));
+        document.addEventListener('DOMContentLoaded', userInterface.displayUsers());
+        createAccountBtn.addEventListener('click', this.checkRegistrationData.bind(this));
 
         /*
         signUpLink.addEventListener(
@@ -113,6 +117,7 @@ class App {
         const user = new User(userName.value, password.value);
 
         if (this.signUpFormValidation.validateOnSubmit()) {
+            this.userInterface.addUserToList(user);
             this.storage.storeUser(user);
         }
     }
@@ -125,18 +130,18 @@ class App {
         if (email && password === loginPassword.value) {
             alert('Welcome! You are logged in.');
             overlay.classList.add('overlay--hidden');
-            // this.hideForm(loginFormContainer);
+            this.hideForm(loginFormContainer);
         }
     }
 
-    // checkRegistrationData() {
-    //     if (userName.checkValidity() && password.checkValidity()) {
-    //         alert('Your account has been registered!');
-    //         document.querySelector('form').reset();
-    //         this.showForm(loginForm);
-    //         this.hideForm(registerForm);
-    //     }
-    // }
+    checkRegistrationData() {
+        if (this.signUpFormValidation.validateOnSubmit()) {
+            alert('Your account has been registered!');
+            document.querySelector('form').reset();
+            this.hideForm(registerFormContainer);
+            this.showForm(loginFormContainer);
+        }
+    }
 }
 
 export default App;

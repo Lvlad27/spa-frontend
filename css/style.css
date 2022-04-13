@@ -84,104 +84,109 @@ header {
     .main .container__login a {
       text-decoration: none;
       color: #ab9df2; }
-    .main .container__login .form__login-btn {
-      width: 100%;
-      display: inline-block;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      cursor: pointer;
-      background: #fc9867;
-      font-family: inherit;
-      font-weight: 600;
-      border: 0;
-      border-radius: 5px;
-      color: #222222; }
-      .main .container__login .form__login-btn:focus {
-        outline: 0; }
-      .main .container__login .form__login-btn:active {
-        transform: scale(0.98); }
-    .main .container__login .form__login-control {
-      position: relative;
-      margin: 2rem 0 4rem;
-      width: 30rem; }
-      .main .container__login .form__login-control input {
-        background-color: transparent;
-        border: 0;
-        border-bottom: 2px white solid;
-        display: block;
+    .main .container__login .form__login {
+      /*
+                @include form__registration-control();
+
+                &-control--error {
+                    @include form__registration-control();
+                    .error-icon {
+                        right: 0;
+                        color: $color-2;
+                    }
+
+                    .error-message {
+                        font-size: $small-font-size;
+                        margin-top: 5px;
+                        color: $color-2;
+                    }
+
+                    &.input-error {
+                        border: 1px solid $color-2;
+
+                        &:focus {
+                            border: 1px solid $color-2;
+                        }
+                    }
+                }
+
+                &-control--success {
+                    @include form__registration-control();
+                    .success-icon {
+                        right: 0;
+                    }
+
+                    .success-icon {
+                        color: $color-4;
+                    }
+                }
+
+                &-text {
+                    color: $color-light;
+                    text-align: center;
+                }
+                */ }
+      .main .container__login .form__login-btn {
         width: 100%;
-        font-size: 2rem;
-        color: white; }
-        .main .container__login .form__login-control input:focus {
-          outline: none;
-          border-bottom-color: #a9dc76; }
-        .main .container__login .form__login-control input::placeholder {
-          color: #ff6188;
-          font-weight: 100; }
-        .main .container__login .form__login-control input:-webkit-autofill {
-          background-clip: text;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: white !important; }
-      .main .container__login .form__login-control .fas,
-      .main .container__login .form__login-control .far {
-        position: absolute;
-        margin-top: -3rem; }
-      .main .container__login .form__login-control .success-icon,
-      .main .container__login .form__login-control .error-icon {
-        right: 0; }
-      .main .container__login .form__login-control .error-icon,
-      .main .container__login .form__login-control .error-message {
-        color: #fc9867; }
-      .main .container__login .form__login-control .success-icon {
-        color: #a9dc76; }
-      .main .container__login .form__login-control .error-message {
-        font-size: 1.3rem;
-        margin-top: 5px; }
-      .main .container__login .form__login-control.input-error {
-        border: 1px solid #fc9867; }
-        .main .container__login .form__login-control.input-error:focus {
-          border: 1px solid #fc9867; }
-    .main .container__login .form__login-control--error {
-      position: relative;
-      margin: 2rem 0 4rem;
-      width: 30rem; }
-      .main .container__login .form__login-control--error input {
-        background-color: transparent;
+        display: inline-block;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        cursor: pointer;
+        background: #fc9867;
+        font-family: inherit;
+        font-weight: 600;
         border: 0;
-        border-bottom: 2px white solid;
-        display: block;
-        width: 100%;
-        font-size: 2rem;
+        border-radius: 5px;
+        color: #222222; }
+        .main .container__login .form__login-btn:focus {
+          outline: 0; }
+        .main .container__login .form__login-btn:active {
+          transform: scale(0.98); }
+      .main .container__login .form__login-control {
+        position: relative;
+        margin: 2rem 0 4rem;
+        width: 30rem;
         color: white; }
-        .main .container__login .form__login-control--error input:focus {
-          outline: none;
-          border-bottom-color: #a9dc76; }
-        .main .container__login .form__login-control--error input::placeholder {
-          color: #ff6188;
-          font-weight: 100; }
-        .main .container__login .form__login-control--error input:-webkit-autofill {
-          background-clip: text;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: white !important; }
-      .main .container__login .form__login-control--error .fas,
-      .main .container__login .form__login-control--error .far {
-        position: absolute;
-        margin-top: -3rem; }
-      .main .container__login .form__login-control--error .error-icon {
-        right: 0; }
-      .main .container__login .form__login-control--error .error-icon,
-      .main .container__login .form__login-control--error .error-message {
-        color: #fc9867; }
-      .main .container__login .form__login-control--error .error-message {
-        font-size: 1.3rem;
-        margin-top: 5px; }
-      .main .container__login .form__login-control--error.input-error {
-        border: 1px solid #fc9867; }
-        .main .container__login .form__login-control--error.input-error:focus {
+        .main .container__login .form__login-control input {
+          background-color: transparent;
+          border: 0;
+          border-bottom: 2px white solid;
+          display: block;
+          width: 100%;
+          font-size: 2rem;
+          color: white; }
+          .main .container__login .form__login-control input:focus {
+            outline: none;
+            border-bottom-color: #a9dc76; }
+          .main .container__login .form__login-control input::placeholder {
+            color: #ff6188;
+            font-weight: 100; }
+          .main .container__login .form__login-control input:-webkit-autofill {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: white !important; }
+        .main .container__login .form__login-control .fas,
+        .main .container__login .form__login-control .far {
+          position: absolute;
+          margin-top: -3rem; }
+        .main .container__login .form__login-control .success-icon,
+        .main .container__login .form__login-control .error-icon {
+          right: 0; }
+        .main .container__login .form__login-control .error-icon,
+        .main .container__login .form__login-control .error-message {
+          color: #fc9867; }
+        .main .container__login .form__login-control .success-icon {
+          color: #a9dc76; }
+        .main .container__login .form__login-control .error-message {
+          font-size: 1.3rem;
+          margin-top: 5px; }
+        .main .container__login .form__login-control.input-error {
           border: 1px solid #fc9867; }
-    .main .container__login .form__login-text {
-      color: white;
-      text-align: center; }
+          .main .container__login .form__login-control.input-error:focus {
+            border: 1px solid #fc9867; }
+      .main .container__login .form__login-text {
+        color: white;
+        text-align: center; }
   .main .container__registration {
     z-index: 99;
     position: absolute;
@@ -198,7 +203,126 @@ header {
     .main .container__registration a {
       text-decoration: none;
       color: #ab9df2; }
-    .main .container__registration .form__registration-btn {
+    .main .container__registration .form__registration {
+      /*
+                @include form__registration-control();
+
+                &-control--error {
+                    @include form__registration-control();
+                    .error-icon {
+                        right: 0;
+                        color: $color-2;
+                    }
+
+                    .error-message {
+                        font-size: $small-font-size;
+                        margin-top: 5px;
+                        color: $color-2;
+                    }
+
+                    &.input-error {
+                        border: 1px solid $color-2;
+
+                        &:focus {
+                            border: 1px solid $color-2;
+                        }
+                    }
+                }
+
+                &-control--success {
+                    @include form__registration-control();
+                    .success-icon {
+                        right: 0;
+                    }
+
+                    .success-icon {
+                        color: $color-4;
+                    }
+                }
+
+                &-text {
+                    color: $color-light;
+                    text-align: center;
+                }
+                */ }
+      .main .container__registration .form__registration-btn {
+        width: 100%;
+        display: inline-block;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        cursor: pointer;
+        background: #fc9867;
+        font-family: inherit;
+        font-weight: 600;
+        border: 0;
+        border-radius: 5px;
+        color: #222222; }
+        .main .container__registration .form__registration-btn:focus {
+          outline: 0; }
+        .main .container__registration .form__registration-btn:active {
+          transform: scale(0.98); }
+      .main .container__registration .form__registration-control {
+        position: relative;
+        margin: 2rem 0 4rem;
+        width: 30rem;
+        color: white; }
+        .main .container__registration .form__registration-control input {
+          background-color: transparent;
+          border: 0;
+          border-bottom: 2px white solid;
+          display: block;
+          width: 100%;
+          font-size: 2rem;
+          color: white; }
+          .main .container__registration .form__registration-control input:focus {
+            outline: none;
+            border-bottom-color: #a9dc76; }
+          .main .container__registration .form__registration-control input::placeholder {
+            color: #ff6188;
+            font-weight: 100; }
+          .main .container__registration .form__registration-control input:-webkit-autofill {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: white !important; }
+        .main .container__registration .form__registration-control .fas,
+        .main .container__registration .form__registration-control .far {
+          position: absolute;
+          margin-top: -3rem; }
+        .main .container__registration .form__registration-control .success-icon,
+        .main .container__registration .form__registration-control .error-icon {
+          right: 0; }
+        .main .container__registration .form__registration-control .error-icon,
+        .main .container__registration .form__registration-control .error-message {
+          color: #fc9867; }
+        .main .container__registration .form__registration-control .success-icon {
+          color: #a9dc76; }
+        .main .container__registration .form__registration-control .error-message {
+          font-size: 1.3rem;
+          margin-top: 5px; }
+        .main .container__registration .form__registration-control.input-error {
+          border: 1px solid #fc9867; }
+          .main .container__registration .form__registration-control.input-error:focus {
+            border: 1px solid #fc9867; }
+      .main .container__registration .form__registration-text {
+        color: white;
+        text-align: center; }
+  .main .container__userdata {
+    z-index: 99;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #222222;
+    padding: 2rem 4rem;
+    border-radius: 5px; }
+    .main .container__userdata-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      color: #ffd866; }
+    .main .container__userdata a {
+      text-decoration: none;
+      color: #ab9df2; }
+    .main .container__userdata .form__userdata-btn {
       width: 100%;
       display: inline-block;
       padding: 1.5rem;
@@ -210,15 +334,18 @@ header {
       border: 0;
       border-radius: 5px;
       color: #222222; }
-      .main .container__registration .form__registration-btn:focus {
+      .main .container__userdata .form__userdata-btn:focus {
         outline: 0; }
-      .main .container__registration .form__registration-btn:active {
+      .main .container__userdata .form__userdata-btn:active {
         transform: scale(0.98); }
-    .main .container__registration .form__registration-control {
-      position: relative;
+    .main .container__userdata .form__userdata .usernames {
+      display: inline-flex;
+      gap: 4rem; }
+    .main .container__userdata .form__userdata-control {
       margin: 2rem 0 4rem;
-      width: 30rem; }
-      .main .container__registration .form__registration-control input {
+      width: 30rem;
+      color: white; }
+      .main .container__userdata .form__userdata-control input {
         background-color: transparent;
         border: 0;
         border-bottom: 2px white solid;
@@ -226,76 +353,16 @@ header {
         width: 100%;
         font-size: 2rem;
         color: white; }
-        .main .container__registration .form__registration-control input:focus {
+        .main .container__userdata .form__userdata-control input:focus {
           outline: none;
           border-bottom-color: #a9dc76; }
-        .main .container__registration .form__registration-control input::placeholder {
+        .main .container__userdata .form__userdata-control input::placeholder {
           color: #ff6188;
           font-weight: 100; }
-        .main .container__registration .form__registration-control input:-webkit-autofill {
+        .main .container__userdata .form__userdata-control input:-webkit-autofill {
           background-clip: text;
           -webkit-background-clip: text;
           -webkit-text-fill-color: white !important; }
-      .main .container__registration .form__registration-control .fas,
-      .main .container__registration .form__registration-control .far {
-        position: absolute;
-        margin-top: -3rem; }
-      .main .container__registration .form__registration-control .success-icon,
-      .main .container__registration .form__registration-control .error-icon {
-        right: 0; }
-      .main .container__registration .form__registration-control .error-icon,
-      .main .container__registration .form__registration-control .error-message {
-        color: #fc9867; }
-      .main .container__registration .form__registration-control .success-icon {
-        color: #a9dc76; }
-      .main .container__registration .form__registration-control .error-message {
-        font-size: 1.3rem;
-        margin-top: 5px; }
-      .main .container__registration .form__registration-control.input-error {
-        border: 1px solid #fc9867; }
-        .main .container__registration .form__registration-control.input-error:focus {
-          border: 1px solid #fc9867; }
-    .main .container__registration .form__registration-control--error {
-      position: relative;
-      margin: 2rem 0 4rem;
-      width: 30rem; }
-      .main .container__registration .form__registration-control--error input {
-        background-color: transparent;
-        border: 0;
-        border-bottom: 2px white solid;
-        display: block;
-        width: 100%;
-        font-size: 2rem;
-        color: white; }
-        .main .container__registration .form__registration-control--error input:focus {
-          outline: none;
-          border-bottom-color: #a9dc76; }
-        .main .container__registration .form__registration-control--error input::placeholder {
-          color: #ff6188;
-          font-weight: 100; }
-        .main .container__registration .form__registration-control--error input:-webkit-autofill {
-          background-clip: text;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: white !important; }
-      .main .container__registration .form__registration-control--error .fas,
-      .main .container__registration .form__registration-control--error .far {
-        position: absolute;
-        margin-top: -3rem; }
-      .main .container__registration .form__registration-control--error .error-icon {
-        right: 0; }
-      .main .container__registration .form__registration-control--error .error-icon,
-      .main .container__registration .form__registration-control--error .error-message {
-        color: #fc9867; }
-      .main .container__registration .form__registration-control--error .error-message {
-        font-size: 1.3rem;
-        margin-top: 5px; }
-      .main .container__registration .form__registration-control--error.input-error {
-        border: 1px solid #fc9867; }
-        .main .container__registration .form__registration-control--error.input-error:focus {
-          border: 1px solid #fc9867; }
-    .main .container__registration .form__registration-text {
-      color: white;
-      text-align: center; }
   .main .section__menu {
     flex: 0 0 20vw;
     background-color: #1e293b;
@@ -303,6 +370,24 @@ header {
   .main .section__content {
     flex: 1 0 65vw;
     background-color: #78dce8; }
+    .main .section__content .users-table {
+      margin: auto;
+      background-color: #fc9867;
+      border-bottom: 1px solid black;
+      box-shadow: 0 0 5px 2px black;
+      width: 50%;
+      text-align: center; }
+      .main .section__content .users-table tbody tr:nth-child(odd) {
+        background-color: #78dce8;
+        padding: 2rem 0; }
+      .main .section__content .users-table tbody tr:nth-child(even) {
+        background-color: #78dce8;
+        padding: 2rem 0; }
+      .main .section__content .users-table tbody td {
+        padding: 1rem 0.5rem; }
+      .main .section__content .users-table .edit-user {
+        text-decoration: none;
+        font-weight: 700; }
   .main .section__ads {
     flex: 0 0 15vw;
     background-color: #1e293b;
