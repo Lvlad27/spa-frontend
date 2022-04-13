@@ -96,7 +96,7 @@
             <div class="container container__userdata">
                 <h2 class="container__userdata-title">Edit User Data</h2>
                 <form action="#" class="form form__userdata" id="userDataForm">
-                    <div class="usernames">
+                    <div class="container-1">
                         <!-- First Name -->
                         <div class="form__userdata-control">
                             <label class="firstname" for="firstname" id="firstname-label"
@@ -121,6 +121,9 @@
                                 placeholder="Enter your Last Name"
                             />
                         </div>
+                    </div>
+
+                    <div class="container-2">
                         <!-- Age -->
                         <div class="form__userdata-control">
                             <label for="age" id="age-label">Age</label>
@@ -134,70 +137,87 @@
                                 placeholder="Enter your Age"
                             />
                         </div>
+                        <!-- Date of birth -->
+                        <div class="form__userdata-control">
+                            <label for="birthday" id="age-label">Date of birth</label>
+                            <input
+                                type="date"
+                                name="birthday"
+                                id="birthday"
+                                min="1950-01-01"
+                                max="2022-12-31"
+                                class="input"
+                            />
+                        </div>
                     </div>
 
-                    <!-- Date of birth -->
-                    <div class="form__userdata-control">
-                        <label for="birthday" id="age-label">Date of birth</label>
-                        <input
-                            type="date"
-                            name="birthday"
-                            id="birthday"
-                            min="1950-01-01"
-                            max="2022-12-31"
-                            class="input"
-                        />
-                    </div>
-                    <!-- Gender -->
-                    <div class="form__userdata-control">
-                        <p>What is your gender?</p>
-                        <label>
-                            <input type="radio" name="male" value="Male" class="radio" />Male
-                        </label>
-                        <label>
-                            <input type="radio" name="female" value="Female" class="radio" />Female
-                        </label>
+                    <div class="container-3">
+                        <!-- Gender -->
+                        <div class="form__userdata-control">
+                            <p>What is your gender?</p>
+                            <div class="container-gender">
+                                <div class="alignment">
+                                    <input type="radio" name="gender" value="Male" class="radio" />
+                                    <label>Male</label>
+                                </div>
+                                <div class="alignment">
+                                    <input
+                                        type="radio"
+                                        name="gender"
+                                        value="Female"
+                                        class="radio"
+                                    />
+                                    <label>Female</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Hobbies -->
+                        <div class="form__userdata-control">
+                            <p>What kind of hobbies are you interested in?</p>
+                            <div class="container-hobbies">
+                                <div class="alignment">
+                                    <input
+                                        type="checkbox"
+                                        name="prefer"
+                                        value="sports"
+                                        class="checkbox"
+                                    />
+                                    <label>Sports</label>
+                                </div>
+                                <div class="alignment">
+                                    <input
+                                        type="checkbox"
+                                        name="prefer"
+                                        value="gaming"
+                                        class="checkbox"
+                                    />
+                                    <label>Gaming</label>
+                                </div>
+                                <div class="alignment">
+                                    <input
+                                        type="checkbox"
+                                        name="prefer"
+                                        value="arts"
+                                        class="checkbox"
+                                    />
+                                    <label>Arts & Crafts</label>
+                                </div>
+                                <div class="alignment">
+                                    <input
+                                        type="checkbox"
+                                        name="prefer"
+                                        value="traveling"
+                                        class="checkbox"
+                                    />
+                                    <label>Traveling & Outdoors</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form__userdata-control">
-                        <p>What kind of hobbies are you interested in?</p>
-                        <label>
-                            <input
-                                type="checkbox"
-                                name="prefer"
-                                value="sports"
-                                class="checkbox"
-                            />Sports
-                        </label>
-                        <label>
-                            <input
-                                type="checkbox"
-                                name="prefer"
-                                value="gaming"
-                                class="checkbox"
-                            />Gaming
-                        </label>
-                        <label>
-                            <input
-                                type="checkbox"
-                                name="prefer"
-                                value="arts"
-                                class="checkbox"
-                            />Arts & Crafts
-                        </label>
-                        <label>
-                            <input
-                                type="checkbox"
-                                name="prefer"
-                                value="traveling"
-                                class="checkbox"
-                            />Traveling & Outdoors
-                        </label>
-                    </div>
-
-                    <div class="form__userdata-control">
-                        <button type="submit" id="submit" class="form__userdata-btn">Submit</button>
-                    </div>
+                    <button type="submit" id="submit" class="form__userdata-btn">
+                        Submit
+                    </button>
                 </form>
             </div>
             <!-- ----------------------------------------------------------------------- -->

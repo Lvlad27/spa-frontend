@@ -73,6 +73,7 @@ header {
         @include form(registration, 99);
 
         &__userdata {
+            width: 50%;
             z-index: 99;
             position: absolute;
             top: 50%;
@@ -96,11 +97,69 @@ header {
 
             .form {
                 &__userdata {
+                    .container-1,
+                    .container-2,
+                    .container-3 {
+                        display: flex;
+                        gap: 4rem;
+                    }
+
+                    .container-gender,
+                    .container-hobbies {
+                        display: flex;
+                        flex-direction: column;
+
+                        .alignment {
+                            display: flex;
+                            align-items: center;
+                        }
+
+                        label,
+                        input {
+                            clear: none;
+                            width: auto;
+                            padding: 0.5rem 1rem;
+                        }
+                    }
+
+                    &-control {
+                        margin: 2rem 0 2rem;
+                        width: 30rem;
+                        color: $color-light;
+
+                        input {
+                            background-color: transparent;
+                            border: 0;
+                            border-bottom: 2px $color-light solid;
+                            width: 100%;
+                            // padding: 5px 0 5px;
+                            font-size: $medium-font-size;
+                            color: $color-light;
+
+                            &:focus {
+                                outline: none;
+                                border-bottom-color: $color-4;
+                            }
+
+                            &::placeholder {
+                                color: $color-1;
+                                font-size: $default-font-size;
+                                font-weight: 100;
+                            }
+
+                            &:-webkit-autofill {
+                                background-clip: text;
+                                -webkit-background-clip: text;
+                                -webkit-text-fill-color: $color-light !important;
+                            }
+                        }
+                    }
+
                     &-btn {
-                        width: 100%;
-                        display: inline-block;
-                        padding: 1.5rem;
-                        margin-bottom: 1.5rem;
+                        display: block;
+                        margin: auto;
+                        width: 50%;
+                        padding: 1rem;
                         cursor: pointer;
                         background: $color-2;
                         font-family: inherit;
@@ -115,46 +174,6 @@ header {
 
                         &:active {
                             transform: scale(0.98);
-                        }
-                    }
-
-                    .usernames {
-                        display: inline-flex;
-                        gap: 4rem;
-                        .form__userdata-control {
-                        }
-                    }
-
-                    &-control {
-                        margin: 2rem 0 4rem;
-                        width: 30rem;
-                        color: $color-light;
-
-                        input {
-                            background-color: transparent;
-                            border: 0;
-                            border-bottom: 2px $color-light solid;
-                            display: block;
-                            width: 100%;
-                            // padding: 5px 0 5px;
-                            font-size: $medium-font-size;
-                            color: $color-light;
-
-                            &:focus {
-                                outline: none;
-                                border-bottom-color: $color-4;
-                            }
-
-                            &::placeholder {
-                                color: $color-1;
-                                font-weight: 100;
-                            }
-
-                            &:-webkit-autofill {
-                                background-clip: text;
-                                -webkit-background-clip: text;
-                                -webkit-text-fill-color: $color-light !important;
-                            }
                         }
                     }
                 }
