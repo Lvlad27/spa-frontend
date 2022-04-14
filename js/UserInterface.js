@@ -20,7 +20,7 @@ class UserInterface {
         <td>${user.password}</td>
         <td>${user.name}</td>
         <td>${user.surname}</td>
-        <td>${user.age}</td>
+        <td>${user.country}</td>
         <td>${user.birthday}</td>
         <td>${user.gender}</td>
         <td>${user.hobbies}</td>

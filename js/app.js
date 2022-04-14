@@ -12,12 +12,6 @@ export const loginFormContainer = id('loginAccount'),
     userdataForm = id('userdataForm'),
     userName = id('signUpEmail'),
     password = id('signUpPass'),
-    name = id('firstName'),
-    surname = id('surname'),
-    age = id('age'),
-    birthday = id('birthday'),
-    gender = ['male', 'female'],
-    hobbies = ['Sports', 'Gaming', 'Arts & Crafts', 'Traveling & Outdoors'],
     passwordConfirm = id('passwordConfirm'),
     loginUserName = id('loginUserName'),
     loginPassword = id('loginPassword'),
@@ -31,9 +25,16 @@ export const loginFormContainer = id('loginAccount'),
     loginFormInputs = ['loginUserName', 'loginPassword'],
     signUpFormInputs = ['signUpEmail', 'signUpPass', 'passwordConfirm'],
     userDataFormInputs = ['name', 'surname', 'age', 'birthday', 'hobbies'],
-    userList = id('userList');
-
-// if (tr.childNodes.tagName === 'button') console.log('button');
+    userTable = id('userTable'),
+    userList = id('userList'),
+    name = id('firstName'),
+    surname = id('surname'),
+    country = id('country'),
+    birthday = id('birthday'),
+    gender = document.querySelector('input[name=gender]:checked'),
+    checkedHobbies = Array.from(document.querySelectorAll('input[name="prefer"]:checked'))
+        .map(checkbox => checkbox.value)
+        .toString();
 
 ////////////////////////////////////////////////////////////////////
 class App {
@@ -49,7 +50,11 @@ class App {
         loginBtn.addEventListener('click', this.checkLoginData.bind(this));
         createAccountBtn.addEventListener('click', this.checkRegistrationData.bind(this));
         registerFormContainer.addEventListener('submit', this.addUser.bind(this));
-        userdataFormContainer.addEventListener('submit', this.updateUserData.bind(this));
+
+        userdataForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+        });
+        userdataForm.addEventListener('submit', this.updateUserData.bind(this));
 
         /*
         signUpLink.addEventListener(
@@ -112,9 +117,8 @@ class App {
         // this.toggleFormVisibility(loginFormContainer, registerFormContainer);
         this.hideForm(loginFormContainer);
         this.hideForm(userdataFormContainer);
-        this.hideForm(registerFormContainer);
-        const storedUserData = this.storage.getUsers();
-        console.log(storedUserData);
+        this.hideForm(userTable);
+        // this.hideForm(registerFormContainer);
         // this.animateFadeIn(registerForm);
     }
 
@@ -138,8 +142,19 @@ class App {
         formName.classList.remove('hide-element');
     }
 
+    readFromEditFormData() {}
+
     addUser() {
-        const user = new User(userName.value, password.value);
+        const user = new User(
+            userName.value,
+            password.value,
+            name.value,
+            surname.value,
+            country.value,
+            birthday.value,
+            gender.value,
+            checkedHobbies
+        );
 
         if (this.signUpFormValidation.validateOnSubmit()) {
             this.userInterface.addUserToList(user);
@@ -147,48 +162,16 @@ class App {
         }
     }
 
-    updateUserData(user) {
+    updateUserData() {
         const storedUserData = this.storage.getUsers();
-        // console.log(storedUserData);
 
-        const buttonArray = document.querySelectorAll('.edit-user');
-        // const entries = Object.entries(storedUserData);
-
-        // console.log(entries);
-
-        // entries[0][1]['name'] = name.value;
-
-        // this.storage.storeUser(storedUserData);
-
-        // Return true If buttonArray and Object.keys(storedUserData) have same index number. If the condition is true, the submitted form will go to the corresponding user object.
+        const keysArray = Object.entries(storedUserData);
+        console.log('keysArray', keysArray);
 
         /*
-        What is the problem I'm trying to solve?
-        User needs to click on edit button. A form will show which he can complete and submit. The submitted data will be added to the corresponding user object and updated in storage. Also the form will show the new information.
-
-        */
-
-        // I have an index and 2 arrays.
-
-        // const editCondition = () => {
-        //     for (let i = 0; i <= buttonArray.length; i++) {
-        //         for (let j = 0; j <= keys.length; j++) {
-        //             if (i === j) {
-        //                 return true;
-        //             } else {
-        //                 return false;
-        //             }
-        //         }
-        //     }
-        // };
-
         const keysArray = Object.keys(storedUserData);
-        // console.log('keysArray', keysArray);
 
-        // for (let i = 0; i < keysArray.length; i++) {
-        //     let user = storedUserData[i];
-        //     console.log('user', user);
-        // }
+
 
         keysArray.forEach(
             function (key) {
@@ -202,6 +185,7 @@ class App {
                 }
             }.bind(this)
         );
+        */
     }
 
     checkLoginData() {
@@ -212,6 +196,7 @@ class App {
         if (email && password === loginPassword.value) {
             overlay.classList.add('overlay--hidden');
             this.hideForm(loginFormContainer);
+            this.showForm(userTable);
         }
     }
 

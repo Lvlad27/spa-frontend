@@ -124,17 +124,15 @@
                     </div>
 
                     <div class="container-2">
-                        <!-- Age -->
+                        <!-- Country -->
                         <div class="form__userdata-control">
-                            <label for="age" id="age-label">Age</label>
+                            <label for="country" id="country-label">Country</label>
                             <input
-                                type="number"
-                                name="age"
-                                id="age"
-                                min="0"
-                                max="99"
+                                type="text"
+                                name="country"
+                                id="country"
                                 class="input"
-                                placeholder="Enter your Age"
+                                placeholder="Enter your country"
                             />
                         </div>
                         <!-- Date of birth -->
@@ -157,7 +155,13 @@
                             <p>What is your gender?</p>
                             <div class="container-gender">
                                 <div class="alignment">
-                                    <input type="radio" name="gender" value="Male" class="radio" />
+                                    <input
+                                        type="radio"
+                                        name="gender"
+                                        value="Male"
+                                        class="radio"
+                                        checked="checked"
+                                    />
                                     <label>Male</label>
                                 </div>
                                 <div class="alignment">
@@ -200,7 +204,7 @@
                                         value="arts"
                                         class="checkbox"
                                     />
-                                    <label>Arts & Crafts</label>
+                                    <label>Arts</label>
                                 </div>
                                 <div class="alignment">
                                     <input
@@ -209,7 +213,7 @@
                                         value="traveling"
                                         class="checkbox"
                                     />
-                                    <label>Traveling & Outdoors</label>
+                                    <label>Traveling</label>
                                 </div>
                             </div>
                         </div>
@@ -233,17 +237,17 @@
             </nav>
 
             <section class="section section__content">
-                <table class="users-table">
+                <table class="users-table" id="userTable">
                     <thead>
                         <tr>
-                            <th>Email</th>
-                            <th>Password</th>
-                            <th>Name</th>
-                            <th>Surname</th>
-                            <th>Age</th>
-                            <th>Birthday</th>
-                            <th>Gender</th>
-                            <th>Hobbies</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Surname</th>
+                            <th scope="col">Country</th>
+                            <th scope="col">Birthday</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Hobbies</th>
                         </tr>
                     </thead>
                     <tbody id="userList"></tbody>

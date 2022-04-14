@@ -1,19 +1,21 @@
 class Storage {
     getUsers() {
-        let userStorage = {};
-        if (localStorage.getItem('userStorage') !== null) {
-            userStorage = JSON.parse(localStorage.getItem('userStorage'));
+        let storedUserData = {};
+        if (localStorage.getItem('storedUserData') !== null) {
+            storedUserData = JSON.parse(localStorage.getItem('storedUserData'));
         }
-        return userStorage;
+        return storedUserData;
     }
 
     storeUser(user) {
-        let userStorage = this.getUsers();
-        userStorage[user.userName] = user;
-        localStorage.setItem('userStorage', JSON.stringify(userStorage));
+        let storedUserData = this.getUsers();
+        storedUserData[user.userName] = user;
+        localStorage.setItem('storedUserData', JSON.stringify(storedUserData));
     }
 
-    // addUser() {
+    updateUser(user) {
+        let storedUserData = this.getUsers();
+    }
 }
 
 export default Storage;
