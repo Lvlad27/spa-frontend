@@ -89,9 +89,10 @@ header {
                 color: $color-3;
             }
 
-            a {
-                text-decoration: none;
+            .edit-user {
                 color: $color-6;
+                background-color: $color-6;
+                cursor: pointer;
             }
 
             .form {
@@ -206,7 +207,7 @@ header {
                     }
 
                     tr:nth-child(even) {
-                        background-color: $color-5;
+                        background-color: $color-light;
                         padding: 2rem 0;
                     }
 

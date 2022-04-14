@@ -8,20 +8,32 @@ export let id = id => document.getElementById(id);
 
 export const loginFormContainer = id('loginAccount'),
     registerFormContainer = id('registerAccount'),
+    userdataFormContainer = id('userdataContainer'),
+    userdataForm = id('userdataForm'),
     userName = id('signUpEmail'),
     password = id('signUpPass'),
+    name = id('firstName'),
+    surname = id('surname'),
+    age = id('age'),
+    birthday = id('birthday'),
+    gender = ['male', 'female'],
+    hobbies = ['Sports', 'Gaming', 'Arts & Crafts', 'Traveling & Outdoors'],
     passwordConfirm = id('passwordConfirm'),
     loginUserName = id('loginUserName'),
     loginPassword = id('loginPassword'),
     loginBtn = id('loginBtn'),
     signUpBtn = id('createAccountBtn'),
+    submitUserdata = id('submit-userdata'),
     loginLink = id('loginLink'),
     signUpLink = id('signUpLink'),
     createAccountBtn = id('createAccountBtn'),
     overlay = id('overlay'),
     loginFormInputs = ['loginUserName', 'loginPassword'],
     signUpFormInputs = ['signUpEmail', 'signUpPass', 'passwordConfirm'],
-    userList = document.getElementById('userList');
+    userDataFormInputs = ['name', 'surname', 'age', 'birthday', 'hobbies'],
+    userList = id('userList');
+
+// if (tr.childNodes.tagName === 'button') console.log('button');
 
 ////////////////////////////////////////////////////////////////////
 class App {
@@ -34,7 +46,10 @@ class App {
         // Attach event listeners
         document.addEventListener('DOMContentLoaded', this.pageLoadEvent.bind(this));
         document.addEventListener('DOMContentLoaded', userInterface.displayUsers());
+        loginBtn.addEventListener('click', this.checkLoginData.bind(this));
         createAccountBtn.addEventListener('click', this.checkRegistrationData.bind(this));
+        registerFormContainer.addEventListener('submit', this.addUser.bind(this));
+        userdataFormContainer.addEventListener('submit', this.updateUserData.bind(this));
 
         /*
         signUpLink.addEventListener(
@@ -66,8 +81,15 @@ class App {
             }.bind(this)
         );
 
-        registerFormContainer.addEventListener('submit', this.addUser.bind(this));
-        loginBtn.addEventListener('click', this.checkLoginData.bind(this));
+        userList.addEventListener(
+            'click',
+            function (e) {
+                e.preventDefault();
+                if (e.target.matches('button.edit-user')) {
+                    this.showForm(userdataFormContainer);
+                }
+            }.bind(this)
+        );
     }
 
     /*
@@ -86,10 +108,13 @@ class App {
     */
 
     pageLoadEvent() {
-        overlay.classList.remove('overlay--hidden');
+        // overlay.classList.remove('overlay--hidden');
         // this.toggleFormVisibility(loginFormContainer, registerFormContainer);
         this.hideForm(loginFormContainer);
-        this.showForm(registerFormContainer);
+        this.hideForm(userdataFormContainer);
+        this.hideForm(registerFormContainer);
+        const storedUserData = this.storage.getUsers();
+        console.log(storedUserData);
         // this.animateFadeIn(registerForm);
     }
 
@@ -122,13 +147,69 @@ class App {
         }
     }
 
+    updateUserData(user) {
+        const storedUserData = this.storage.getUsers();
+        // console.log(storedUserData);
+
+        const buttonArray = document.querySelectorAll('.edit-user');
+        // const entries = Object.entries(storedUserData);
+
+        // console.log(entries);
+
+        // entries[0][1]['name'] = name.value;
+
+        // this.storage.storeUser(storedUserData);
+
+        // Return true If buttonArray and Object.keys(storedUserData) have same index number. If the condition is true, the submitted form will go to the corresponding user object.
+
+        /*
+        What is the problem I'm trying to solve?
+        User needs to click on edit button. A form will show which he can complete and submit. The submitted data will be added to the corresponding user object and updated in storage. Also the form will show the new information.
+
+        */
+
+        // I have an index and 2 arrays.
+
+        // const editCondition = () => {
+        //     for (let i = 0; i <= buttonArray.length; i++) {
+        //         for (let j = 0; j <= keys.length; j++) {
+        //             if (i === j) {
+        //                 return true;
+        //             } else {
+        //                 return false;
+        //             }
+        //         }
+        //     }
+        // };
+
+        const keysArray = Object.keys(storedUserData);
+        // console.log('keysArray', keysArray);
+
+        // for (let i = 0; i < keysArray.length; i++) {
+        //     let user = storedUserData[i];
+        //     console.log('user', user);
+        // }
+
+        keysArray.forEach(
+            function (key) {
+                let user = storedUserData[key];
+                let userKeys = Object.keys(user);
+                console.log('userKeys', userKeys);
+
+                for (let i = 0; i <= keysArray; i++) {
+                    console.log(user[0]);
+                    // Object.assign(user, { name: name.value });
+                }
+            }.bind(this)
+        );
+    }
+
     checkLoginData() {
         const storedUserData = this.storage.getUsers();
         const email = storedUserData[loginUserName.value];
         const password = storedUserData[loginUserName.value].password;
 
         if (email && password === loginPassword.value) {
-            alert('Welcome! You are logged in.');
             overlay.classList.add('overlay--hidden');
             this.hideForm(loginFormContainer);
         }

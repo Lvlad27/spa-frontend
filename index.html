@@ -93,32 +93,32 @@
             <!-- ----------------------------------------------------------------------- -->
 
             <!-- --------------------------- USER DATA FORM ---------------------------- -->
-            <div class="container container__userdata">
+            <div class="container container__userdata" id="userdataContainer">
                 <h2 class="container__userdata-title">Edit User Data</h2>
-                <form action="#" class="form form__userdata" id="userDataForm">
+                <form action="#" class="form form__userdata" id="userdataForm">
                     <div class="container-1">
                         <!-- First Name -->
                         <div class="form__userdata-control">
                             <label class="firstname" for="firstname" id="firstname-label"
-                                >First Name</label
+                                >Name</label
                             >
                             <input
                                 type="text"
                                 name="firstname"
                                 id="firstName"
                                 class="input"
-                                placeholder="Enter your First Name"
+                                placeholder="Enter your name"
                             />
                         </div>
                         <!-- Last Name -->
                         <div class="form__userdata-control">
-                            <label for="lastname" id="lastname-label">Last Name</label>
+                            <label for="lastname" id="lastname-label">Surname</label>
                             <input
                                 type="text"
                                 name="lastname"
-                                id="lastName"
+                                id="surname"
                                 class="input"
-                                placeholder="Enter your Last Name"
+                                placeholder="Enter your surname"
                             />
                         </div>
                     </div>
@@ -215,8 +215,8 @@
                         </div>
                     </div>
 
-                    <button type="submit" id="submit" class="form__userdata-btn">
-                        Submit
+                    <button type="submit" id="submit-userdata" class="form__userdata-btn">
+                        Update
                     </button>
                 </form>
             </div>
@@ -238,6 +238,12 @@
                         <tr>
                             <th>Email</th>
                             <th>Password</th>
+                            <th>Name</th>
+                            <th>Surname</th>
+                            <th>Age</th>
+                            <th>Birthday</th>
+                            <th>Gender</th>
+                            <th>Hobbies</th>
                         </tr>
                     </thead>
                     <tbody id="userList"></tbody>

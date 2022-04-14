@@ -319,9 +319,10 @@ header {
       text-align: center;
       margin-bottom: 3rem;
       color: #ffd866; }
-    .main .container__userdata a {
-      text-decoration: none;
-      color: #ab9df2; }
+    .main .container__userdata .edit-user {
+      color: #ab9df2;
+      background-color: #ab9df2;
+      cursor: pointer; }
     .main .container__userdata .form__userdata .container-1,
     .main .container__userdata .form__userdata .container-2,
     .main .container__userdata .form__userdata .container-3 {
@@ -398,7 +399,7 @@ header {
         background-color: #78dce8;
         padding: 2rem 0; }
       .main .section__content .users-table tbody tr:nth-child(even) {
-        background-color: #78dce8;
+        background-color: white;
         padding: 2rem 0; }
       .main .section__content .users-table tbody td {
         padding: 1rem 0.5rem; }

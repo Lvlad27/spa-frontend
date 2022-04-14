@@ -18,15 +18,15 @@ class UserInterface {
         row.innerHTML = `
         <td>${user.userName}</td>
         <td>${user.password}</td>
-        <td><a href="#" class="edit-user">Edit</a></td>
+        <td>${user.name}</td>
+        <td>${user.surname}</td>
+        <td>${user.age}</td>
+        <td>${user.birthday}</td>
+        <td>${user.gender}</td>
+        <td>${user.hobbies}</td>
+        <td><button type="button" class="edit-user">Edit</button></td>
         `;
         userList.appendChild(row);
-    }
-
-    editUser() {
-        /* 
-        1. Form with country, date of birth, checkboxes for hobbies, radio button for gender (select, date, radio buttons, checkbox)
-        */
     }
 }
 
