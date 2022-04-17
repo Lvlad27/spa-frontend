@@ -3,22 +3,20 @@ class UserInterface {
         this.storage = storage;
     }
 
-    displayUsers() {
-        const storedUserData = this.storage.getUsers();
-        Object.keys(storedUserData).forEach(
-            function (key) {
-                this.addUserToList(storedUserData[key]);
-            }.bind(this)
-        );
+    displayUsers(usersArray = this.storage.getUsersArray()) {
+        console.log('userInterfaceCall', usersArray);
+        usersArray.forEach((userObj) => {
+            this.addUserToTable(userObj);
+        });
     }
 
-    addUserToList(user) {
-        const row = document.createElement('tr');
+    addUserToTable(user) {
+        let row = document.createElement('tr');
 
         row.innerHTML = `
         <td>${user.userName}</td>
         <td>${user.password}</td>
-        <td>${user.name}</td>
+        <td>${user.firstName}</td>
         <td>${user.surname}</td>
         <td>${user.country}</td>
         <td>${user.birthday}</td>

@@ -1,12 +1,9 @@
 import User from './User.js';
-import Storage from './Storage.js';
-import FormValidation from './FormValidation.js';
-import UserInterface from './UserInterface.js';
 
 ////////////////////////////////////////////////////////////////////
-export let id = id => document.getElementById(id);
+export let id = (id) => document.getElementById(id);
 
-export const loginFormContainer = id('loginAccount'),
+export let loginFormContainer = id('loginAccount'),
     registerFormContainer = id('registerAccount'),
     userdataFormContainer = id('userdataContainer'),
     userdataForm = id('userdataForm'),
@@ -24,17 +21,14 @@ export const loginFormContainer = id('loginAccount'),
     overlay = id('overlay'),
     loginFormInputs = ['loginUserName', 'loginPassword'],
     signUpFormInputs = ['signUpEmail', 'signUpPass', 'passwordConfirm'],
-    userDataFormInputs = ['name', 'surname', 'age', 'birthday', 'hobbies'],
     userTable = id('userTable'),
     userList = id('userList'),
     name = id('firstName'),
     surname = id('surname'),
     country = id('country'),
     birthday = id('birthday'),
-    gender = document.querySelector('input[name=gender]:checked'),
-    checkedHobbies = Array.from(document.querySelectorAll('input[name="prefer"]:checked'))
-        .map(checkbox => checkbox.value)
-        .toString();
+    gender = '',
+    checkedHobbies = '';
 
 ////////////////////////////////////////////////////////////////////
 class App {
@@ -50,11 +44,7 @@ class App {
         loginBtn.addEventListener('click', this.checkLoginData.bind(this));
         createAccountBtn.addEventListener('click', this.checkRegistrationData.bind(this));
         registerFormContainer.addEventListener('submit', this.addUser.bind(this));
-
-        userdataForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-        });
-        userdataForm.addEventListener('submit', this.updateUserData.bind(this));
+        this.updateUserTableData();
 
         /*
         signUpLink.addEventListener(
@@ -86,15 +76,15 @@ class App {
             }.bind(this)
         );
 
-        userList.addEventListener(
-            'click',
-            function (e) {
-                e.preventDefault();
-                if (e.target.matches('button.edit-user')) {
-                    this.showForm(userdataFormContainer);
-                }
-            }.bind(this)
-        );
+        // userList.addEventListener(
+        //     'click',
+        //     function (e) {
+        //         e.preventDefault();
+        //         if (e.target.matches('button.edit-user')) {
+        //             this.showForm(userdataFormContainer);
+        //         }
+        //     }.bind(this)
+        // );
     }
 
     /*
@@ -117,8 +107,9 @@ class App {
         // this.toggleFormVisibility(loginFormContainer, registerFormContainer);
         this.hideForm(loginFormContainer);
         this.hideForm(userdataFormContainer);
-        this.hideForm(userTable);
-        // this.hideForm(registerFormContainer);
+        this.showForm(userTable);
+        this.hideForm(registerFormContainer);
+        // console.log('usersArray', this.storage.getUsersArray());
         // this.animateFadeIn(registerForm);
     }
 
@@ -142,13 +133,11 @@ class App {
         formName.classList.remove('hide-element');
     }
 
-    readFromEditFormData() {}
-
     addUser() {
-        const user = new User(
+        let user = new User(
             userName.value,
             password.value,
-            name.value,
+            firstName.value,
             surname.value,
             country.value,
             birthday.value,
@@ -157,41 +146,78 @@ class App {
         );
 
         if (this.signUpFormValidation.validateOnSubmit()) {
-            this.userInterface.addUserToList(user);
+            this.userInterface.addUserToTable(user);
             this.storage.storeUser(user);
         }
     }
 
-    updateUserData() {
-        const storedUserData = this.storage.getUsers();
+    updateUserTableData(storedUserData = this.storage.getUsers()) {
+        let usersArray = this.storage.getUsersArray(),
+            editUserButtons = [...document.getElementsByClassName('edit-user')];
 
-        const keysArray = Object.entries(storedUserData);
-        console.log('keysArray', keysArray);
+        editUserButtons.forEach((button, buttonIndex) => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.showForm(userdataFormContainer);
+                usersArray.forEach((user, userIndex) => {
+                    if (editUserButtons.indexOf(e.target) === userIndex) {
+                        console.log(`You clicked on ${usersArray[userIndex].userName}`);
 
-        /*
-        const keysArray = Object.keys(storedUserData);
+                        userdataFormContainer.addEventListener('submit', (e) => {
+                            let firstName = id('firstName'),
+                                surname = id('surname'),
+                                country = id('country'),
+                                birthday = id('birthday'),
+                                checkedHobbies = Array.from(
+                                    userdataForm.querySelectorAll('input[name="prefer"]:checked')
+                                )
+                                    .map((checkbox) => checkbox.value)
+                                    .toString(),
+                                gender = document.querySelector('input[name=gender]:checked');
 
+                            user = new User(
+                                usersArray[userIndex].userName,
+                                usersArray[userIndex].password,
+                                firstName.value,
+                                surname.value,
+                                country.value,
+                                birthday.value,
+                                gender.value,
+                                checkedHobbies
+                            );
+                            this.storage.storeUser(user);
+                            console.log(user);
+                            // usersArray[userIndex].firstName = name.value;
+                            // usersArray[userIndex].surname = surname.value;
+                            // usersArray[userIndex].country = country.value;
+                            // usersArray[userIndex].birthday = birthday.value;
+                            // usersArray[userIndex].gender = gender.value;
 
+                            // let user = new User(
+                            //     userName.value,
+                            //     password.value,
+                            //     firstName.value,
+                            //     surname.value,
+                            //     country.value,
+                            //     birthday.value,
+                            //     gender.value,
+                            //     checkedHobbies
+                            // );
 
-        keysArray.forEach(
-            function (key) {
-                let user = storedUserData[key];
-                let userKeys = Object.keys(user);
-                console.log('userKeys', userKeys);
+                            usersArray[userIndex].hobbies = checkedHobbies;
 
-                for (let i = 0; i <= keysArray; i++) {
-                    console.log(user[0]);
-                    // Object.assign(user, { name: name.value });
-                }
-            }.bind(this)
-        );
-        */
+                            this.storage.storeUser(user);
+                        });
+                    }
+                });
+            });
+        });
     }
 
     checkLoginData() {
-        const storedUserData = this.storage.getUsers();
-        const email = storedUserData[loginUserName.value];
-        const password = storedUserData[loginUserName.value].password;
+        let storedUserData = this.storage.getUsers(),
+            email = storedUserData[loginUserName.value],
+            password = storedUserData[loginUserName.value].password;
 
         if (email && password === loginPassword.value) {
             overlay.classList.add('overlay--hidden');
