@@ -15,13 +15,55 @@ body {
 }
 
 header {
-    text-align: center;
-    background-color: $color-dark;
-
     .nav {
-        display: flex;
-        justify-content: center;
+        background-color: $color-dark;
         color: $color-3;
+
+        .container {
+            display: flex;
+            flex-direction: row;
+
+            justify-content: space-around;
+            align-items: center;
+
+            .title {
+                margin: 2rem;
+            }
+
+            .search-bar {
+                input[type='search'] {
+                    width: 30vw;
+                    margin-left: 1rem;
+                    color: $color-dark;
+
+                    &:active {
+                        border: none;
+                        color: $color-3;
+                    }
+                }
+            }
+
+            .create {
+                display: flex;
+                align-items: center;
+
+                @include btn($color-dark, $color-3);
+
+                .profile {
+                    margin: 1rem 2rem 1rem;
+                    background-color: $color-light;
+                    width: 6rem;
+                    aspect-ratio: 1/1;
+                    overflow: hidden;
+                    border-radius: 50%;
+
+                    img {
+                        display: block;
+                        width: 100%;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -37,8 +79,8 @@ header {
     bottom: 0;
     // width: 100%;
     height: 100%;
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: 0 blur(3px);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: 0 blur(6px);
     z-index: 5;
 
     &--hidden {
@@ -186,6 +228,20 @@ header {
             flex: 0 0 20vw;
             background-color: $color-7;
             color: $color-light;
+
+            &-sidebar {
+                margin-top: 2rem;
+                text-decoration: none;
+                list-style: none;
+
+                @include btn($color-dark, $color-2);
+                .btn-menu {
+                    margin: 1rem;
+                    i {
+                        margin-right: 0.5rem;
+                    }
+                }
+            }
         }
 
         &__content {

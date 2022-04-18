@@ -6,20 +6,36 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link rel="stylesheet" href="/css/style.css" />
-        <title>Connex</title>
+        <title>RoboGram</title>
     </head>
 
     <body>
         <div class="overlay overlay--hidden" id="overlay"></div>
         <header>
             <nav class="nav">
-                <h1 class="title">Social App</h1>
+                <div class="container">
+                    <h1 class="title">RoboGram</h1>
+                    <div class="search-bar">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="search" placeholder="Search for Robots" />
+                    </div>
+                    <div class="create">
+                        <button class="btn btn-create">Create</button>
+                        <div class="profile">
+                            <img
+                                src="https://robohash.org/user"
+                                alt="Portrait of a robot"
+                                class="profile-picture"
+                            />
+                        </div>
+                    </div>
+                </div>
             </nav>
         </header>
 
         <main class="main">
             <!-- ----------------------------- LOGIN FORM ------------------------------ -->
-            <div class="container container__login" id="loginAccount">
+            <div class="container container__login hide-element" id="loginAccount">
                 <h2 class="container__login-title">Login</h2>
                 <form action="#" class="form form__login">
                     <!-- Email -->
@@ -37,17 +53,15 @@
                         <small class="error-message"></small>
                     </div>
 
-                    <input id="loginBtn" class="form__login-btn" type="submit" value="Login" />
+                    <input id="loginBtn" class="btn form__login-btn" type="submit" value="Login" />
                     <p class="form__login-text">
                         Don't have an account?
                         <a class="form__login-text--link" href="#" id="signUpLink">Sign Up!</a>
                     </p>
                 </form>
             </div>
-            <!-- ----------------------------------------------------------------------- -->
-
             <!-- -------------------------- REGISTRATION FORM -------------------------- -->
-            <div class="container container__registration" id="registerAccount">
+            <div class="container container__registration hide-element" id="registerAccount">
                 <h2 class="container__registration-title">Sign Up</h2>
                 <form action="#" class="form form__registration">
                     <!-- Email -->
@@ -80,7 +94,7 @@
 
                     <input
                         id="createAccountBtn"
-                        class="form__registration-btn"
+                        class="btn form__registration-btn"
                         type="submit"
                         value="Create account"
                     />
@@ -90,10 +104,8 @@
                     </p>
                 </form>
             </div>
-            <!-- ----------------------------------------------------------------------- -->
-
             <!-- --------------------------- USER DATA FORM ---------------------------- -->
-            <div class="container container__userdata" id="userdataContainer">
+            <div class="container container__userdata hide-element" id="userdataContainer">
                 <h2 class="container__userdata-title">Edit User Data</h2>
                 <form action="#" autocomplete="off" class="form form__userdata" id="userdataForm">
                     <div class="container-1">
@@ -224,20 +236,27 @@
                     </button>
                 </form>
             </div>
-            <!-- ----------------------------------------------------------------------- -->
 
+            <!-- ------------------------------- SIDEBAR ------------------------------- -->
             <nav class="section section__menu">
-                <ul>
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                    <li>5</li>
+                <ul class="section__menu-sidebar">
+                    <li>
+                        <button class="btn btn-menu active" id="sidebarHomeBtn">
+                            <i class="fa-solid fa-house"></i>
+                            Home
+                        </button>
+                    </li>
+                    <li>
+                        <button class="btn btn-menu" id="sidebarUserTableBtn">
+                            <i class="fa-solid fa-table"></i>
+                            User Table
+                        </button>
+                    </li>
                 </ul>
             </nav>
 
             <section class="section section__content">
-                <table class="users-table" id="userTable">
+                <table class="users-table hide-element" id="userTable">
                     <thead>
                         <tr>
                             <th scope="col">Email</th>

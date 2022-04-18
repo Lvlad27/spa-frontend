@@ -1,4 +1,3 @@
-import User from './User.js';
 import Storage from './Storage.js';
 import App, { signUpFormInputs, loginFormInputs } from './App.js';
 import FormValidation from './FormValidation.js';

@@ -14,6 +14,8 @@ export let loginFormContainer = id('loginAccount'),
     loginPassword = id('loginPassword'),
     loginBtn = id('loginBtn'),
     signUpBtn = id('createAccountBtn'),
+    sidebarUserTableBtn = id('sidebarUserTableBtn'),
+    sidebarHomeBtn = id('sidebarHomeBtn'),
     submitUserdata = id('submit-userdata'),
     loginLink = id('loginLink'),
     signUpLink = id('signUpLink'),
@@ -39,81 +41,65 @@ class App {
         this.userInterface = userInterface;
 
         // Attach event listeners
-        document.addEventListener('DOMContentLoaded', this.pageLoadEvent.bind(this));
         document.addEventListener('DOMContentLoaded', userInterface.displayUsers());
+        document.addEventListener('DOMContentLoaded', this.pageLoadEvent.bind(this));
         loginBtn.addEventListener('click', this.checkLoginData.bind(this));
         createAccountBtn.addEventListener('click', this.checkRegistrationData.bind(this));
         registerFormContainer.addEventListener('submit', this.addUser.bind(this));
         this.updateUserTableData();
+        this.signUpLinkOnClick();
+        this.loginLinkOnClick();
+        this.sidebarUserTableBtnOnClick();
+        this.sidebarHomeBtnOnClick();
+    }
 
-        /*
-        signUpLink.addEventListener(
-            'click',
-            this.toggleFormVisibility(loginFormContainer, registerFormContainer).bind(this)
-        );
+    pageLoadEvent() {
+        overlay.classList.remove('overlay--hidden');
+        this.animateFadeIn(loginFormContainer);
+        this.showForm(loginFormContainer);
+    }
 
-        loginLink.addEventListener(
-            'click',
-            this.toggleFormVisibility(registerFormContainer, loginFormContainer).bind(this)
-        );
-        */
+    sidebarUserTableBtnOnClick() {
+        sidebarUserTableBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.animateFadeIn(userTable);
+            this.showForm(userTable);
+        });
+    }
 
+    sidebarHomeBtnOnClick() {
+        sidebarHomeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.hideForm(userTable);
+        });
+    }
+
+    signUpLinkOnClick() {
         signUpLink.addEventListener(
             'click',
 
             function () {
+                this.animateFadeOut(loginFormContainer);
                 this.hideForm(loginFormContainer);
+                this.animateFadeIn(registerFormContainer);
                 this.showForm(registerFormContainer);
             }.bind(this)
         );
+    }
 
+    loginLinkOnClick() {
         loginLink.addEventListener(
             'click',
 
             function () {
+                this.animateFadeOut(registerFormContainer);
                 this.hideForm(registerFormContainer);
+                this.animateFadeIn(loginFormContainer);
                 this.showForm(loginFormContainer);
             }.bind(this)
         );
-
-        // userList.addEventListener(
-        //     'click',
-        //     function (e) {
-        //         e.preventDefault();
-        //         if (e.target.matches('button.edit-user')) {
-        //             this.showForm(userdataFormContainer);
-        //         }
-        //     }.bind(this)
-        // );
     }
 
-    /*
-    toggleFormVisibility(hidden, visible) {
-        const hideform = e => {
-            e.classList.add('hide-element');
-        };
-
-        const showForm = e => {
-            e.classList.remove('hide-element');
-        };
-
-        hideform(hidden);
-        showForm(visible);
-    }
-    */
-
-    pageLoadEvent() {
-        // overlay.classList.remove('overlay--hidden');
-        // this.toggleFormVisibility(loginFormContainer, registerFormContainer);
-        this.hideForm(loginFormContainer);
-        this.hideForm(userdataFormContainer);
-        this.showForm(userTable);
-        this.hideForm(registerFormContainer);
-        // console.log('usersArray', this.storage.getUsersArray());
-        // this.animateFadeIn(registerForm);
-    }
-
-    /*
     animateFadeIn(element) {
         element.classList.remove('FadeOut');
         element.classList.add('FadeIn');
@@ -123,7 +109,6 @@ class App {
         element.classList.remove('FadeIn');
         element.classList.add('FadeOut');
     }
-    */
 
     hideForm(formName) {
         formName.classList.add('hide-element');
@@ -155,15 +140,18 @@ class App {
         let usersArray = this.storage.getUsersArray(),
             editUserButtons = [...document.getElementsByClassName('edit-user')];
 
-        editUserButtons.forEach((button, buttonIndex) => {
+        editUserButtons.forEach((button) => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
+                this.animateFadeIn(userdataFormContainer);
                 this.showForm(userdataFormContainer);
                 usersArray.forEach((user, userIndex) => {
                     if (editUserButtons.indexOf(e.target) === userIndex) {
                         console.log(`You clicked on ${usersArray[userIndex].userName}`);
 
-                        userdataFormContainer.addEventListener('submit', (e) => {
+                        submitUserdata.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            this.hideForm(userdataFormContainer);
                             let firstName = id('firstName'),
                                 surname = id('surname'),
                                 country = id('country'),
@@ -175,7 +163,7 @@ class App {
                                     .toString(),
                                 gender = document.querySelector('input[name=gender]:checked');
 
-                            user = new User(
+                            let user = new User(
                                 usersArray[userIndex].userName,
                                 usersArray[userIndex].password,
                                 firstName.value,
@@ -185,27 +173,6 @@ class App {
                                 gender.value,
                                 checkedHobbies
                             );
-                            this.storage.storeUser(user);
-                            console.log(user);
-                            // usersArray[userIndex].firstName = name.value;
-                            // usersArray[userIndex].surname = surname.value;
-                            // usersArray[userIndex].country = country.value;
-                            // usersArray[userIndex].birthday = birthday.value;
-                            // usersArray[userIndex].gender = gender.value;
-
-                            // let user = new User(
-                            //     userName.value,
-                            //     password.value,
-                            //     firstName.value,
-                            //     surname.value,
-                            //     country.value,
-                            //     birthday.value,
-                            //     gender.value,
-                            //     checkedHobbies
-                            // );
-
-                            usersArray[userIndex].hobbies = checkedHobbies;
-
                             this.storage.storeUser(user);
                         });
                     }
@@ -222,7 +189,6 @@ class App {
         if (email && password === loginPassword.value) {
             overlay.classList.add('overlay--hidden');
             this.hideForm(loginFormContainer);
-            this.showForm(userTable);
         }
     }
 
