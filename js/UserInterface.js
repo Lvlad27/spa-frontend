@@ -4,7 +4,6 @@ class UserInterface {
     }
 
     displayUsers(usersArray = this.storage.getUsersArray()) {
-        console.log('userInterfaceCall', usersArray);
         usersArray.forEach((userObj) => {
             this.addUserToTable(userObj);
         });

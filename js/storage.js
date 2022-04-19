@@ -27,33 +27,38 @@ class Storage {
         return usersArray;
     }
 
-    editUser() {
-        let usersArray = this.getUsersArray();
-        let firstName = document.getElementById('firstName'),
-            surname = document.getElementById('surname'),
-            country = document.getElementById('country'),
-            birthday = document.getElementById('birthday'),
-            checkedHobbies = Array.from(
-                userdataForm.querySelectorAll('input[name="prefer"]:checked')
-            )
-                .map((checkbox) => checkbox.value)
-                .toString(),
-            gender = document.querySelector('input[name=gender]:checked');
+    // Looks for value in User Array. If it finds username, update Object
 
-        let user = new User(
-            usersArray[userIndex].userName,
-            usersArray[userIndex].password,
-            firstName.value,
-            surname.value,
-            country.value,
-            birthday.value,
-            gender.value,
-            checkedHobbies
-        );
-        this.storage.storeUser(user);
+    updateUser(username) {
+        let usersArray = this.getUsersArray();
+
+        usersArray.forEach((_, index) => {
+            if (usersArray[index].userName === username) {
+                let firstName = document.getElementById('firstName'),
+                    surname = document.getElementById('surname'),
+                    country = document.getElementById('country'),
+                    birthday = document.getElementById('birthday'),
+                    checkedHobbies = Array.from(
+                        userdataForm.querySelectorAll('input[name="prefer"]:checked')
+                    )
+                        .map((checkbox) => checkbox.value)
+                        .toString(),
+                    gender = document.querySelector('input[name=gender]:checked');
+
+                let user = new User(
+                    usersArray[index].userName,
+                    usersArray[index].password,
+                    firstName.value,
+                    surname.value,
+                    country.value,
+                    birthday.value,
+                    gender.value,
+                    checkedHobbies
+                );
+                this.storeUser(user);
+            }
+        });
     }
 }
 
 export default Storage;
-
-/*Hope it's not serious! I can wait till tomorrow, managed to fix the code, still would like to do some refactoring, I may have a questions a little bit later */

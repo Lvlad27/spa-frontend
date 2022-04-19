@@ -41,8 +41,8 @@ class App {
         this.userInterface = userInterface;
 
         // Attach event listeners
-        document.addEventListener('DOMContentLoaded', userInterface.displayUsers());
-        document.addEventListener('DOMContentLoaded', this.pageLoadEvent.bind(this));
+        // document.addEventListener('DOMContentLoaded', userInterface.displayUsers());
+        // document.addEventListener('DOMContentLoaded', this.pageLoadEvent.bind(this));
         createAccountBtn.addEventListener('click', this.checkRegistrationData.bind(this));
         registerFormContainer.addEventListener('submit', this.addUser.bind(this));
         this.checkLoginData();
@@ -136,30 +136,51 @@ class App {
         }
     }
 
-    submitUserdataOnClick() {
-        submitUserdata.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.hideForm(userdataFormContainer);
-            this.storage.editUser();
-        });
+    getAllSiblings(e) {
+        // for collecting siblings
+        let siblings = [];
+        // if no parent, return no sibling
+        if (!e.parentNode) {
+            return siblings;
+        }
+        // first child of the parent node
+        let sibling = e.parentNode.firstChild;
+
+        // collecting siblings
+        while (sibling) {
+            if (sibling.nodeType === 1 && sibling !== e) {
+                siblings.push(sibling);
+            }
+            sibling = sibling.nextSibling;
+        }
+        return siblings;
     }
 
     updateUserTableData() {
-        let usersArray = this.storage.getUsersArray();
+        this.userInterface.displayUsers();
         let editUserButtons = [...document.getElementsByClassName('edit-user')];
 
-        editUserButtons.forEach((button) => {
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
+        const checkIfButton = (element) => {
+            if (element.matches('button.edit-user')) {
                 this.animateFadeIn(userdataFormContainer);
                 this.showForm(userdataFormContainer);
-                usersArray.forEach((user, userIndex) => {
-                    if (editUserButtons.indexOf(e.target) === userIndex) {
-                        console.log(`You clicked on ${usersArray[userIndex].userName}`);
-                        this.submitUserdataOnClick();
-                    }
+
+                return true;
+            }
+        };
+
+        userList.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (checkIfButton(e.target)) {
+                let currentUser = e.target.parentElement.parentElement.firstElementChild.innerHTML;
+                console.log(currentUser);
+
+                submitUserdata.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.hideForm(userdataFormContainer);
+                    this.storage.updateUser(currentUser);
                 });
-            });
+            }
         });
     }
 
@@ -172,7 +193,7 @@ class App {
 
             if (email && password === loginPassword.value) {
                 overlay.classList.add('overlay--hidden');
-                this.animateFadeOut(loginFormContainer);
+                this.hideForm(loginFormContainer);
             }
         });
     }
@@ -182,6 +203,7 @@ class App {
             alert('Your account has been registered!');
             document.querySelector('form').reset();
             this.hideForm(registerFormContainer);
+            this.animateFadeIn(loginFormContainer);
             this.showForm(loginFormContainer);
         }
     }
