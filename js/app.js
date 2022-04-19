@@ -43,9 +43,9 @@ class App {
         // Attach event listeners
         document.addEventListener('DOMContentLoaded', userInterface.displayUsers());
         document.addEventListener('DOMContentLoaded', this.pageLoadEvent.bind(this));
-        loginBtn.addEventListener('click', this.checkLoginData.bind(this));
         createAccountBtn.addEventListener('click', this.checkRegistrationData.bind(this));
         registerFormContainer.addEventListener('submit', this.addUser.bind(this));
+        this.checkLoginData();
         this.updateUserTableData();
         this.signUpLinkOnClick();
         this.loginLinkOnClick();
@@ -136,9 +136,17 @@ class App {
         }
     }
 
-    updateUserTableData(storedUserData = this.storage.getUsers()) {
-        let usersArray = this.storage.getUsersArray(),
-            editUserButtons = [...document.getElementsByClassName('edit-user')];
+    submitUserdataOnClick() {
+        submitUserdata.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.hideForm(userdataFormContainer);
+            this.storage.editUser();
+        });
+    }
+
+    updateUserTableData() {
+        let usersArray = this.storage.getUsersArray();
+        let editUserButtons = [...document.getElementsByClassName('edit-user')];
 
         editUserButtons.forEach((button) => {
             button.addEventListener('click', (e) => {
@@ -148,33 +156,7 @@ class App {
                 usersArray.forEach((user, userIndex) => {
                     if (editUserButtons.indexOf(e.target) === userIndex) {
                         console.log(`You clicked on ${usersArray[userIndex].userName}`);
-
-                        submitUserdata.addEventListener('click', (e) => {
-                            e.preventDefault();
-                            this.hideForm(userdataFormContainer);
-                            let firstName = id('firstName'),
-                                surname = id('surname'),
-                                country = id('country'),
-                                birthday = id('birthday'),
-                                checkedHobbies = Array.from(
-                                    userdataForm.querySelectorAll('input[name="prefer"]:checked')
-                                )
-                                    .map((checkbox) => checkbox.value)
-                                    .toString(),
-                                gender = document.querySelector('input[name=gender]:checked');
-
-                            let user = new User(
-                                usersArray[userIndex].userName,
-                                usersArray[userIndex].password,
-                                firstName.value,
-                                surname.value,
-                                country.value,
-                                birthday.value,
-                                gender.value,
-                                checkedHobbies
-                            );
-                            this.storage.storeUser(user);
-                        });
+                        this.submitUserdataOnClick();
                     }
                 });
             });
@@ -182,14 +164,17 @@ class App {
     }
 
     checkLoginData() {
-        let storedUserData = this.storage.getUsers(),
-            email = storedUserData[loginUserName.value],
-            password = storedUserData[loginUserName.value].password;
+        loginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            let storedUserData = this.storage.getUsers(),
+                email = storedUserData[loginUserName.value],
+                password = storedUserData[loginUserName.value].password;
 
-        if (email && password === loginPassword.value) {
-            overlay.classList.add('overlay--hidden');
-            this.hideForm(loginFormContainer);
-        }
+            if (email && password === loginPassword.value) {
+                overlay.classList.add('overlay--hidden');
+                this.animateFadeOut(loginFormContainer);
+            }
+        });
     }
 
     checkRegistrationData() {
