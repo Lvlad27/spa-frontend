@@ -33,18 +33,18 @@ class Storage {
         let usersArray = this.getUsersArray();
 
         usersArray.forEach((_, index) => {
-            if (usersArray[index].userName === username) {
-                let firstName = document.getElementById('firstName'),
-                    surname = document.getElementById('surname'),
-                    country = document.getElementById('country'),
-                    birthday = document.getElementById('birthday'),
-                    checkedHobbies = Array.from(
-                        userdataForm.querySelectorAll('input[name="prefer"]:checked')
-                    )
-                        .map((checkbox) => checkbox.value)
-                        .toString(),
-                    gender = document.querySelector('input[name=gender]:checked');
+            let firstName = document.getElementById('firstName'),
+                surname = document.getElementById('surname'),
+                country = document.getElementById('country'),
+                birthday = document.getElementById('birthday'),
+                checkedHobbies = Array.from(
+                    userdataForm.querySelectorAll('input[name="prefer"]:checked')
+                )
+                    .map((checkbox) => checkbox.value)
+                    .toString(),
+                gender = document.querySelector('input[name=gender]:checked');
 
+            if (usersArray[index].userName === username) {
                 let user = new User(
                     usersArray[index].userName,
                     usersArray[index].password,

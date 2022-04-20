@@ -461,7 +461,8 @@ header .nav {
         background-color: white;
         padding: 2rem 0; }
       .main .section__content .users-table tbody td {
-        word-wrap: break-word;
+        white-space: nowrap;
+        width: 30rem;
         padding: 1rem 0.5rem; }
       .main .section__content .users-table .edit-user {
         text-decoration: none;

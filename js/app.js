@@ -29,7 +29,7 @@ export let loginFormContainer = id('loginAccount'),
     surname = id('surname'),
     country = id('country'),
     birthday = id('birthday'),
-    gender = '',
+    gender = document.querySelector('input[name=gender]:checked'),
     checkedHobbies = '';
 
 ////////////////////////////////////////////////////////////////////
@@ -42,7 +42,7 @@ class App {
 
         // Attach event listeners
         // document.addEventListener('DOMContentLoaded', userInterface.displayUsers());
-        // document.addEventListener('DOMContentLoaded', this.pageLoadEvent.bind(this));
+        document.addEventListener('DOMContentLoaded', this.pageLoadEvent.bind(this));
         createAccountBtn.addEventListener('click', this.checkRegistrationData.bind(this));
         registerFormContainer.addEventListener('submit', this.addUser.bind(this));
         this.checkLoginData();
@@ -136,24 +136,19 @@ class App {
         }
     }
 
-    getAllSiblings(e) {
-        // for collecting siblings
-        let siblings = [];
-        // if no parent, return no sibling
-        if (!e.parentNode) {
-            return siblings;
-        }
-        // first child of the parent node
-        let sibling = e.parentNode.firstChild;
+    readUpdateUserFormData() {
+        let formData = {
+            firstName: document.getElementById('firstName').value,
+            surname: document.getElementById('surname').value,
+            country: document.getElementById('country').value,
+            birthday: document.getElementById('birthday').value,
+            gender: document.querySelector('input[name=gender]:checked').value,
+            hobbies: Array.from(userdataForm.querySelectorAll('input[name="prefer"]:checked'))
+                .map((checkbox) => checkbox.value)
+                .toString(),
+        };
 
-        // collecting siblings
-        while (sibling) {
-            if (sibling.nodeType === 1 && sibling !== e) {
-                siblings.push(sibling);
-            }
-            sibling = sibling.nextSibling;
-        }
-        return siblings;
+        return formData;
     }
 
     updateUserTableData() {
@@ -169,19 +164,35 @@ class App {
             }
         };
 
-        userList.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (checkIfButton(e.target)) {
-                let currentUser = e.target.parentElement.parentElement.firstElementChild.innerHTML;
-                console.log(currentUser);
+        const insertRecord = (rowArray, data) => {
+            rowArray[2].innerHTML = data.firstName;
+            rowArray[3].innerHTML = data.surname;
+            rowArray[4].innerHTML = data.country;
+            rowArray[5].innerHTML = data.birthday;
+            rowArray[6].innerHTML = data.gender;
+            rowArray[7].innerHTML = data.hobbies;
+        };
 
-                submitUserdata.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.hideForm(userdataFormContainer);
-                    this.storage.updateUser(currentUser);
-                });
-            }
-        });
+        const onFormSubmit = (data) => {
+            userList.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (checkIfButton(e.target)) {
+                    let currentUser =
+                        e.target.parentElement.parentElement.firstElementChild.innerHTML;
+                    let currRowArray = [...e.target.parentElement.parentElement.children];
+
+                    submitUserdata.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        let formData = this.readUpdateUserFormData();
+                        insertRecord(currRowArray, formData);
+                        this.hideForm(userdataFormContainer);
+                        this.storage.updateUser(currentUser);
+                    });
+                }
+            });
+        };
+
+        onFormSubmit();
     }
 
     checkLoginData() {
@@ -194,6 +205,13 @@ class App {
             if (email && password === loginPassword.value) {
                 overlay.classList.add('overlay--hidden');
                 this.hideForm(loginFormContainer);
+
+                let message = id('welcomeMessage');
+                message.innerHTML = `Welcome \n
+            ${loginUserName.value}!`;
+
+                this.animateFadeIn(message);
+                this.showForm(message);
             }
         });
     }
