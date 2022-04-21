@@ -30,7 +30,14 @@ export let loginFormContainer = id('loginAccount'),
     country = id('country'),
     birthday = id('birthday'),
     gender = document.querySelector('input[name=gender]:checked'),
-    checkedHobbies = '';
+    checkedHobbies = '',
+    logoLink = id('logoLink');
+// console.log('URL is ', location.href);
+// console.log('Host is ', location.hostname);
+// console.log('Pathname is ', location.pathname);
+// console.log('Protocol is ', location.protocol);
+// console.log('Port name is ', location.port);
+// location.assign('https://www.google.ro/');
 
 ////////////////////////////////////////////////////////////////////
 class App {
@@ -41,7 +48,7 @@ class App {
         this.userInterface = userInterface;
 
         // Attach event listeners
-        // document.addEventListener('DOMContentLoaded', userInterface.displayUsers());
+
         document.addEventListener('DOMContentLoaded', this.pageLoadEvent.bind(this));
         createAccountBtn.addEventListener('click', this.checkRegistrationData.bind(this));
         registerFormContainer.addEventListener('submit', this.addUser.bind(this));
@@ -53,10 +60,24 @@ class App {
         this.sidebarHomeBtnOnClick();
     }
 
+    onRouteChange() {
+        if (this.checkLoginData) {
+            if (location.href === 'http://127.0.0.1:8080/#updateUserDataForm') {
+                return true;
+            }
+        }
+    }
+
     pageLoadEvent() {
-        overlay.classList.remove('overlay--hidden');
-        this.animateFadeIn(loginFormContainer);
-        this.showForm(loginFormContainer);
+        if (this.onRouteChange()) {
+            overlay.classList.add('overlay--hidden');
+            this.showForm(userdataFormContainer);
+            console.log('URL has changed to ', location.href);
+        } else {
+            overlay.classList.remove('overlay--hidden');
+            this.animateFadeIn(loginFormContainer);
+            this.showForm(loginFormContainer);
+        }
     }
 
     sidebarUserTableBtnOnClick() {
@@ -77,7 +98,6 @@ class App {
     signUpLinkOnClick() {
         signUpLink.addEventListener(
             'click',
-
             function () {
                 this.animateFadeOut(loginFormContainer);
                 this.hideForm(loginFormContainer);
@@ -156,7 +176,7 @@ class App {
         let editUserButtons = [...document.getElementsByClassName('edit-user')];
 
         const checkIfButton = (element) => {
-            if (element.matches('button.edit-user')) {
+            if (element.matches('a.edit-user')) {
                 this.animateFadeIn(userdataFormContainer);
                 this.showForm(userdataFormContainer);
 
@@ -173,9 +193,9 @@ class App {
             rowArray[7].innerHTML = data.hobbies;
         };
 
-        const onFormSubmit = (data) => {
+        // TODO separate event listeners
+        const onFormSubmit = () => {
             userList.addEventListener('click', (e) => {
-                e.preventDefault();
                 if (checkIfButton(e.target)) {
                     let currentUser =
                         e.target.parentElement.parentElement.firstElementChild.innerHTML;
@@ -209,9 +229,11 @@ class App {
                 let message = id('welcomeMessage');
                 message.innerHTML = `Welcome \n
             ${loginUserName.value}!`;
-
                 this.animateFadeIn(message);
                 this.showForm(message);
+                return true;
+            } else {
+                alert('Wrong password!');
             }
         });
     }

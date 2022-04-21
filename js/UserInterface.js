@@ -21,7 +21,7 @@ class UserInterface {
         <td>${user.birthday}</td>
         <td>${user.gender}</td>
         <td>${user.hobbies}</td>
-        <td><button type="button" class="edit-user">Edit</button></td>
+        <td><a href="#updateUserDataForm" class="btn edit-user">Edit</a></td>
         `;
         userList.appendChild(row);
     }

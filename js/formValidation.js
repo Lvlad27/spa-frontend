@@ -108,7 +108,6 @@ class FormValidation {
         };
 
         // Check for valid login password
-
         let conditions = [emailCheck(), passCheck(), passConfirmCheck()];
 
         // Check for no values condition first

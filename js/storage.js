@@ -29,6 +29,7 @@ class Storage {
 
     // Looks for value in User Array. If it finds username, update Object
 
+    // TODO updateUser receives a parameter which is the userUpdateData form object
     updateUser(username) {
         let usersArray = this.getUsersArray();
 
