@@ -61,23 +61,16 @@ class App {
     }
 
     onRouteChange() {
-        if (this.checkLoginData) {
-            if (location.href === 'http://127.0.0.1:8080/#updateUserDataForm') {
-                return true;
-            }
+        if (location.href === 'http://127.0.0.1:8080/#updateUserDataForm') {
+            this.showForm(userdataFormContainer);
+            console.log('URL has changed to ', location.href);
         }
     }
 
     pageLoadEvent() {
-        if (this.onRouteChange()) {
-            overlay.classList.add('overlay--hidden');
-            this.showForm(userdataFormContainer);
-            console.log('URL has changed to ', location.href);
-        } else {
-            overlay.classList.remove('overlay--hidden');
-            this.animateFadeIn(loginFormContainer);
-            this.showForm(loginFormContainer);
-        }
+        overlay.classList.remove('overlay--hidden');
+        this.animateFadeIn(loginFormContainer);
+        this.showForm(loginFormContainer);
     }
 
     sidebarUserTableBtnOnClick() {
@@ -223,6 +216,7 @@ class App {
                 password = storedUserData[loginUserName.value].password;
 
             if (email && password === loginPassword.value) {
+                this.onRouteChange();
                 overlay.classList.add('overlay--hidden');
                 this.hideForm(loginFormContainer);
 
@@ -231,9 +225,11 @@ class App {
             ${loginUserName.value}!`;
                 this.animateFadeIn(message);
                 this.showForm(message);
+                console.log('true');
                 return true;
             } else {
                 alert('Wrong password!');
+                console.log('false');
             }
         });
     }
