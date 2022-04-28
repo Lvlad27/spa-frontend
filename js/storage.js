@@ -30,35 +30,36 @@ class Storage {
     // Looks for value in User Array. If it finds username, update Object
 
     // TODO updateUser receives a parameter which is the userUpdateData form object
-    updateUser(username) {
+    updateUser(username, data) {
         let usersArray = this.getUsersArray();
 
         usersArray.forEach((_, index) => {
-            let firstName = document.getElementById('firstName'),
-                surname = document.getElementById('surname'),
-                country = document.getElementById('country'),
-                birthday = document.getElementById('birthday'),
-                checkedHobbies = Array.from(
-                    userdataForm.querySelectorAll('input[name="prefer"]:checked')
-                )
-                    .map((checkbox) => checkbox.value)
-                    .toString(),
-                gender = document.querySelector('input[name=gender]:checked');
-
             if (usersArray[index].userName === username) {
                 let user = new User(
                     usersArray[index].userName,
                     usersArray[index].password,
-                    firstName.value,
-                    surname.value,
-                    country.value,
-                    birthday.value,
-                    gender.value,
-                    checkedHobbies
+                    data.firstName,
+                    data.surname,
+                    data.country,
+                    data.birthday,
+                    data.gender,
+                    data.hobbies
                 );
-                this.storeUser(user);
+                return this.storeUser(user);
             }
         });
+    }
+
+    saveUserSession(username) {
+        sessionStorage.setItem('loggedUser', JSON.stringify(username));
+    }
+
+    getLoggedUser() {
+        return JSON.parse(sessionStorage.getItem('loggedUser'));
+    }
+
+    deleteUserSession() {
+        sessionStorage.removeItem('loggedUser');
     }
 }
 

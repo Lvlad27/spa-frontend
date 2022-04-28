@@ -14,8 +14,6 @@ export let loginFormContainer = id('loginAccount'),
     loginPassword = id('loginPassword'),
     loginBtn = id('loginBtn'),
     signUpBtn = id('createAccountBtn'),
-    sidebarUserTableBtn = id('sidebarUserTableBtn'),
-    sidebarHomeBtn = id('sidebarHomeBtn'),
     submitUserdata = id('submit-userdata'),
     loginLink = id('loginLink'),
     signUpLink = id('signUpLink'),
@@ -47,70 +45,62 @@ class App {
         this.signUpFormValidation = signUpFormValidation;
         this.userInterface = userInterface;
 
-        // Attach event listeners
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', this._pageLoad.bind(this));
+        document.addEventListener('click', this.sidebarUserTableBtn.bind(this));
+        document.addEventListener('click', this.sidebarHomeBtn.bind(this));
+        document.addEventListener('click', this.sidebarLogoutBtn.bind(this));
+        document.addEventListener('click', this.signUpLink.bind(this));
+        document.addEventListener('click', this.loginLink.bind(this));
+        document.addEventListener('submit', this.registrationForm.bind(this));
+        document.addEventListener('click', this.createAccountBtn.bind(this));
+        document.addEventListener('click', this.loginBtn.bind(this));
+        document.addEventListener('hashchange', this.window.bind(this));
 
-        document.addEventListener('DOMContentLoaded', this.pageLoadEvent.bind(this));
-        createAccountBtn.addEventListener('click', this.checkRegistrationData.bind(this));
-        registerFormContainer.addEventListener('submit', this.addUser.bind(this));
-        this.checkLoginData();
         this.updateUserTableData();
-        this.signUpLinkOnClick();
-        this.loginLinkOnClick();
-        this.sidebarUserTableBtnOnClick();
-        this.sidebarHomeBtnOnClick();
     }
 
-    onRouteChange() {
-        if (location.href === 'http://127.0.0.1:8080/#updateUserDataForm') {
-            this.showForm(userdataFormContainer);
-            console.log('URL has changed to ', location.href);
+    window(event) {
+        if (event.target.matches('window')) {
+            this._onRouteChange();
         }
     }
 
-    pageLoadEvent() {
-        overlay.classList.remove('overlay--hidden');
-        this.animateFadeIn(loginFormContainer);
-        this.showForm(loginFormContainer);
-    }
-
-    sidebarUserTableBtnOnClick() {
-        sidebarUserTableBtn.addEventListener('click', (e) => {
-            e.preventDefault();
+    sidebarUserTableBtn(event) {
+        if (event.target.matches('#sidebarUserTableBtn')) {
             this.animateFadeIn(userTable);
             this.showForm(userTable);
-        });
+        }
     }
 
-    sidebarHomeBtnOnClick() {
-        sidebarHomeBtn.addEventListener('click', (e) => {
-            e.preventDefault();
+    sidebarHomeBtn(event) {
+        if (event.target.matches('#sidebarHomeBtn')) {
             this.hideForm(userTable);
-        });
+        }
     }
 
-    signUpLinkOnClick() {
-        signUpLink.addEventListener(
-            'click',
-            function () {
-                this.animateFadeOut(loginFormContainer);
-                this.hideForm(loginFormContainer);
-                this.animateFadeIn(registerFormContainer);
-                this.showForm(registerFormContainer);
-            }.bind(this)
-        );
+    sidebarLogoutBtn(event) {
+        if (event.target.matches('#sidebarLogoutBtn')) {
+            this._logOut();
+        }
     }
 
-    loginLinkOnClick() {
-        loginLink.addEventListener(
-            'click',
+    signUpLink(event) {
+        if (event.target.matches('#signUpLink')) {
+            this.animateFadeOut(loginFormContainer);
+            this.hideForm(loginFormContainer);
+            this.animateFadeIn(registerFormContainer);
+            this.showForm(registerFormContainer);
+        }
+    }
 
-            function () {
-                this.animateFadeOut(registerFormContainer);
-                this.hideForm(registerFormContainer);
-                this.animateFadeIn(loginFormContainer);
-                this.showForm(loginFormContainer);
-            }.bind(this)
-        );
+    loginLink(event) {
+        if (event.target.matches('#loginLink')) {
+            this.animateFadeOut(registerFormContainer);
+            this.hideForm(registerFormContainer);
+            this.animateFadeIn(loginFormContainer);
+            this.showForm(loginFormContainer);
+        }
     }
 
     animateFadeIn(element) {
@@ -131,7 +121,37 @@ class App {
         formName.classList.remove('hide-element');
     }
 
-    addUser() {
+    registrationForm(event) {
+        if (event.target.matches('#registerAccount')) {
+            this._addUser();
+        }
+    }
+
+    createAccountBtn(event) {
+        if (event.target.matches('#createAccountBtn')) {
+            this._checkRegistrationData();
+        }
+    }
+
+    loginBtn(event) {
+        if (event.target.matches('#loginBtn')) {
+            event.preventDefault();
+            this._checkLoginData();
+        }
+    }
+
+    _pageLoad() {
+        overlay.classList.remove('overlay--hidden');
+        this.animateFadeIn(loginFormContainer);
+        this.showForm(loginFormContainer);
+
+        if (this.storage.getLoggedUser() !== null) {
+            overlay.classList.add('overlay--hidden');
+            this.hideForm(loginFormContainer);
+        }
+    }
+
+    _addUser() {
         let user = new User(
             userName.value,
             password.value,
@@ -149,7 +169,67 @@ class App {
         }
     }
 
-    readUpdateUserFormData() {
+    _checkLoginData() {
+        let storedUserData = this.storage.getUsers(),
+            email = storedUserData[loginUserName.value],
+            password = storedUserData[loginUserName.value].password;
+
+        if (email && password === loginPassword.value) {
+            // this.onRouteChange();
+            let loggedUser = email;
+            this.storage.saveUserSession(loggedUser);
+
+            overlay.classList.add('overlay--hidden');
+            this.hideForm(loginFormContainer);
+
+            let message = id('welcomeMessage');
+            message.innerHTML = `Welcome \n
+            ${loginUserName.value}!`;
+            this.animateFadeIn(message);
+            this.showForm(message);
+            // return true;
+        } else {
+            alert('Wrong password!');
+            console.log('false');
+        }
+    }
+
+    _checkRegistrationData() {
+        if (this.signUpFormValidation.validateOnSubmit()) {
+            alert('Your account has been registered!');
+            document.querySelector('form').reset();
+            this.hideForm(registerFormContainer);
+            this.animateFadeIn(loginFormContainer);
+            this.showForm(loginFormContainer);
+        }
+    }
+
+    _fillFormData(rowArray) {
+        let hobbiesArr = Array.from(userdataForm.querySelectorAll('input[name="prefer"]'));
+        let hobbies = rowArray[7].innerHTML.split(',');
+        gender = document.getElementsByName('gender');
+
+        name.value = rowArray[2].innerHTML;
+        surname.value = rowArray[3].innerHTML;
+        country.value = rowArray[4].innerHTML;
+        birthday.value = rowArray[5].innerHTML;
+
+        gender.forEach((input) => {
+            if (input.value === rowArray[6].innerHTML) {
+                input.checked = true;
+            }
+        });
+
+        hobbiesArr.forEach((input1) => {
+            hobbies.forEach((input2) => {
+                if (input1.value === input2) {
+                    input1.checked = true;
+                }
+            });
+        });
+    }
+
+    _readUpdateUserFormData() {
         let formData = {
             firstName: document.getElementById('firstName').value,
             surname: document.getElementById('surname').value,
@@ -168,15 +248,6 @@ class App {
         this.userInterface.displayUsers();
         let editUserButtons = [...document.getElementsByClassName('edit-user')];
 
-        const checkIfButton = (element) => {
-            if (element.matches('a.edit-user')) {
-                this.animateFadeIn(userdataFormContainer);
-                this.showForm(userdataFormContainer);
-
-                return true;
-            }
-        };
-
         const insertRecord = (rowArray, data) => {
             rowArray[2].innerHTML = data.firstName;
             rowArray[3].innerHTML = data.surname;
@@ -186,20 +257,32 @@ class App {
             rowArray[7].innerHTML = data.hobbies;
         };
 
+        const checkIfButton = (element) => {
+            if (element.matches('a.edit-user')) {
+                this.animateFadeIn(userdataFormContainer);
+                this.showForm(userdataFormContainer);
+                return true;
+            }
+        };
+
         // TODO separate event listeners
         const onFormSubmit = () => {
-            userList.addEventListener('click', (e) => {
+            document.addEventListener('click', (e) => {
                 if (checkIfButton(e.target)) {
+                    let currRowArray = [...e.target.parentElement.parentElement.children];
                     let currentUser =
                         e.target.parentElement.parentElement.firstElementChild.innerHTML;
-                    let currRowArray = [...e.target.parentElement.parentElement.children];
+                    let data = this.readUpdateUserFormData();
+                    this.fillFormData(currRowArray);
+
+                    location.href = `#${currentUser}`;
 
                     submitUserdata.addEventListener('click', (e) => {
                         e.preventDefault();
-                        let formData = this.readUpdateUserFormData();
+                        let formData = this._readUpdateUserFormData();
                         insertRecord(currRowArray, formData);
                         this.hideForm(userdataFormContainer);
-                        this.storage.updateUser(currentUser);
+                        this.storage.updateUser(currentUser, formData);
                     });
                 }
             });
@@ -208,39 +291,28 @@ class App {
         onFormSubmit();
     }
 
-    checkLoginData() {
-        loginBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            let storedUserData = this.storage.getUsers(),
-                email = storedUserData[loginUserName.value],
-                password = storedUserData[loginUserName.value].password;
-
-            if (email && password === loginPassword.value) {
-                this.onRouteChange();
-                overlay.classList.add('overlay--hidden');
-                this.hideForm(loginFormContainer);
-
-                let message = id('welcomeMessage');
-                message.innerHTML = `Welcome \n
-            ${loginUserName.value}!`;
-                this.animateFadeIn(message);
-                this.showForm(message);
-                console.log('true');
-                return true;
-            } else {
-                alert('Wrong password!');
-                console.log('false');
-            }
-        });
+    saveUpdatedFormData() {
+        let user = this.storage.getLoggedUser();
+        let data = this.readUpdateUserFormData();
+        let savedFormData = Object.assign(data, user);
+        return savedFormData;
     }
 
-    checkRegistrationData() {
-        if (this.signUpFormValidation.validateOnSubmit()) {
-            alert('Your account has been registered!');
-            document.querySelector('form').reset();
-            this.hideForm(registerFormContainer);
-            this.animateFadeIn(loginFormContainer);
-            this.showForm(loginFormContainer);
+    _logOut() {
+        this.storage.deleteUserSession();
+    }
+
+    _onRouteChange() {
+        let hash = location.hash;
+
+        switch (hash) {
+            case '#updateUserDataForm':
+                //
+                break;
+
+            case '#usertable':
+                //
+                break;
         }
     }
 }
