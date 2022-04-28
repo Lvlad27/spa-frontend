@@ -23,6 +23,8 @@ export let loginFormContainer = id('loginAccount'),
     signUpFormInputs = ['signUpEmail', 'signUpPass', 'passwordConfirm'],
     userTable = id('userTable'),
     userList = id('userList'),
+    emailInput = id('emailInput'),
+    passwordInput = id('passwordInput'),
     name = id('firstName'),
     surname = id('surname'),
     country = id('country'),
@@ -55,9 +57,10 @@ class App {
         document.addEventListener('submit', this.registrationForm.bind(this));
         document.addEventListener('click', this.createAccountBtn.bind(this));
         document.addEventListener('click', this.loginBtn.bind(this));
-        document.addEventListener('hashchange', this.window.bind(this));
-
-        this.updateUserTableData();
+        document.addEventListener('click', this.editUserBtn.bind(this));
+        document.addEventListener('click', this.updateUserDataBtn.bind(this));
+        document.addEventListener('click', this.cancelUserDataBtn.bind(this));
+        // document.addEventListener('hashchange', this.window.bind(this));
     }
 
     window(event) {
@@ -70,6 +73,9 @@ class App {
         if (event.target.matches('#sidebarUserTableBtn')) {
             this.animateFadeIn(userTable);
             this.showForm(userTable);
+            this.hideForm(userdataFormContainer);
+
+            // TODO check to only show once if clicked multiple times
         }
     }
 
@@ -140,10 +146,54 @@ class App {
         }
     }
 
+    editUserBtn(event) {
+        if (event.target.matches('a.edit-user')) {
+            let editUserBtn = event.target,
+                currRowArray = [...editUserBtn.parentElement.parentElement.children];
+            this.animateFadeIn(userdataFormContainer);
+            this.showForm(userdataFormContainer);
+            this.hideForm(userTable);
+
+            this._fillFormData(currRowArray);
+            return editUserBtn;
+        }
+    }
+
+    updateUserDataBtn(event) {
+        if (event.target.matches('#submit-userdata')) {
+            event.preventDefault();
+
+            // let currRowArray = [...editUserButton.parentElement.parentElement.children],
+            //     currentUser =
+            //         editUserButton.parentElement.parentElement.firstElementChild.innerHTML,
+            //     formData = this._readUpdateUserFormData();
+
+            // this._insertRecord(currRowArray, formData);
+            // this.hideForm(userdataFormContainer);
+            // this.storage.updateUser(currentUser, formData);
+        }
+    }
+
+    cancelUserDataBtn(event) {
+        if (event.target.matches('#cancel-userdata')) {
+            this.hideForm(userdataFormContainer);
+            this.showForm(userTable);
+        }
+    }
+
+    _welcomeMessage(user) {
+        let message = id('welcomeMessage');
+        message.innerHTML = `Welcome \n
+            ${user}!`;
+        this.animateFadeIn(message);
+        this.showForm(message);
+    }
+
     _pageLoad() {
         overlay.classList.remove('overlay--hidden');
         this.animateFadeIn(loginFormContainer);
         this.showForm(loginFormContainer);
+        this.userInterface.displayUsers();
 
         if (this.storage.getLoggedUser() !== null) {
             overlay.classList.add('overlay--hidden');
@@ -176,21 +226,16 @@ class App {
 
         if (email && password === loginPassword.value) {
             // this.onRouteChange();
-            let loggedUser = email;
-            this.storage.saveUserSession(loggedUser);
+            this.storage.saveUserSession(email);
+            let loggedUser = this.storage.getLoggedUser();
+            this._welcomeMessage(loggedUser.userName);
 
             overlay.classList.add('overlay--hidden');
             this.hideForm(loginFormContainer);
 
-            let message = id('welcomeMessage');
-            message.innerHTML = `Welcome \n
-            ${loginUserName.value}!`;
-            this.animateFadeIn(message);
-            this.showForm(message);
-            // return true;
+            return true;
         } else {
             alert('Wrong password!');
-            console.log('false');
         }
     }
 
@@ -204,11 +249,41 @@ class App {
         }
     }
 
+    _readUpdateUserFormData() {
+        let formData = {
+            email: document.getElementById('emailInput').value,
+            password: document.getElementById('passwordInput').value,
+            firstName: document.getElementById('firstName').value,
+            surname: document.getElementById('surname').value,
+            country: document.getElementById('country').value,
+            birthday: document.getElementById('birthday').value,
+            gender: document.querySelector('input[name=gender]:checked').value,
+            hobbies: Array.from(userdataForm.querySelectorAll('input[name="prefer"]:checked'))
+                .map((checkbox) => checkbox.value)
+                .toString(),
+        };
+
+        return formData;
+    }
+
+    _insertRecord(rowArray, data) {
+        rowArray[0].innerHTML = data.email;
+        rowArray[1].innerHTML = data.password;
+        rowArray[2].innerHTML = data.firstName;
+        rowArray[3].innerHTML = data.surname;
+        rowArray[4].innerHTML = data.country;
+        rowArray[5].innerHTML = data.birthday;
+        rowArray[6].innerHTML = data.gender;
+        rowArray[7].innerHTML = data.hobbies;
+    }
+
     _fillFormData(rowArray) {
         let hobbiesArr = Array.from(userdataForm.querySelectorAll('input[name="prefer"]'));
         let hobbies = rowArray[7].innerHTML.split(',');
         gender = document.getElementsByName('gender');
 
+        emailInput.value = rowArray[0].innerHTML;
+        passwordInput.value = rowArray[1].innerHTML;
         name.value = rowArray[2].innerHTML;
         surname.value = rowArray[3].innerHTML;
         country.value = rowArray[4].innerHTML;
@@ -229,92 +304,23 @@ class App {
         });
     }
 
-    _readUpdateUserFormData() {
-        let formData = {
-            firstName: document.getElementById('firstName').value,
-            surname: document.getElementById('surname').value,
-            country: document.getElementById('country').value,
-            birthday: document.getElementById('birthday').value,
-            gender: document.querySelector('input[name=gender]:checked').value,
-            hobbies: Array.from(userdataForm.querySelectorAll('input[name="prefer"]:checked'))
-                .map((checkbox) => checkbox.value)
-                .toString(),
-        };
-
-        return formData;
-    }
-
-    updateUserTableData() {
-        this.userInterface.displayUsers();
-        let editUserButtons = [...document.getElementsByClassName('edit-user')];
-
-        const insertRecord = (rowArray, data) => {
-            rowArray[2].innerHTML = data.firstName;
-            rowArray[3].innerHTML = data.surname;
-            rowArray[4].innerHTML = data.country;
-            rowArray[5].innerHTML = data.birthday;
-            rowArray[6].innerHTML = data.gender;
-            rowArray[7].innerHTML = data.hobbies;
-        };
-
-        const checkIfButton = (element) => {
-            if (element.matches('a.edit-user')) {
-                this.animateFadeIn(userdataFormContainer);
-                this.showForm(userdataFormContainer);
-                return true;
-            }
-        };
-
-        // TODO separate event listeners
-        const onFormSubmit = () => {
-            document.addEventListener('click', (e) => {
-                if (checkIfButton(e.target)) {
-                    let currRowArray = [...e.target.parentElement.parentElement.children];
-                    let currentUser =
-                        e.target.parentElement.parentElement.firstElementChild.innerHTML;
-                    let data = this.readUpdateUserFormData();
-                    this.fillFormData(currRowArray);
-
-                    location.href = `#${currentUser}`;
-
-                    submitUserdata.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        let formData = this._readUpdateUserFormData();
-                        insertRecord(currRowArray, formData);
-                        this.hideForm(userdataFormContainer);
-                        this.storage.updateUser(currentUser, formData);
-                    });
-                }
-            });
-        };
-
-        onFormSubmit();
-    }
-
-    saveUpdatedFormData() {
-        let user = this.storage.getLoggedUser();
-        let data = this.readUpdateUserFormData();
-        let savedFormData = Object.assign(data, user);
-        return savedFormData;
-    }
-
     _logOut() {
         this.storage.deleteUserSession();
     }
 
-    _onRouteChange() {
-        let hash = location.hash;
+    // _onRouteChange() {
+    //     let hash = location.hash;
 
-        switch (hash) {
-            case '#updateUserDataForm':
-                //
-                break;
+    //     switch (hash) {
+    //         case '#updateUserDataForm':
+    //             //
+    //             break;
 
-            case '#usertable':
-                //
-                break;
-        }
-    }
+    //         case '#usertable':
+    //             //
+    //             break;
+    //     }
+    // }
 }
 
 export default App;

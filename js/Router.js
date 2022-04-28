@@ -1,20 +1,13 @@
 class Router {
     constructor() {
+        const ROUTES = this.ROUTES;
         window.addEventListener('hashchange', this.onRouteChange);
     }
 
+    ROUTES = {};
+
     onRouteChange() {
         const hash = location.hash;
-
-        switch (hash) {
-            case '#updateUserDataForm':
-                //
-                break;
-
-            case '#usertable':
-                //
-                break;
-        }
     }
 }
 

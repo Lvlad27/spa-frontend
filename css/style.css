@@ -7,7 +7,8 @@ body {
   display: flex;
   flex-direction: column;
   font-family: "Inter", Courier, sans-serif;
-  font-size: 1.6rem; }
+  font-size: 1.6rem;
+  overflow: hidden; }
 
 header .nav {
   background-color: #222222;
@@ -327,81 +328,6 @@ header .nav {
       .main .container__registration .form__registration-text {
         color: white;
         text-align: center; }
-  .main .container__userdata {
-    z-index: 99;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #222222;
-    padding: 2rem 4rem;
-    border-radius: 5px; }
-    .main .container__userdata-title {
-      text-align: center;
-      margin-bottom: 3rem;
-      color: #ffd866; }
-    .main .container__userdata .edit-user {
-      color: #ab9df2;
-      background-color: #ab9df2;
-      cursor: pointer; }
-    .main .container__userdata .form__userdata .container-1,
-    .main .container__userdata .form__userdata .container-2,
-    .main .container__userdata .form__userdata .container-3 {
-      display: flex;
-      gap: 4rem; }
-    .main .container__userdata .form__userdata .container-gender,
-    .main .container__userdata .form__userdata .container-hobbies {
-      display: flex;
-      flex-direction: column; }
-      .main .container__userdata .form__userdata .container-gender .alignment,
-      .main .container__userdata .form__userdata .container-hobbies .alignment {
-        display: flex;
-        align-items: center; }
-      .main .container__userdata .form__userdata .container-gender label,
-      .main .container__userdata .form__userdata .container-gender input,
-      .main .container__userdata .form__userdata .container-hobbies label,
-      .main .container__userdata .form__userdata .container-hobbies input {
-        clear: none;
-        width: auto;
-        padding: 0.5rem 1rem; }
-    .main .container__userdata .form__userdata-control {
-      margin: 2rem 0 2rem;
-      width: 30rem;
-      color: white; }
-      .main .container__userdata .form__userdata-control input {
-        background-color: transparent;
-        border: 0;
-        border-bottom: 2px white solid;
-        width: 100%;
-        font-size: 2rem;
-        color: white; }
-        .main .container__userdata .form__userdata-control input:focus {
-          outline: none;
-          border-bottom-color: #a9dc76; }
-        .main .container__userdata .form__userdata-control input::placeholder {
-          color: #ff6188;
-          font-size: 1.6rem;
-          font-weight: 100; }
-        .main .container__userdata .form__userdata-control input:-webkit-autofill {
-          background-clip: text;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: white !important; }
-    .main .container__userdata .form__userdata-btn {
-      display: block;
-      margin: auto;
-      width: 50%;
-      padding: 1rem;
-      cursor: pointer;
-      background: #fc9867;
-      font-family: inherit;
-      font-weight: 600;
-      border: 0;
-      border-radius: 5px;
-      color: #222222; }
-      .main .container__userdata .form__userdata-btn:focus {
-        outline: 0; }
-      .main .container__userdata .form__userdata-btn:active {
-        transform: scale(0.98); }
   .main .section__menu {
     flex: 0 0 20vw;
     background-color: #1e293b;
@@ -456,7 +382,7 @@ header .nav {
       background-color: #fc9867;
       border-bottom: 1px solid black;
       box-shadow: 0 0 5px 2px black;
-      width: 50%;
+      width: 100%;
       text-align: center; }
       .main .section__content .users-table tbody tr:nth-child(odd) {
         background-color: #78dce8;
@@ -508,6 +434,77 @@ header .nav {
       .main .section__content .users-table .edit-user {
         text-decoration: none;
         font-weight: 700; }
+    .main .section__content .container__userdata {
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      background-color: #78dce8;
+      padding: 2rem 4rem; }
+      .main .section__content .container__userdata-title {
+        text-align: center;
+        margin-bottom: 3rem;
+        color: #222222; }
+      .main .section__content .container__userdata .form__userdata .container-0,
+      .main .section__content .container__userdata .form__userdata .container-1,
+      .main .section__content .container__userdata .form__userdata .container-2,
+      .main .section__content .container__userdata .form__userdata .container-3 {
+        display: flex;
+        gap: 4rem; }
+      .main .section__content .container__userdata .form__userdata .container-gender,
+      .main .section__content .container__userdata .form__userdata .container-hobbies {
+        display: flex;
+        flex-direction: column; }
+        .main .section__content .container__userdata .form__userdata .container-gender .alignment,
+        .main .section__content .container__userdata .form__userdata .container-hobbies .alignment {
+          display: flex;
+          align-items: center; }
+        .main .section__content .container__userdata .form__userdata .container-gender label,
+        .main .section__content .container__userdata .form__userdata .container-gender input,
+        .main .section__content .container__userdata .form__userdata .container-hobbies label,
+        .main .section__content .container__userdata .form__userdata .container-hobbies input {
+          clear: none;
+          width: auto;
+          padding: 0.5rem 1rem; }
+      .main .section__content .container__userdata .form__userdata-control {
+        margin: 2rem 0 2rem;
+        width: 30rem;
+        color: #222222; }
+        .main .section__content .container__userdata .form__userdata-control input {
+          background-color: transparent;
+          border: 0;
+          border-bottom: 2px #fc9867 solid;
+          width: 100%;
+          font-size: 2rem;
+          color: #222222; }
+          .main .section__content .container__userdata .form__userdata-control input:focus {
+            outline: none;
+            border-bottom-color: #ab9df2; }
+          .main .section__content .container__userdata .form__userdata-control input::placeholder {
+            color: #ff6188;
+            font-size: 1.6rem;
+            font-weight: 100; }
+          .main .section__content .container__userdata .form__userdata-control input:-webkit-autofill {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: white !important; }
+      .main .section__content .container__userdata .form__userdata .wrapper {
+        display: flex;
+        justify-content: space-evenly; }
+        .main .section__content .container__userdata .form__userdata .wrapper .form__userdata-btn {
+          margin-top: 3rem;
+          width: 30%;
+          padding: 1rem;
+          cursor: pointer;
+          background: #fc9867;
+          font-family: inherit;
+          font-weight: 600;
+          border: 0;
+          border-radius: 5px;
+          color: #222222; }
+          .main .section__content .container__userdata .form__userdata .wrapper .form__userdata-btn:focus {
+            outline: 0; }
+          .main .section__content .container__userdata .form__userdata .wrapper .form__userdata-btn:active {
+            transform: scale(0.98); }
   .main .section__ads {
     flex: 0 0 15vw;
     background-color: #1e293b;

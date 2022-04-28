@@ -12,6 +12,7 @@ body {
     flex-direction: column;
     font-family: $font-primary;
     font-size: $default-font-size;
+    overflow: hidden;
 }
 
 header {
@@ -116,114 +117,6 @@ header {
     .container {
         @include form(login, 99);
         @include form(registration, 99);
-
-        &__userdata {
-            z-index: 99;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-
-            background-color: $color-dark;
-            padding: 2rem 4rem;
-            border-radius: 5px;
-
-            &-title {
-                text-align: center;
-                margin-bottom: 3rem;
-                color: $color-3;
-            }
-
-            .edit-user {
-                color: $color-6;
-                background-color: $color-6;
-                cursor: pointer;
-            }
-
-            .form {
-                &__userdata {
-                    .container-1,
-                    .container-2,
-                    .container-3 {
-                        display: flex;
-                        gap: 4rem;
-                    }
-
-                    .container-gender,
-                    .container-hobbies {
-                        display: flex;
-                        flex-direction: column;
-
-                        .alignment {
-                            display: flex;
-                            align-items: center;
-                        }
-
-                        label,
-                        input {
-                            clear: none;
-                            width: auto;
-                            padding: 0.5rem 1rem;
-                        }
-                    }
-
-                    &-control {
-                        margin: 2rem 0 2rem;
-                        width: 30rem;
-                        color: $color-light;
-
-                        input {
-                            background-color: transparent;
-                            border: 0;
-                            border-bottom: 2px $color-light solid;
-                            width: 100%;
-                            // padding: 5px 0 5px;
-                            font-size: $medium-font-size;
-                            color: $color-light;
-
-                            &:focus {
-                                outline: none;
-                                border-bottom-color: $color-4;
-                            }
-
-                            &::placeholder {
-                                color: $color-1;
-                                font-size: $default-font-size;
-                                font-weight: 100;
-                            }
-
-                            &:-webkit-autofill {
-                                background-clip: text;
-                                -webkit-background-clip: text;
-                                -webkit-text-fill-color: $color-light !important;
-                            }
-                        }
-                    }
-
-                    &-btn {
-                        display: block;
-                        margin: auto;
-                        width: 50%;
-                        padding: 1rem;
-                        cursor: pointer;
-                        background: $color-2;
-                        font-family: inherit;
-                        font-weight: 600;
-                        border: 0;
-                        border-radius: 5px;
-                        color: $color-dark;
-
-                        &:focus {
-                            outline: 0;
-                        }
-
-                        &:active {
-                            transform: scale(0.98);
-                        }
-                    }
-                }
-            }
-        }
     }
 
     .section {
@@ -258,7 +151,7 @@ header {
                 background-color: $color-2;
                 border-bottom: 1px solid black;
                 box-shadow: 0 0 5px 2px black;
-                width: 50%;
+                width: 100%;
                 text-align: center;
 
                 tbody {
@@ -290,6 +183,111 @@ header {
                 .edit-user {
                     text-decoration: none;
                     font-weight: 700;
+                }
+            }
+            .container {
+                &__userdata {
+                    overflow: hidden;
+                    display: flex;
+                    justify-content: center;
+                    // z-index: 99;
+                    background-color: $color-5;
+                    padding: 2rem 4rem;
+
+                    &-title {
+                        text-align: center;
+                        margin-bottom: 3rem;
+                        color: $color-dark;
+                    }
+
+                    .form {
+                        &__userdata {
+                            .container-0,
+                            .container-1,
+                            .container-2,
+                            .container-3 {
+                                display: flex;
+                                gap: 4rem;
+                            }
+
+                            .container-gender,
+                            .container-hobbies {
+                                display: flex;
+                                flex-direction: column;
+
+                                .alignment {
+                                    display: flex;
+                                    align-items: center;
+                                }
+
+                                label,
+                                input {
+                                    clear: none;
+                                    width: auto;
+                                    padding: 0.5rem 1rem;
+                                }
+                            }
+
+                            &-control {
+                                margin: 2rem 0 2rem;
+                                width: 30rem;
+                                color: $color-dark;
+
+                                input {
+                                    background-color: transparent;
+                                    border: 0;
+                                    border-bottom: 2px $color-2 solid;
+                                    width: 100%;
+                                    // padding: 5px 0 5px;
+                                    font-size: $medium-font-size;
+                                    color: $color-dark;
+
+                                    &:focus {
+                                        outline: none;
+                                        border-bottom-color: $color-6;
+                                    }
+
+                                    &::placeholder {
+                                        color: $color-1;
+                                        font-size: $default-font-size;
+                                        font-weight: 100;
+                                    }
+
+                                    &:-webkit-autofill {
+                                        background-clip: text;
+                                        -webkit-background-clip: text;
+                                        -webkit-text-fill-color: $color-light !important;
+                                    }
+                                }
+                            }
+
+                            .wrapper {
+                                display: flex;
+                                justify-content: space-evenly;
+
+                                .form__userdata-btn {
+                                    margin-top: 3rem;
+                                    width: 30%;
+                                    padding: 1rem;
+                                    cursor: pointer;
+                                    background: $color-2;
+                                    font-family: inherit;
+                                    font-weight: 600;
+                                    border: 0;
+                                    border-radius: 5px;
+                                    color: $color-dark;
+
+                                    &:focus {
+                                        outline: 0;
+                                    }
+
+                                    &:active {
+                                        transform: scale(0.98);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
