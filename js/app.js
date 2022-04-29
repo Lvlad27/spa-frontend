@@ -55,6 +55,7 @@ class App {
         document.addEventListener('click', this.cancelUserDataBtn.bind(this));
     }
 
+    ////////////////////////////////////////////////
     // EVENT FUNCTIONS
     window(event) {
         if (event.target.matches('window')) {
@@ -170,6 +171,7 @@ class App {
         }
     }
 
+    ////////////////////////////////////////////////
     // METHODS
     _updateUser() {
         let tdArr = document.querySelectorAll('[data-email]');
