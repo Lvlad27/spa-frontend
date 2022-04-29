@@ -41,7 +41,6 @@ class App {
         this.signUpFormValidation = signUpFormValidation;
         this.userInterface = userInterface;
 
-        // Event listeners
         document.addEventListener('DOMContentLoaded', this._pageLoad.bind(this));
         document.addEventListener('click', this.sidebarUserTableBtn.bind(this));
         document.addEventListener('click', this.sidebarHomeBtn.bind(this));
@@ -56,6 +55,7 @@ class App {
         document.addEventListener('click', this.cancelUserDataBtn.bind(this));
     }
 
+    // EVENT FUNCTIONS
     window(event) {
         if (event.target.matches('window')) {
             this._onRouteChange();
@@ -80,7 +80,6 @@ class App {
         }
     }
 
-    // Event functions
     sidebarLogoutBtn(event) {
         if (event.target.matches('#sidebarLogoutBtn')) {
             this._logOut();
@@ -171,7 +170,7 @@ class App {
         }
     }
 
-    // Methods
+    // METHODS
     _updateUser() {
         let tdArr = document.querySelectorAll('[data-email]');
         tdArr.forEach((td) => {
@@ -310,25 +309,9 @@ class App {
         });
     }
 
-    // user clicks on edit button => the form is opened =>
-
     _logOut() {
         this.storage.deleteUserSession();
     }
-
-    // _onRouteChange() {
-    //     let hash = location.hash;
-
-    //     switch (hash) {
-    //         case '#updateUserDataForm':
-    //             //
-    //             break;
-
-    //         case '#usertable':
-    //             //
-    //             break;
-    //     }
-    // }
 }
 
 export default App;
