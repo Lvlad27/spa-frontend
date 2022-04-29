@@ -29,12 +29,11 @@ class Storage {
 
     updateUser(username, data) {
         let usersArray = this.getUsersArray();
-
         usersArray.forEach((_, index) => {
             if (usersArray[index].userName === username) {
                 let user = new User(
                     usersArray[index].userName,
-                    usersArray[index].password,
+                    data.password,
                     data.firstName,
                     data.surname,
                     data.country,

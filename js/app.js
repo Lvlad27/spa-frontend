@@ -32,12 +32,6 @@ export let loginFormContainer = id('loginAccount'),
     gender = document.querySelector('input[name=gender]:checked'),
     checkedHobbies = '',
     logoLink = id('logoLink');
-// console.log('URL is ', location.href);
-// console.log('Host is ', location.hostname);
-// console.log('Pathname is ', location.pathname);
-// console.log('Protocol is ', location.protocol);
-// console.log('Port name is ', location.port);
-// location.assign('https://www.google.ro/');
 
 ////////////////////////////////////////////////////////////////////
 class App {
@@ -60,7 +54,6 @@ class App {
         document.addEventListener('click', this.editUserBtn.bind(this));
         document.addEventListener('click', this.updateUserDataBtn.bind(this));
         document.addEventListener('click', this.cancelUserDataBtn.bind(this));
-        // document.addEventListener('hashchange', this.window.bind(this));
     }
 
     window(event) {
@@ -82,9 +75,12 @@ class App {
     sidebarHomeBtn(event) {
         if (event.target.matches('#sidebarHomeBtn')) {
             this.hideForm(userTable);
+            this.hideForm(userdataFormContainer);
+            userdataForm.reset();
         }
     }
 
+    // Event functions
     sidebarLogoutBtn(event) {
         if (event.target.matches('#sidebarLogoutBtn')) {
             this._logOut();
@@ -136,6 +132,7 @@ class App {
     createAccountBtn(event) {
         if (event.target.matches('#createAccountBtn')) {
             this._checkRegistrationData();
+            this._addUser();
         }
     }
 
@@ -150,35 +147,44 @@ class App {
         if (event.target.matches('a.edit-user')) {
             let editUserBtn = event.target,
                 currRowArray = [...editUserBtn.parentElement.parentElement.children];
+            // currUser = event.target.parentElement.parentElement.firstElementChild.innerHTML;
             this.animateFadeIn(userdataFormContainer);
             this.showForm(userdataFormContainer);
             this.hideForm(userTable);
 
             this._fillFormData(currRowArray);
-            return editUserBtn;
         }
     }
 
     updateUserDataBtn(event) {
         if (event.target.matches('#submit-userdata')) {
             event.preventDefault();
-
-            // let currRowArray = [...editUserButton.parentElement.parentElement.children],
-            //     currentUser =
-            //         editUserButton.parentElement.parentElement.firstElementChild.innerHTML,
-            //     formData = this._readUpdateUserFormData();
-
-            // this._insertRecord(currRowArray, formData);
-            // this.hideForm(userdataFormContainer);
-            // this.storage.updateUser(currentUser, formData);
+            this._updateUser();
         }
     }
 
     cancelUserDataBtn(event) {
         if (event.target.matches('#cancel-userdata')) {
             this.hideForm(userdataFormContainer);
+            userdataForm.reset();
             this.showForm(userTable);
         }
+    }
+
+    // Methods
+    _updateUser() {
+        let tdArr = document.querySelectorAll('[data-email]');
+        tdArr.forEach((td) => {
+            if (emailInput.value === td.innerHTML) {
+                let currRowArr = td.parentElement.children;
+                let formData = this._readUpdateUserFormData();
+                this._insertRecord(currRowArr, formData);
+                this.storage.updateUser(emailInput.value, formData);
+                userdataForm.reset();
+            }
+        });
+        this.hideForm(userdataFormContainer);
+        this.showForm(userTable);
     }
 
     _welcomeMessage(user) {
@@ -303,6 +309,8 @@ class App {
             });
         });
     }
+
+    // user clicks on edit button => the form is opened =>
 
     _logOut() {
         this.storage.deleteUserSession();
