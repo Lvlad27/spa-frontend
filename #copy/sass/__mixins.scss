@@ -1,0 +1,156 @@
+@mixin form($type, $z-index) {
+    &__#{$type} {
+        z-index: $z-index;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        background-color: $color-dark;
+        padding: 2rem 4rem;
+        border-radius: 5px;
+
+        &-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: $color-3;
+        }
+
+        a {
+            text-decoration: none;
+            color: $color-6;
+        }
+
+        .form {
+            text-align: center;
+
+            &__#{$type} {
+                @include btn($color-dark, $color-2);
+
+                &-btn {
+                    margin-bottom: 2rem;
+                    width: 50%;
+                }
+
+                &-control {
+                    text-align: left;
+                    position: relative;
+                    margin: 2rem 0 4rem;
+                    width: 30rem;
+                    color: $color-light;
+                    input {
+                        background-color: transparent;
+                        border: 0;
+                        border-bottom: 2px $color-light solid;
+                        display: block;
+                        width: 100%;
+                        // padding: 5px 0 5px;
+                        font-size: $medium-font-size;
+                        color: $color-light;
+
+                        &:focus {
+                            outline: none;
+                            border-bottom-color: $color-4;
+                        }
+
+                        &::placeholder {
+                            color: $color-1;
+                            font-weight: 100;
+                        }
+
+                        &:-webkit-autofill {
+                            background-clip: text;
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: $color-light !important;
+                        }
+                    }
+
+                    .fas,
+                    .far {
+                        position: absolute;
+                        margin-top: -3rem;
+                        // padding-bottom: 3rem;
+                    }
+
+                    .success-icon,
+                    .error-icon {
+                        right: 0;
+                        // top: -5;
+                        // opacity: 0;
+                    }
+
+                    .error-icon,
+                    .error-message {
+                        color: $color-2;
+                    }
+
+                    .success-icon {
+                        color: $color-4;
+                    }
+
+                    .error-message {
+                        font-size: $small-font-size;
+                        margin-top: 5px;
+                    }
+
+                    &.input-error {
+                        border: 1px solid $color-2;
+
+                        &:focus {
+                            border: 1px solid $color-2;
+                        }
+                    }
+                }
+
+                &-text {
+                    color: $color-light;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+
+@mixin btn($textColor, $bgColor) {
+    .btn {
+        align-items: center;
+        appearance: none;
+        background-color: $bgColor;
+        background-size: calc(100% + 2rem) calc(100% + 2rem);
+        border-radius: 10rem;
+        border-width: 0;
+        box-shadow: none;
+        box-sizing: border-box;
+        color: $textColor;
+        cursor: pointer;
+        display: inline-flex;
+        font-weight: 500;
+        font-size: $default-font-size;
+        height: auto;
+        justify-content: center;
+        line-height: 1.5;
+        padding: 6px 2rem;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.2s, background-position 0.2s;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: top;
+        white-space: nowrap;
+
+        &:active,
+        &:focus {
+            outline: none;
+        }
+
+        &:hover {
+            transform: scale(1.05);
+        }
+
+        &:focus:not(:active) {
+            box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 0.125em;
+        }
+    }
+}

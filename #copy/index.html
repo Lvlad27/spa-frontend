@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="/css/style.css" />
+        <title>RoboGram</title>
+    </head>
+
+    <body>
+        <div class="overlay overlay--hidden" id="overlay"></div>
+        <header>
+            <nav class="nav">
+                <div class="container">
+                    <a class="title" href="#home" id="logoLink">RoboGram</a>
+                    <div class="search-bar">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="search" placeholder="Search for Robots" />
+                    </div>
+                    <div class="create">
+                        <button class="btn btn-create">Create</button>
+                        <div class="profile">
+                            <img
+                                src="https://robohash.org/user"
+                                alt="Portrait of a robot"
+                                class="profile-picture"
+                            />
+                        </div>
+                        <small class="hide-element" id="welcomeMessage"></small>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="main">
+            <!-- ----------------------------- LOGIN FORM ------------------------------ -->
+            <div class="container container__login hide-element" id="loginAccount">
+                <h2 class="container__login-title">Login</h2>
+                <form action="#" class="form form__login">
+                    <!-- Email -->
+                    <div class="form__login-control">
+                        <input id="loginUserName" type="text" placeholder="Email" />
+                        <i class="fas fa-exclamation-circle error-icon hide-element"></i>
+                        <i class="far fa-check-circle success-icon hide-element"></i>
+                        <small class="error-message"></small>
+                    </div>
+                    <!-- Password -->
+                    <div class="form__login-control">
+                        <input id="loginPassword" type="password" placeholder="Password" />
+                        <i class="fas fa-exclamation-circle error-icon hide-element"></i>
+                        <i class="far fa-check-circle success-icon hide-element"></i>
+                        <small class="error-message"></small>
+                    </div>
+
+                    <input id="loginBtn" class="btn form__login-btn" type="submit" value="Login" />
+                    <p class="form__login-text">
+                        Don't have an account?
+                        <a class="form__login-text--link" href="#SignUp" id="signUpLink"
+                            >Sign Up!</a
+                        >
+                    </p>
+                </form>
+            </div>
+            <!-- -------------------------- REGISTRATION FORM -------------------------- -->
+            <div class="container container__registration hide-element" id="registerAccount">
+                <h2 class="container__registration-title">Sign Up</h2>
+                <form action="#" class="form form__registration">
+                    <!-- Email -->
+                    <div class="form__registration-control">
+                        <input id="signUpEmail" type="text" placeholder="Email" />
+                        <i class="fas fa-exclamation-circle error-icon hide-element"></i>
+                        <i class="far fa-check-circle success-icon hide-element"></i>
+                        <small class="error-message"></small>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form__registration-control">
+                        <input id="signUpPass" type="password" placeholder="Password" />
+                        <i class="fas fa-exclamation-circle error-icon hide-element"></i>
+                        <i class="far fa-check-circle success-icon hide-element"></i>
+                        <small class="error-message"></small>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="form__registration-control">
+                        <input
+                            id="passwordConfirm"
+                            type="password"
+                            placeholder="Password Confirmation"
+                        />
+                        <i class="fas fa-exclamation-circle error-icon hide-element"></i>
+                        <i class="far fa-check-circle success-icon hide-element"></i>
+                        <small class="error-message"></small>
+                    </div>
+
+                    <input
+                        id="createAccountBtn"
+                        class="btn form__registration-btn"
+                        type="submit"
+                        value="Create account"
+                    />
+                    <p class="form__registration-text">
+                        Already have an account?
+                        <a class="form__registration-text--link" href="#Login" id="loginLink"
+                            >Login!</a
+                        >
+                    </p>
+                </form>
+            </div>
+
+            <!-- ------------------------------- SIDEBAR ------------------------------- -->
+            <nav class="section section__menu">
+                <ul class="section__menu-sidebar">
+                    <li>
+                        <a href="#" class="btn btn-menu active" id="sidebarHomeBtn">
+                            <i class="fa-solid fa-house"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#usertable" class="btn btn-menu" id="sidebarUserTableBtn">
+                            <i class="fa-solid fa-table"></i>
+                            User Table
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="btn btn-menu" id="sidebarLogoutBtn">
+                            <i class="fa-solid fa-sign-out"></i>
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <section class="section section__content">
+                <table class="users-table hide-element" id="userTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Email</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Surname</th>
+                            <th scope="col">Country</th>
+                            <th scope="col">Birthday</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Hobbies</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userList"></tbody>
+                </table>
+
+                <!-- --------------------------- USER DATA FORM ---------------------------- -->
+                <div class="container container__userdata hide-element" id="userdataContainer">
+                    <form
+                        action="#"
+                        autocomplete="off"
+                        class="form form__userdata"
+                        id="userdataForm"
+                    >
+                        <h2 class="container__userdata-title">Edit User Data</h2>
+
+                        <div class="container-0">
+                            <!-- Email -->
+                            <div class="form__userdata-control">
+                                <label class="email" for="email" id="email-label">Email</label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    id="emailInput"
+                                    class="input"
+                                    readonly
+                                />
+                            </div>
+
+                            <!-- Password -->
+                            <div class="form__userdata-control">
+                                <label class="email" for="email" id="email-label">Password</label>
+                                <input
+                                    type="text"
+                                    name="password"
+                                    id="passwordInput"
+                                    class="input"
+                                    readonly
+                                />
+                            </div>
+                        </div>
+                        <div class="container-1">
+                            <!-- First Name -->
+                            <div class="form__userdata-control">
+                                <label class="firstname" for="firstname" id="firstname-label"
+                                    >Name</label
+                                >
+                                <input
+                                    type="text"
+                                    name="firstname"
+                                    id="firstName"
+                                    class="input"
+                                    placeholder="Enter your name"
+                                />
+                            </div>
+                            <!-- Last Name -->
+                            <div class="form__userdata-control">
+                                <label for="lastname" id="lastname-label">Surname</label>
+                                <input
+                                    type="text"
+                                    name="lastname"
+                                    id="surname"
+                                    class="input"
+                                    placeholder="Enter your surname"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="container-2">
+                            <!-- Country -->
+                            <div class="form__userdata-control">
+                                <label for="country" id="country-label">Country</label>
+                                <input
+                                    type="text"
+                                    name="country"
+                                    id="country"
+                                    class="input"
+                                    placeholder="Enter your country"
+                                />
+                            </div>
+                            <!-- Date of birth -->
+                            <div class="form__userdata-control">
+                                <label for="birthday" id="age-label">Date of birth</label>
+                                <input
+                                    type="date"
+                                    name="birthday"
+                                    id="birthday"
+                                    min="1950-01-01"
+                                    max="2022-12-31"
+                                    class="input"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="container-3">
+                            <!-- Gender -->
+                            <div class="form__userdata-control">
+                                <p>What is your gender?</p>
+                                <div class="container-gender">
+                                    <div class="alignment">
+                                        <input
+                                            type="radio"
+                                            name="gender"
+                                            value="Male"
+                                            class="radio"
+                                            checked="checked"
+                                        />
+                                        <label>Male</label>
+                                    </div>
+                                    <div class="alignment">
+                                        <input
+                                            type="radio"
+                                            name="gender"
+                                            value="Female"
+                                            class="radio"
+                                        />
+                                        <label>Female</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Hobbies -->
+                            <div class="form__userdata-control">
+                                <p>What kind of hobbies are you interested in?</p>
+                                <div class="container-hobbies">
+                                    <div class="alignment">
+                                        <input
+                                            type="checkbox"
+                                            name="prefer"
+                                            value="sports"
+                                            class="checkbox"
+                                        />
+                                        <label>Sports</label>
+                                    </div>
+                                    <div class="alignment">
+                                        <input
+                                            type="checkbox"
+                                            name="prefer"
+                                            value="gaming"
+                                            class="checkbox"
+                                        />
+                                        <label>Gaming</label>
+                                    </div>
+                                    <div class="alignment">
+                                        <input
+                                            type="checkbox"
+                                            name="prefer"
+                                            value="arts"
+                                            class="checkbox"
+                                        />
+                                        <label>Arts</label>
+                                    </div>
+                                    <div class="alignment">
+                                        <input
+                                            type="checkbox"
+                                            name="prefer"
+                                            value="traveling"
+                                            class="checkbox"
+                                        />
+                                        <label>Traveling</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="wrapper">
+                            <button type="submit" id="submit-userdata" class="form__userdata-btn">
+                                Update
+                            </button>
+                            <button type="button" id="cancel-userdata" class="form__userdata-btn">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <aside class="section section__ads"></aside>
+        </main>
+
+        <footer class="footer">
+            <p>Footer</p>
+        </footer>
+
+        <!-- Font Awesome script -->
+        <script src="https://kit.fontawesome.com/426a99cbec.js" crossorigin="anonymous"></script>
+        <!-- Application script -->
+        <script type="module" src="./js/main.js"></script>
+    </body>
+</html>
