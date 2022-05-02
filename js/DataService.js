@@ -1,6 +1,6 @@
 import User from './User.js';
 
-class Storage {
+class DataService {
     getUsers() {
         let storedUserData = {};
         if (localStorage.getItem('storedUserData') !== null) {
@@ -59,4 +59,4 @@ class Storage {
     }
 }
 
-export default Storage;
+export default DataService;
