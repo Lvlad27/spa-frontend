@@ -1,7 +1,6 @@
 import User from './User.js';
 
 ////////////////////////////////////////////////////////////////////
-export let id = (id) => document.getElementById(id);
 
 export let loginFormContainer = id('loginAccount'),
     registerFormContainer = id('registerAccount'),
@@ -105,24 +104,6 @@ class App {
         }
     }
 
-    animateFadeIn(element) {
-        element.classList.remove('FadeOut');
-        element.classList.add('FadeIn');
-    }
-
-    animateFadeOut(element) {
-        element.classList.remove('FadeIn');
-        element.classList.add('FadeOut');
-    }
-
-    hideForm(formName) {
-        formName.classList.add('hide-element');
-    }
-
-    showForm(formName) {
-        formName.classList.remove('hide-element');
-    }
-
     registrationForm(event) {
         if (event.target.matches('#registerAccount')) {
             this._addUser();
@@ -188,26 +169,6 @@ class App {
         this.showForm(userTable);
     }
 
-    _welcomeMessage(user) {
-        let message = id('welcomeMessage');
-        message.innerHTML = `Welcome \n
-            ${user}!`;
-        this.animateFadeIn(message);
-        this.showForm(message);
-    }
-
-    _pageLoad() {
-        overlay.classList.remove('overlay--hidden');
-        this.animateFadeIn(loginFormContainer);
-        this.showForm(loginFormContainer);
-        this.userInterface.displayUsers();
-
-        if (this.storage.getLoggedUser() !== null) {
-            overlay.classList.add('overlay--hidden');
-            this.hideForm(loginFormContainer);
-        }
-    }
-
     _addUser() {
         let user = new User(
             userName.value,
@@ -223,26 +184,6 @@ class App {
         if (this.signUpFormValidation.validateOnSubmit()) {
             this.userInterface.addUserToTable(user);
             this.storage.storeUser(user);
-        }
-    }
-
-    _checkLoginData() {
-        let storedUserData = this.storage.getUsers(),
-            email = storedUserData[loginUserName.value],
-            password = storedUserData[loginUserName.value].password;
-
-        if (email && password === loginPassword.value) {
-            // this.onRouteChange();
-            this.storage.saveUserSession(email);
-            let loggedUser = this.storage.getLoggedUser();
-            this._welcomeMessage(loggedUser.userName);
-
-            overlay.classList.add('overlay--hidden');
-            this.hideForm(loginFormContainer);
-
-            return true;
-        } else {
-            alert('Wrong password!');
         }
     }
 

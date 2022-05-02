@@ -1,44 +1,68 @@
-import BaseView from './BaseView';
+import BaseView from './BaseView.js';
+import { loginFormContainer } from '../helpers.js';
 
 class LoginFormView extends BaseView {
     constructor(DataService, templateRenderer) {
         super(DataService, templateRenderer);
-        this.template = document.getElementById('');
+        this.template = document.getElementById('LoginFormView');
+
+        // document.addEventListener('DOMContentLoaded', this.pageLoad.bind(this));
     }
 
-    getData(param) {
-        const name = param;
-        return this.DataService.getUser(name);
+    getData() {
+        return {};
     }
+
+    render() {
+        const templateHTML = this.template.innerHTML;
+        return templateHTML;
+    }
+
+    getElement() {
+        const html = this.render();
+        return html;
+    }
+
+    // pageLoad() {
+    //     overlay.classList.remove('overlay--hidden');
+    //     // animateFadeIn(loginFormContainer);
+    //     // showForm(loginFormContainer);
+    //     // this.userInterface.displayUsers();
+
+    //     if (this.DataService.getLoggedUser() !== null) {
+    //         overlay.classList.add('overlay--hidden');
+    //         // hideForm(loginFormContainer);
+    //     }
+    // }
+
+    /*
+    welcomeMessage(user) {
+        let message = id('welcomeMessage');
+        message.innerHTML = `Welcome \n
+            ${user}!`;
+        animateFadeIn(message);
+        showForm(message);
+    }
+    */
+
+    /*
+    checkLoginData() {
+        let storedUserData = this.getData(),
+            email = storedUserData[loginUserName.value],
+            password = storedUserData[loginUserName.value].password;
+
+        if (email && password === loginPassword.value) {
+            DataService.saveUserSession(email);
+            let loggedUser = DataService.getLoggedUser();
+            welcomeMessage(loggedUser.userName);
+
+            overlay.classList.add('overlay--hidden');
+            hideForm(loginFormContainer);
+        } else {
+            alert('Wrong password!');
+        }
+    }
+    */
 }
 
-/* 
-<!-- ----------------------------- LOGIN FORM ------------------------------ -->
-            <div class="container container__login hide-element" id="loginAccount">
-                <h2 class="container__login-title">Login</h2>
-                <form action="#" class="form form__login">
-                    <!-- Email -->
-                    <div class="form__login-control">
-                        <input id="loginUserName" type="text" placeholder="Email" />
-                        <i class="fas fa-exclamation-circle error-icon hide-element"></i>
-                        <i class="far fa-check-circle success-icon hide-element"></i>
-                        <small class="error-message"></small>
-                    </div>
-                    <!-- Password -->
-                    <div class="form__login-control">
-                        <input id="loginPassword" type="password" placeholder="Password" />
-                        <i class="fas fa-exclamation-circle error-icon hide-element"></i>
-                        <i class="far fa-check-circle success-icon hide-element"></i>
-                        <small class="error-message"></small>
-                    </div>
-
-                    <input id="loginBtn" class="btn form__login-btn" type="submit" value="Login" />
-                    <p class="form__login-text">
-                        Don't have an account?
-                        <a class="form__login-text--link" href="#SignUp" id="signUpLink"
-                            >Sign Up!</a
-                        >
-                    </p>
-                </form>
-            </div>
-*/
+export default LoginFormView;

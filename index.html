@@ -34,8 +34,7 @@
             </nav>
         </header>
 
-        <main class="main">
-            <!-- ----------------------------- LOGIN FORM ------------------------------ -->
+        <template id="LoginFormView">
             <div class="container container__login hide-element" id="loginAccount">
                 <h2 class="container__login-title">Login</h2>
                 <form action="#" class="form form__login">
@@ -57,13 +56,14 @@
                     <input id="loginBtn" class="btn form__login-btn" type="submit" value="Login" />
                     <p class="form__login-text">
                         Don't have an account?
-                        <a class="form__login-text--link" href="#SignUp" id="signUpLink"
+                        <a class="form__login-text--link" href="#signUpForm" id="signUpLink"
                             >Sign Up!</a
                         >
                     </p>
                 </form>
             </div>
-            <!-- -------------------------- REGISTRATION FORM -------------------------- -->
+        </template>
+        <template id="SignUpFormView">
             <div class="container container__registration hide-element" id="registerAccount">
                 <h2 class="container__registration-title">Sign Up</h2>
                 <form action="#" class="form form__registration">
@@ -109,7 +109,9 @@
                     </p>
                 </form>
             </div>
+        </template>
 
+        <main class="main" id="main">
             <!-- ------------------------------- SIDEBAR ------------------------------- -->
             <nav class="section section__menu">
                 <ul class="section__menu-sidebar">

@@ -1,9 +1,9 @@
 import BaseView from './BaseView.js';
 
-class SignUpFormView extends BaseView {
+class UserTableView extends BaseView {
     constructor(DataService, templateRenderer) {
         super(DataService, templateRenderer);
-        this.template = document.getElementById('SignUpFormView');
+        this.template = document.getElementById('loginAccount');
     }
 
     getData(param) {
@@ -12,8 +12,4 @@ class SignUpFormView extends BaseView {
     }
 }
 
-export default SignUpFormView;
-
-/*
-
-*/
+export default UserTableView;
