@@ -13,6 +13,10 @@ const loginFormView = new LoginFormView(DataService, templateRenderer),
 class Router {
     constructor() {
         this.router = {
+            // '': {
+            //     component: navbarView,
+            //     isProtected: true,
+            // },
             '#login': {
                 component: loginFormView,
                 isProtected: false,
@@ -24,10 +28,6 @@ class Router {
             '#userList': {
                 component: userListView,
                 isProtected: true,
-            },
-            '': {
-                component: loginFormView,
-                isProtected: false,
             },
         };
 
@@ -44,6 +44,7 @@ class Router {
         }
 
         if (route === '') {
+            console.log('wat');
             this.goTo('#login');
         }
     }
