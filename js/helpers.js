@@ -9,20 +9,20 @@ export function templateRenderer(template, data) {
     });
 }
 
-// export function animateFadeIn(element) {
-//     element.classList.remove('FadeOut');
-//     element.classList.add('FadeIn');
-// }
+export function fadeIn(element) {
+    element.classList.remove('FadeOut');
+    element.classList.add('FadeIn');
+}
 
-// export function animateFadeOut(element) {
-//     element.classList.remove('FadeIn');
-//     element.classList.add('FadeOut');
-// }
+export function fadeOut(element) {
+    element.classList.remove('FadeIn');
+    element.classList.add('FadeOut');
+}
 
-// export function hideForm(formName) {
-//     formName.classList.add('hide-element');
-// }
+export function hide(element) {
+    element.classList.add('hide-element');
+}
 
-// export function showForm(formName) {
-//     formName.classList.remove('hide-element');
-// }
+export function show(element) {
+    element.classList.remove('hide-element');
+}

@@ -54,6 +54,10 @@ class DataService {
         return JSON.parse(sessionStorage.getItem('loggedUser'));
     }
 
+    isUserLoggedIn() {
+        if (this.getLoggedUser() !== null) return true;
+    }
+
     deleteUserSession() {
         sessionStorage.removeItem('loggedUser');
     }

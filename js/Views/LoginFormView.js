@@ -5,48 +5,70 @@ class LoginFormView extends BaseView {
     constructor(DataService, templateRenderer) {
         super(DataService, templateRenderer);
         this.template = document.getElementById('LoginFormView');
+    }
 
-        // document.addEventListener('DOMContentLoaded', this.pageLoad.bind(this));
+    addEventListeners() {
+        document.addEventListener('DOMContentLoaded', this.$pageLoad);
+        document.addEventListener('click', this.$signUpLink);
+        document.addEventListener('click', this.$loginBtn);
     }
 
     getData() {
-        return {};
+        return this.DataService.getUsers();
     }
 
-    render() {
+    render(data) {
         const templateHTML = this.template.innerHTML;
         return templateHTML;
     }
 
-    getElement() {
+    getElement(param) {
         const html = this.render();
         return html;
     }
 
-    // pageLoad() {
-    //     overlay.classList.remove('overlay--hidden');
-    //     // animateFadeIn(loginFormContainer);
-    //     // showForm(loginFormContainer);
-    //     // this.userInterface.displayUsers();
+    afterRender() {
+        overlay.classList.remove('overlay--hidden');
+        fadeIn(loginFormContainer);
+        show(loginFormContainer);
+    }
 
-    //     if (this.DataService.getLoggedUser() !== null) {
-    //         overlay.classList.add('overlay--hidden');
-    //         // hideForm(loginFormContainer);
-    //     }
-    // }
+    $signUpLink(event) {
+        if (event.target.matches('#signUpLink')) {
+            this.animateFadeOut(loginFormContainer);
+            this.hideForm(loginFormContainer);
+            this.animateFadeIn(registerFormContainer);
+            this.showForm(registerFormContainer);
+        }
+    }
+
+    $loginBtn(event) {
+        if (event.target.matches('#loginBtn')) {
+            event.preventDefault();
+            this._checkLoginData();
+        }
+    }
+
+    $pageLoad() {
+        // this.userInterface.displayUsers();
+
+        if (this.DataService.getLoggedUser() !== null) {
+            overlay.classList.add('overlay--hidden');
+            hide(loginFormContainer);
+        }
+    }
 
     /*
-    welcomeMessage(user) {
+    $welcomeMessage(user) {
         let message = id('welcomeMessage');
         message.innerHTML = `Welcome \n
             ${user}!`;
-        animateFadeIn(message);
-        showForm(message);
+        fadeIn(message);
+        show(message);
     }
     */
 
-    /*
-    checkLoginData() {
+    $checkLoginData() {
         let storedUserData = this.getData(),
             email = storedUserData[loginUserName.value],
             password = storedUserData[loginUserName.value].password;
@@ -55,14 +77,12 @@ class LoginFormView extends BaseView {
             DataService.saveUserSession(email);
             let loggedUser = DataService.getLoggedUser();
             welcomeMessage(loggedUser.userName);
-
             overlay.classList.add('overlay--hidden');
-            hideForm(loginFormContainer);
+            hide(loginFormContainer);
         } else {
             alert('Wrong password!');
         }
     }
-    */
 }
 
 export default LoginFormView;

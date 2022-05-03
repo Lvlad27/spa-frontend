@@ -1,7 +1,6 @@
 import User from './User.js';
 
 ////////////////////////////////////////////////////////////////////
-
 export let loginFormContainer = id('loginAccount'),
     registerFormContainer = id('registerAccount'),
     userdataFormContainer = id('userdataContainer'),
@@ -44,11 +43,6 @@ class App {
         document.addEventListener('click', this.sidebarUserTableBtn.bind(this));
         document.addEventListener('click', this.sidebarHomeBtn.bind(this));
         document.addEventListener('click', this.sidebarLogoutBtn.bind(this));
-        document.addEventListener('click', this.signUpLink.bind(this));
-        document.addEventListener('click', this.loginLink.bind(this));
-        document.addEventListener('submit', this.registrationForm.bind(this));
-        document.addEventListener('click', this.createAccountBtn.bind(this));
-        document.addEventListener('click', this.loginBtn.bind(this));
         document.addEventListener('click', this.editUserBtn.bind(this));
         document.addEventListener('click', this.updateUserDataBtn.bind(this));
         document.addEventListener('click', this.cancelUserDataBtn.bind(this));
@@ -56,19 +50,11 @@ class App {
 
     ////////////////////////////////////////////////
     // EVENT FUNCTIONS
-    window(event) {
-        if (event.target.matches('window')) {
-            this._onRouteChange();
-        }
-    }
-
     sidebarUserTableBtn(event) {
         if (event.target.matches('#sidebarUserTableBtn')) {
             this.animateFadeIn(userTable);
             this.showForm(userTable);
             this.hideForm(userdataFormContainer);
-
-            // TODO check to only show once if clicked multiple times
         }
     }
 
@@ -86,44 +72,6 @@ class App {
         }
     }
 
-    signUpLink(event) {
-        if (event.target.matches('#signUpLink')) {
-            this.animateFadeOut(loginFormContainer);
-            this.hideForm(loginFormContainer);
-            this.animateFadeIn(registerFormContainer);
-            this.showForm(registerFormContainer);
-        }
-    }
-
-    loginLink(event) {
-        if (event.target.matches('#loginLink')) {
-            this.animateFadeOut(registerFormContainer);
-            this.hideForm(registerFormContainer);
-            this.animateFadeIn(loginFormContainer);
-            this.showForm(loginFormContainer);
-        }
-    }
-
-    registrationForm(event) {
-        if (event.target.matches('#registerAccount')) {
-            this._addUser();
-        }
-    }
-
-    createAccountBtn(event) {
-        if (event.target.matches('#createAccountBtn')) {
-            this._checkRegistrationData();
-            this._addUser();
-        }
-    }
-
-    loginBtn(event) {
-        if (event.target.matches('#loginBtn')) {
-            event.preventDefault();
-            this._checkLoginData();
-        }
-    }
-
     editUserBtn(event) {
         if (event.target.matches('a.edit-user')) {
             let editUserBtn = event.target,
@@ -132,7 +80,6 @@ class App {
             this.animateFadeIn(userdataFormContainer);
             this.showForm(userdataFormContainer);
             this.hideForm(userTable);
-
             this._fillFormData(currRowArray);
         }
     }
@@ -167,34 +114,6 @@ class App {
         });
         this.hideForm(userdataFormContainer);
         this.showForm(userTable);
-    }
-
-    _addUser() {
-        let user = new User(
-            userName.value,
-            password.value,
-            firstName.value,
-            surname.value,
-            country.value,
-            birthday.value,
-            gender.value,
-            checkedHobbies
-        );
-
-        if (this.signUpFormValidation.validateOnSubmit()) {
-            this.userInterface.addUserToTable(user);
-            this.storage.storeUser(user);
-        }
-    }
-
-    _checkRegistrationData() {
-        if (this.signUpFormValidation.validateOnSubmit()) {
-            alert('Your account has been registered!');
-            document.querySelector('form').reset();
-            this.hideForm(registerFormContainer);
-            this.animateFadeIn(loginFormContainer);
-            this.showForm(loginFormContainer);
-        }
     }
 
     _readUpdateUserFormData() {
