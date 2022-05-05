@@ -1,5 +1,5 @@
 import DataService from './DataService.js';
-import { templateRenderer } from './helpers.js';
+import { templateRenderer, id } from './helpers.js';
 import LoginFormView from './Views/LoginFormView.js';
 import SignUpFormView from './Views/SignUpFormView.js';
 import UserListView from './Views/UserListView.js';
@@ -8,57 +8,106 @@ import UserFormView from './Views/UserFormView.js';
 const loginFormView = new LoginFormView(DataService, templateRenderer),
     signUpFormView = new SignUpFormView(DataService, templateRenderer),
     userListView = new UserListView(DataService, templateRenderer),
-    userFormView = new UserFormView(DataService, templateRenderer);
+    userFormView = new UserFormView(DataService, templateRenderer),
+    dataService = new DataService();
+
+const main = id('main'),
+    userListContainer = id('sectionContentContainer');
+
+const overlay = id('overlay');
 
 class Router {
     constructor() {
         this.router = {
-            // '': {
-            //     component: navbarView,
-            //     isProtected: true,
-            // },
+            '': {
+                component: {
+                    name: loginFormView,
+                    container: main,
+                },
+                isProtected: false,
+            },
             '#login': {
-                component: loginFormView,
+                component: {
+                    name: loginFormView,
+                    container: main,
+                },
                 isProtected: false,
             },
-            '#signUp': {
-                component: signUpFormView,
+            '#signup': {
+                component: {
+                    name: signUpFormView,
+                    container: main,
+                },
                 isProtected: false,
             },
-            '#userList': {
-                component: userListView,
+            '#userlist': {
+                component: {
+                    name: userListView,
+                    container: userListContainer,
+                },
+                isProtected: true,
+            },
+            '#userform': {
+                component: userFormView,
                 isProtected: true,
             },
         };
 
+        this.log();
         this.onHashChange();
-        this.switchView(loginFormView);
+        window.addEventListener('hashchange', this.onHashChange.bind(this));
+    }
+
+    log() {
+        console.log('console.log');
     }
 
     onHashChange() {
-        const route = location.hash.split('/')[0];
-        const component = this.router[route];
+        const url = location.hash.split('/')[0],
+            route = this.router[url],
+            component = route.component.name,
+            container = route.component.container;
 
-        if (component.isProtected && !DataService.isUserLoggedIn()) {
+        if (url.isProtected && !dataService.isUserLoggedIn()) {
             this.goTo('#login');
+        } else {
+            this.switchView(component, container);
         }
 
-        if (route === '') {
-            console.log('wat');
-            this.goTo('#login');
+        if (location.hash === '#signup') {
+            const loginFormContainer = id('loginAccount');
+            if (loginFormContainer) {
+                this.deleteView(loginFormContainer);
+            }
+        }
+
+        if (location.hash === '#login') {
+            const registerFormContainer = id('registerAccount');
+            if (registerFormContainer) {
+                this.deleteView(registerFormContainer);
+            }
+        }
+
+        if (this.checkLoginView()) {
+            dataService.saveUserSession(loginUserName);
+            let loggedUser = dataService.getLoggedUser();
+            overlay.classList.add('overlay--hidden');
         }
     }
 
-    switchView(component, param) {
+    switchView(component, container, param) {
         const element = component.getElement(param);
-        document.getElementById('loginAccount').innerHTML = element;
-        this.previousView = component;
-        console.log('switchView() called');
+        container.innerHTML += element;
+        previousView = component;
+        // component.afterRender();
+    }
+
+    deleteView(container) {
+        container.remove();
     }
 
     goTo(hash) {
         location.hash = hash;
-        console.log('goTo() called');
     }
 }
 

@@ -6,14 +6,13 @@ class SignUpFormView extends BaseView {
         super(DataService, templateRenderer);
         this.template = document.getElementById('SignUpFormView');
 
-        document.addEventListener('click', this.loginLink.bind(this));
-        document.addEventListener('submit', this.registrationForm.bind(this));
-        document.addEventListener('click', this.createAccountBtn.bind(this));
+        // document.addEventListener('click', this.loginLink.bind(this));
+        // document.addEventListener('submit', this.registrationForm.bind(this));
+        // document.addEventListener('click', this.createAccountBtn.bind(this));
     }
 
     getData(param) {
-        const name = param;
-        return this.DataService.getUser(name);
+        return {};
     }
 
     registrationForm(event) {
@@ -42,9 +41,6 @@ class SignUpFormView extends BaseView {
         if (this.signUpFormValidation.validateOnSubmit()) {
             alert('Your account has been registered!');
             document.querySelector('form').reset();
-            this.hideForm(registerFormContainer);
-            this.animateFadeIn(loginFormContainer);
-            this.showForm(loginFormContainer);
         }
     }
 

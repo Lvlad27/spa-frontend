@@ -1,8 +1,5 @@
 export const id = (id) => document.getElementById(id);
 
-export const loginFormContainer = id('loginAccount'),
-    registerFormContainer = id('registerAccount');
-
 export function templateRenderer(template, data) {
     return template.replace(/{{(.*?)}}/g, (match) => {
         return data[match.split(/{{|}}/).filter(Boolean)[0]];

@@ -3,12 +3,11 @@ import BaseView from './BaseView.js';
 class UserTableView extends BaseView {
     constructor(DataService, templateRenderer) {
         super(DataService, templateRenderer);
-        this.template = document.getElementById('loginAccount');
+        this.template = document.getElementById('UserListView');
     }
 
     getData(param) {
-        const name = param;
-        return this.DataService.getUser(name);
+        return {};
     }
 }
 
