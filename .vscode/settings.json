@@ -6,6 +6,8 @@
         "prefill",
         "Robo",
         "updateform",
+        "userform",
+        "userlist",
         "usertable"
     ]
 }
