@@ -1,5 +1,3 @@
-import User from './User.js';
-
 ////////////////////////////////////////////////////////////////////
 export let loginFormContainer = id('loginAccount'),
     registerFormContainer = id('registerAccount'),
