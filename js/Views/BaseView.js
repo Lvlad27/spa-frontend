@@ -1,8 +1,3 @@
-import { templateRenderer } from '../helpers.js';
-// import DataService from '../DataService.js';
-
-// const DataService = new DataService();
-
 class BaseView {
     constructor(DataService, templateRenderer) {
         this.DataService = DataService;
@@ -11,7 +6,7 @@ class BaseView {
 
     render(data) {
         const templateHTML = this.template.innerHTML;
-        return templateRenderer(templateHTML, data);
+        return this.templateRenderer(templateHTML, data);
     }
 
     getElement(param) {

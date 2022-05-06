@@ -1,9 +1,9 @@
 import BaseView from './BaseView.js';
 
-class NavbarView extends BaseView {
+class HomeView extends BaseView {
     constructor(DataService, templateRenderer) {
         super(DataService, templateRenderer);
-        this.template = document.getElementById('NavbarView');
+        this.template = document.getElementById('HomeView');
     }
 
     getData() {
@@ -11,4 +11,4 @@ class NavbarView extends BaseView {
     }
 }
 
-export default NavbarView;
+export default HomeView;

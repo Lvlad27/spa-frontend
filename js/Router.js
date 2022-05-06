@@ -1,23 +1,22 @@
-import DataService from './DataService.js';
 import { templateRenderer, id } from './helpers.js';
-import NavbarView from './Views/NavbarView.js';
+import DataService from './DataService.js';
+import HomeView from './Views/HomeView.js';
 import LoginFormView from './Views/LoginFormView.js';
 import SignUpFormView from './Views/SignUpFormView.js';
 import UserListView from './Views/UserListView.js';
 import UserFormView from './Views/UserFormView.js';
 
-const navbarView = new NavbarView(DataService, templateRenderer),
-    loginFormView = new LoginFormView(DataService, templateRenderer),
-    signUpFormView = new SignUpFormView(DataService, templateRenderer),
-    userListView = new UserListView(DataService, templateRenderer),
-    userFormView = new UserFormView(DataService, templateRenderer),
-    dataService = new DataService();
+const dataService = new DataService(),
+    homeView = new HomeView(dataService, templateRenderer),
+    loginFormView = new LoginFormView(dataService, templateRenderer),
+    signUpFormView = new SignUpFormView(dataService, templateRenderer),
+    userListView = new UserListView(dataService, templateRenderer),
+    userFormView = new UserFormView(dataService, templateRenderer);
 
 const main = id('main'),
+    body = id('body'),
     contentContainer = id('sectionContent'),
     menuContainer = id('sectionMenu');
-
-const overlay = document.getElementById('overlay');
 
 class Router {
     constructor() {
@@ -25,28 +24,28 @@ class Router {
             '': {
                 component: {
                     name: loginFormView,
-                    container: main,
+                    container: body,
                 },
                 isProtected: true,
             },
             '#home': {
                 component: {
-                    name: navbarView,
-                    container: menuContainer,
+                    name: homeView,
+                    container: body,
                 },
                 isProtected: true,
             },
             '#login': {
                 component: {
                     name: loginFormView,
-                    container: main,
+                    container: body,
                 },
                 isProtected: false,
             },
             '#signup': {
                 component: {
                     name: signUpFormView,
-                    container: main,
+                    container: body,
                 },
                 isProtected: false,
             },
@@ -73,17 +72,30 @@ class Router {
             component = route.component.name,
             container = route.component.container;
 
-        if (route.isProtected) {
+        if (!dataService.isUserLoggedIn() && route.isProtected) {
             this.goTo('#login');
             this.switchView(component, container);
         } else {
             this.switchView(component, container);
+
+            // if (component.layout === 'formLayout') {
+            // }
         }
     }
 
+    // formLayout() {
+    //     const body = document.getElementById('body');
+    //     body.innerHTML = homeView.getElement(param);
+    // }
+
+    // homeLayout() {
+    //     const body = document.getElementById('body');
+    //     body.innerHTML = homeView.getElement(param);
+    // }
+
     switchView(component, container, param) {
         const element = component.getElement(param);
-        container.innerHTML += element;
+        container.innerHTML = element;
         // component.afterRender();
     }
 
