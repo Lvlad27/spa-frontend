@@ -1,4 +1,7 @@
 import { templateRenderer } from '../helpers.js';
+// import DataService from '../DataService.js';
+
+// const DataService = new DataService();
 
 class BaseView {
     constructor(DataService, templateRenderer) {

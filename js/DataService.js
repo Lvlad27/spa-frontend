@@ -27,19 +27,20 @@ class DataService {
         return usersArray;
     }
 
-    // checkLogin() {
-    //     const loginUserName = document.getElementById('loginUserName'),
-    //         loginPassword = document.getElementById('loginPassword');
-    //     const userArray = this.getUsersArray(),
-    //         AllUserNames = userArray.map((user) => user.userName),
-    //         AllUserPasswords = userArray.map((user) => user.password);
+    checkLogin() {
+        const loginUserName = document.getElementById('loginUserName').value,
+            loginPassword = document.getElementById('loginPassword').value;
+        const userArray = this.getUsersArray(),
+            AllUserNames = userArray.map((user) => user.userName),
+            AllUserPasswords = userArray.map((user) => user.password);
 
-    //     if (AllUserNames.includes(loginUserName) && AllUserPasswords.includes(loginPassword)) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
+        if (AllUserNames.includes(loginUserName) && AllUserPasswords.includes(loginPassword)) {
+            this.saveUserSession(loginUserName);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     updateUser(username, data) {
         let usersArray = this.getUsersArray();

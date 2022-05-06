@@ -34,6 +34,28 @@
             </nav>
         </header>
 
+        <template id="NavbarView">
+            <ul class="section__menu-sidebar">
+                <li>
+                    <a href="#home" class="btn btn-menu active" id="sidebarHomeBtn">
+                        <i class="fa-solid fa-house"></i>
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#userlist" class="btn btn-menu" id="sidebarUserTableBtn">
+                        <i class="fa-solid fa-table"></i>
+                        User Table
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="btn btn-menu" id="sidebarLogoutBtn">
+                        <i class="fa-solid fa-sign-out"></i>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </template>
         <template id="LoginFormView">
             <div class="container container__login" id="loginAccount">
                 <h2 class="container__login-title">Login</h2>
@@ -53,7 +75,7 @@
                         <small class="error-message"></small>
                     </div>
                     <!-- Button -->
-                    <a class="btn form__login-btn" href="#userlist" id="loginBtn">Login</a>
+                    <button type="submit" class="btn form__login-btn" id="loginBtn">Login</button>
                     <!-- Message and Link -->
                     <p class="form__login-text">
                         Don't have an account?
@@ -94,9 +116,9 @@
                         <small class="error-message"></small>
                     </div>
                     <!-- Button -->
-                    <a class="btn form__registration-btn" href="#login" id="createAccountBtn"
-                        >Create account</a
-                    >
+                    <button type="button" class="btn form__registration-btn" id="createAccountBtn">
+                        Create account
+                    </button>
                     <!-- Message and Link -->
                     <p class="form__registration-text">
                         Already have an account?
@@ -301,30 +323,9 @@
         </template>
 
         <main class="main" id="main">
-            <nav class="section section__menu">
-                <ul class="section__menu-sidebar">
-                    <li>
-                        <a href="#" class="btn btn-menu active" id="sidebarHomeBtn">
-                            <i class="fa-solid fa-house"></i>
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#usertable" class="btn btn-menu" id="sidebarUserTableBtn">
-                            <i class="fa-solid fa-table"></i>
-                            User Table
-                        </a>
-                    </li>
-                    <li>
-                        <a href="" class="btn btn-menu" id="sidebarLogoutBtn">
-                            <i class="fa-solid fa-sign-out"></i>
-                            Logout
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            <nav class="section section__menu" id="sectionMenu"></nav>
 
-            <section class="section section__content" id="sectionContentContainer"></section>
+            <section class="section section__content" id="sectionContent"></section>
 
             <aside class="section section__ads"></aside>
         </main>

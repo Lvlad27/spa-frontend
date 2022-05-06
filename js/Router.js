@@ -1,20 +1,23 @@
 import DataService from './DataService.js';
 import { templateRenderer, id } from './helpers.js';
+import NavbarView from './Views/NavbarView.js';
 import LoginFormView from './Views/LoginFormView.js';
 import SignUpFormView from './Views/SignUpFormView.js';
 import UserListView from './Views/UserListView.js';
 import UserFormView from './Views/UserFormView.js';
 
-const loginFormView = new LoginFormView(DataService, templateRenderer),
+const navbarView = new NavbarView(DataService, templateRenderer),
+    loginFormView = new LoginFormView(DataService, templateRenderer),
     signUpFormView = new SignUpFormView(DataService, templateRenderer),
     userListView = new UserListView(DataService, templateRenderer),
     userFormView = new UserFormView(DataService, templateRenderer),
     dataService = new DataService();
 
 const main = id('main'),
-    userListContainer = id('sectionContentContainer');
+    contentContainer = id('sectionContent'),
+    menuContainer = id('sectionMenu');
 
-const overlay = id('overlay');
+const overlay = document.getElementById('overlay');
 
 class Router {
     constructor() {
@@ -24,7 +27,14 @@ class Router {
                     name: loginFormView,
                     container: main,
                 },
-                isProtected: false,
+                isProtected: true,
+            },
+            '#home': {
+                component: {
+                    name: navbarView,
+                    container: menuContainer,
+                },
+                isProtected: true,
             },
             '#login': {
                 component: {
@@ -43,7 +53,7 @@ class Router {
             '#userlist': {
                 component: {
                     name: userListView,
-                    container: userListContainer,
+                    container: contentContainer,
                 },
                 isProtected: true,
             },
@@ -53,13 +63,8 @@ class Router {
             },
         };
 
-        this.log();
         this.onHashChange();
         window.addEventListener('hashchange', this.onHashChange.bind(this));
-    }
-
-    log() {
-        console.log('console.log');
     }
 
     onHashChange() {
@@ -68,43 +73,23 @@ class Router {
             component = route.component.name,
             container = route.component.container;
 
-        if (url.isProtected && !dataService.isUserLoggedIn()) {
+        if (route.isProtected) {
             this.goTo('#login');
+            this.switchView(component, container);
         } else {
             this.switchView(component, container);
-        }
-
-        if (location.hash === '#signup') {
-            const loginFormContainer = id('loginAccount');
-            if (loginFormContainer) {
-                this.deleteView(loginFormContainer);
-            }
-        }
-
-        if (location.hash === '#login') {
-            const registerFormContainer = id('registerAccount');
-            if (registerFormContainer) {
-                this.deleteView(registerFormContainer);
-            }
-        }
-
-        if (this.checkLoginView()) {
-            dataService.saveUserSession(loginUserName);
-            let loggedUser = dataService.getLoggedUser();
-            overlay.classList.add('overlay--hidden');
         }
     }
 
     switchView(component, container, param) {
         const element = component.getElement(param);
         container.innerHTML += element;
-        previousView = component;
         // component.afterRender();
     }
 
-    deleteView(container) {
-        container.remove();
-    }
+    // deleteView(container) {
+    //     container.remove();
+    // }
 
     goTo(hash) {
         location.hash = hash;
