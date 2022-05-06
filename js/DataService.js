@@ -27,6 +27,20 @@ class DataService {
         return usersArray;
     }
 
+    // checkLogin() {
+    //     const loginUserName = document.getElementById('loginUserName'),
+    //         loginPassword = document.getElementById('loginPassword');
+    //     const userArray = this.getUsersArray(),
+    //         AllUserNames = userArray.map((user) => user.userName),
+    //         AllUserPasswords = userArray.map((user) => user.password);
+
+    //     if (AllUserNames.includes(loginUserName) && AllUserPasswords.includes(loginPassword)) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
     updateUser(username, data) {
         let usersArray = this.getUsersArray();
         usersArray.forEach((_, index) => {
@@ -55,7 +69,11 @@ class DataService {
     }
 
     isUserLoggedIn() {
-        if (this.getLoggedUser() !== null) return true;
+        if (this.getLoggedUser() !== null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     deleteUserSession() {
