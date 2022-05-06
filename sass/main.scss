@@ -17,8 +17,8 @@ body {
 
 header {
     .nav {
-        background-color: $color-dark;
-        color: $color-3;
+        background-color: $color-light;
+        border-bottom: 3px ridge $form-color-1;
 
         .container {
             display: flex;
@@ -30,20 +30,35 @@ header {
             .title {
                 margin: 2rem;
                 font-size: $medium-font-size;
+                font-weight: bold;
                 text-decoration: none;
-                color: $color-3;
+                color: $form-color-1;
             }
 
             .search-bar {
                 input[type='search'] {
                     width: 30vw;
                     margin-left: 1rem;
-                    color: $color-dark;
+                    border: 1px solid transparent;
+                    border-radius: 8px;
+                    background-color: $form-color-3;
+                    color: $form-color-1;
+
+                    &::placeholder {
+                        color: $form-color-1;
+                    }
 
                     &:active {
                         border: none;
-                        color: $color-3;
                     }
+
+                    &:focus {
+                        outline: none;
+                        border: 1px solid $form-color-1;
+                    }
+                }
+                .fa-magnifying-glass {
+                    color: $color-light;
                 }
             }
 
@@ -51,11 +66,11 @@ header {
                 display: flex;
                 align-items: center;
 
-                @include btn($color-dark, $color-3);
+                @include btn($color-light, $form-color-1);
 
                 .profile {
                     margin: 1rem 2rem 1rem;
-                    background-color: $color-light;
+                    background-color: $form-color-3;
                     width: 6rem;
                     aspect-ratio: 1/1;
                     overflow: hidden;
@@ -73,25 +88,6 @@ header {
 
 //////////////////////////////////////////
 @import '__animations';
-
-.overlay {
-    position: fixed;
-    overflow: hidden;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    // width: 100%;
-    height: 100%;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: 0 blur(6px);
-    z-index: 5;
-
-    &--hidden {
-        display: none;
-        overflow: hidden;
-    }
-}
 
 .hide-element {
     // opacity: 0;
@@ -113,6 +109,8 @@ header {
 .main {
     flex: 1;
     display: flex;
+    background: url('..//assets/img/img-2400x1600.jpg') no-repeat center fixed;
+    // background-size: auto;
 
     .container {
         @include form(login, 99);
@@ -121,16 +119,16 @@ header {
 
     .section {
         &__menu {
-            flex: 0 0 20vw;
-            background-color: $color-7;
+            flex: 0 0 15vw;
             color: $color-light;
+            border-right: 2px solid $form-color-1;
 
             &-sidebar {
                 margin-top: 2rem;
                 text-decoration: none;
                 list-style: none;
 
-                @include btn($color-dark, $color-2);
+                @include btn($form-color-1, $color-light);
                 .btn-menu {
                     margin: 1rem;
                     i {
@@ -141,27 +139,25 @@ header {
         }
 
         &__content {
-            flex: 1 0 65vw;
-            background-color: $color-5;
+            flex: 1 0 70vw;
 
             .users-table {
                 border: none;
 
                 margin: auto;
-                background-color: $color-2;
-                border-bottom: 1px solid black;
-                box-shadow: 0 0 5px 2px black;
+                border-bottom: 1px solid $form-color-1;
+                box-shadow: 0 0 5px 2px $form-color-1;
                 width: 100%;
                 text-align: center;
 
                 tbody {
                     tr:nth-child(odd) {
-                        background-color: $color-5;
+                        background-color: $form-color-2;
                         padding: 2rem 0;
                     }
 
                     tr:nth-child(even) {
-                        background-color: $color-light;
+                        background-color: $form-color-3;
                         padding: 2rem 0;
                     }
 
@@ -178,7 +174,7 @@ header {
                     border: none;
                 }
 
-                @include btn($color-dark, $color-2);
+                @include btn($color-light, $form-color-1);
 
                 .edit-user {
                     text-decoration: none;
@@ -191,7 +187,6 @@ header {
                     display: flex;
                     justify-content: center;
                     // z-index: 99;
-                    background-color: $color-5;
                     padding: 2rem 4rem;
 
                     &-title {
@@ -244,7 +239,7 @@ header {
 
                                     &:focus {
                                         outline: none;
-                                        border-bottom-color: $color-6;
+                                        border-bottom-color: $color-3;
                                     }
 
                                     &::placeholder {
@@ -294,7 +289,7 @@ header {
 
         &__ads {
             flex: 0 0 15vw;
-            background-color: $color-7;
+            border-left: 2px solid $form-color-1;
             color: $color-light;
         }
     }
@@ -302,6 +297,6 @@ header {
 
 .footer {
     text-align: center;
-    background-color: $color-dark;
-    color: $color-3;
+    background-color: $form-color-1;
+    color: $color-light;
 }

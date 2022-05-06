@@ -5,27 +5,29 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-
-        background-color: $color-dark;
+        backdrop-filter: blur(10px);
+        // background-color: $color-dark;
         padding: 2rem 4rem;
         border-radius: 5px;
+        border: 1px solid $form-color-1;
 
         &-title {
             text-align: center;
             margin-bottom: 3rem;
-            color: $color-3;
+            color: $form-color-1;
         }
 
         a {
             text-decoration: none;
-            color: $color-6;
+            border-bottom: 1px solid $form-color-1;
+            color: $form-color-1;
         }
 
         .form {
             text-align: center;
 
             &__#{$type} {
-                @include btn($color-dark, $color-2);
+                @include btn($color-light, $form-color-1);
 
                 &-btn {
                     margin-bottom: 2rem;
@@ -37,31 +39,31 @@
                     position: relative;
                     margin: 2rem 0 4rem;
                     width: 30rem;
-                    color: $color-light;
+                    color: $form-color-1;
                     input {
                         background-color: transparent;
                         border: 0;
-                        border-bottom: 2px $color-light solid;
+                        border-bottom: 2px $form-color-2 solid;
                         display: block;
                         width: 100%;
                         // padding: 5px 0 5px;
                         font-size: $medium-font-size;
-                        color: $color-light;
+                        color: $form-color-1;
 
                         &:focus {
                             outline: none;
-                            border-bottom-color: $color-4;
+                            border-bottom-color: $form-color-1;
                         }
 
                         &::placeholder {
-                            color: $color-1;
+                            color: $form-color-1;
                             font-weight: 100;
                         }
 
                         &:-webkit-autofill {
                             background-clip: text;
                             -webkit-background-clip: text;
-                            -webkit-text-fill-color: $color-light !important;
+                            -webkit-text-fill-color: $form-color-1 !important;
                         }
                     }
 
@@ -103,7 +105,7 @@
                 }
 
                 &-text {
-                    color: $color-light;
+                    color: $form-color-1;
                     text-align: center;
                 }
             }
