@@ -1,66 +1,8 @@
-import { templateRenderer, id } from './helpers.js';
-import DataService from './DataService.js';
-import HomeView from './Views/HomeView.js';
-import LoginFormView from './Views/LoginFormView.js';
-import SignUpFormView from './Views/SignUpFormView.js';
-import UserListView from './Views/UserListView.js';
-import UserFormView from './Views/UserFormView.js';
-
-const dataService = new DataService(),
-    homeView = new HomeView(dataService, templateRenderer),
-    loginFormView = new LoginFormView(dataService, templateRenderer),
-    signUpFormView = new SignUpFormView(dataService, templateRenderer),
-    userListView = new UserListView(dataService, templateRenderer),
-    userFormView = new UserFormView(dataService, templateRenderer);
-
-const main = id('main'),
-    body = id('body'),
-    contentContainer = id('sectionContent'),
-    menuContainer = id('sectionMenu');
-
 class Router {
-    constructor() {
-        this.router = {
-            '': {
-                component: {
-                    name: loginFormView,
-                    container: body,
-                },
-                isProtected: true,
-            },
-            '#home': {
-                component: {
-                    name: homeView,
-                    container: body,
-                },
-                isProtected: true,
-            },
-            '#login': {
-                component: {
-                    name: loginFormView,
-                    container: body,
-                },
-                isProtected: false,
-            },
-            '#signup': {
-                component: {
-                    name: signUpFormView,
-                    container: body,
-                },
-                isProtected: false,
-            },
-            '#userlist': {
-                component: {
-                    name: userListView,
-                    container: contentContainer,
-                },
-                isProtected: true,
-            },
-            '#userform': {
-                component: userFormView,
-                isProtected: true,
-            },
-        };
+    constructor(options) {
+        this.routes = options.routes;
+        this.dataService = options.dataService;
+        this.rootElement = document.getElementById(options.rootElement);
 
         this.onHashChange();
         window.addEventListener('hashchange', this.onHashChange.bind(this));
@@ -68,40 +10,30 @@ class Router {
 
     onHashChange() {
         const url = location.hash.split('/')[0],
-            route = this.router[url],
-            component = route.component.name,
-            container = route.component.container;
+            route = this.routes[url];
 
-        if (!dataService.isUserLoggedIn() && route.isProtected) {
+        if (!route) {
+            return;
+        }
+
+        const component = route.component;
+
+        if (this.dataService.isUserLoggedIn() && ['', '#login', '#signup'].includes(url)) {
+            this.goTo('#home');
+            this.switchView();
+        } else if (!this.dataService.isUserLoggedIn() && route.isProtected) {
+            console.log('call');
             this.goTo('#login');
-            this.switchView(component, container);
+            this.switchView(component);
         } else {
-            this.switchView(component, container);
-
-            // if (component.layout === 'formLayout') {
-            // }
+            this.switchView(component);
         }
     }
 
-    // formLayout() {
-    //     const body = document.getElementById('body');
-    //     body.innerHTML = homeView.getElement(param);
-    // }
-
-    // homeLayout() {
-    //     const body = document.getElementById('body');
-    //     body.innerHTML = homeView.getElement(param);
-    // }
-
-    switchView(component, container, param) {
+    switchView(component, param) {
         const element = component.getElement(param);
-        container.innerHTML = element;
-        // component.afterRender();
+        this.rootElement.innerHTML = element;
     }
-
-    // deleteView(container) {
-    //     container.remove();
-    // }
 
     goTo(hash) {
         location.hash = hash;

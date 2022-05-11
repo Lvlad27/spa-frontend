@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="/css/style.css" />
         <title>RoboGram</title>
     </head>
+
     <template id="HomeView">
         <header>
             <nav class="nav">
@@ -32,34 +33,38 @@
             </nav>
         </header>
         <main class="main">
-            <nav class="section section__menu" id="sectionMenu">
-                <ul class="section__menu-sidebar">
-                    <li>
-                        <a href="#home" class="btn btn-menu active" id="sidebarHomeBtn">
-                            <i class="fa-solid fa-house"></i>
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#userlist" class="btn btn-menu" id="sidebarUserTableBtn">
-                            <i class="fa-solid fa-table"></i>
-                            User Table
-                        </a>
-                    </li>
-                    <li>
-                        <a href="" class="btn btn-menu" id="sidebarLogoutBtn">
-                            <i class="fa-solid fa-sign-out"></i>
-                            Logout
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            <nav class="section section__menu" id="sectionMenu"></nav>
             <section class="section section__content" id="sectionContent"></section>
             <aside class="section section__ads"></aside>
         </main>
         <footer class="footer">
             <p>Footer</p>
         </footer>
+        <!-- Font Awesome script -->
+        <script src="https://kit.fontawesome.com/426a99cbec.js" crossorigin="anonymous"></script>
+        <!-- Application script -->
+    </template>
+    <template id="NavView">
+        <ul class="section__menu-sidebar">
+            <li>
+                <a href="#home" class="btn btn-menu active" id="sidebarHomeBtn">
+                    <i class="fa-solid fa-house"></i>
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="#userlist" class="btn btn-menu" id="sidebarUserTableBtn">
+                    <i class="fa-solid fa-table"></i>
+                    User Table
+                </a>
+            </li>
+            <li>
+                <a href="" class="btn btn-menu" id="sidebarLogoutBtn">
+                    <i class="fa-solid fa-sign-out"></i>
+                    Logout
+                </a>
+            </li>
+        </ul>
     </template>
     <template id="LoginFormView">
         <main class="main" id="main">
@@ -68,14 +73,24 @@
                 <form action="#" class="form form__login">
                     <!-- Email -->
                     <div class="form__login-control">
-                        <input id="loginUserName" type="text" placeholder="Email" />
+                        <input
+                            data-validation="emailCheck()"
+                            id="loginUserName"
+                            type="text"
+                            placeholder="Email"
+                        />
                         <i class="fas fa-exclamation-circle error-icon hide-element"></i>
                         <i class="far fa-check-circle success-icon hide-element"></i>
                         <small class="error-message"></small>
                     </div>
                     <!-- Password -->
                     <div class="form__login-control">
-                        <input id="loginPassword" type="password" placeholder="Password" />
+                        <input
+                            id="loginPassword"
+                            type="password"
+                            placeholder="Password"
+                            data-validation="noValuesCheck()"
+                        />
                         <i class="fas fa-exclamation-circle error-icon hide-element"></i>
                         <i class="far fa-check-circle success-icon hide-element"></i>
                         <small class="error-message"></small>
@@ -140,7 +155,7 @@
     </template>
     <template id="UserListView">
         <table class="users-table" id="userTable">
-            <thead>
+            <thead class="tableHeader">
                 <tr>
                     <th scope="col">Email</th>
                     <th scope="col">Password</th>
@@ -317,10 +332,8 @@
             </form>
         </div>
     </template>
+
     <body id="body">
-        <!-- Font Awesome script -->
-        <script src="https://kit.fontawesome.com/426a99cbec.js" crossorigin="anonymous"></script>
-        <!-- Application script -->
         <script type="module" src="./js/main.js"></script>
     </body>
 </html>

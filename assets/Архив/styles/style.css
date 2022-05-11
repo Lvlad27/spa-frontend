@@ -1,0 +1,291 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  background-color: #fff;
+}
+
+html font,
+body font {
+  size: 16px;
+}
+
+.header {
+  width: 100%;
+  height: 2vh;
+  text-align: center;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.left-menu {
+  width: 25%;
+}
+
+.left-menu ul {
+  list-style: none;
+}
+
+.main {
+  width: 60%;
+}
+
+.main .forms-container {
+  background-color: #f8f6ff;
+}
+
+.main .forms-container .form {
+  padding: 3em;
+  width: 500px;
+  margin: 0 auto;
+}
+
+.main .forms-container .form .successful-sign-up-message {
+  color: #7851a9;
+}
+
+.main .forms-container .form .label {
+  font-size: 0.8rem;
+  color: #7851a9;
+  display: block;
+}
+
+.main .forms-container .form .input {
+  padding: 0.5em;
+  font-size: 0.9rem;
+  width: 85%;
+}
+
+.main .forms-container .form .form-input {
+  margin-bottom: 1.5rem;
+}
+
+.main .forms-container .form .button {
+  display: block;
+  width: 85%;
+  height: 35px;
+  background-color: #7851a9;
+  border: none;
+  border-radius: 3px;
+  color: #f8f6ff;
+  font-weight: 700;
+}
+
+.main .forms-container .form .button:hover {
+  cursor: pointer;
+}
+
+.main .forms-container .sign-up-link,
+.main .forms-container .log-in-link {
+  margin-top: 2em;
+  text-align: center;
+  width: 85%;
+}
+
+.main .forms-container .sign-up-link a,
+.main .forms-container .log-in-link a {
+  color: #7851a9;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.main .forms-container .sign-up-link a:hover,
+.main .forms-container .log-in-link a:hover {
+  cursor: pointer;
+}
+
+.main .user-is-logged {
+  float: right;
+  margin-bottom: 2rem;
+}
+
+.main .user-is-logged p {
+  display: inline;
+}
+
+.main .user-is-logged .welcome-username {
+  color: #7851a9;
+  font-weight: 700;
+}
+
+.main .user-is-logged .log-out-button {
+  font-size: 0.6rem;
+  margin-left: 1rem;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0.5em 1em;
+  background-color: #a97151;
+  border-radius: 1em;
+}
+
+.main .section-users-table .users-table {
+  border-collapse: collapse;
+}
+
+.main .section-users-table .users-table .users-table-thead {
+  background-color: #7851a9;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.main .section-users-table .users-table .users-table-thead th {
+  padding: 1rem;
+}
+
+.main .section-users-table .users-table .users-table-tbody tr:nth-child(odd) {
+  background-color: #f8f6ff;
+}
+
+.main .section-users-table .users-table .users-table-tbody td {
+  padding: 1rem;
+}
+
+.main .section-users-table .users-table .users-table-tbody td .button-edit-user {
+  border: none;
+  background-color: #a99651;
+  border-radius: 1rem;
+  color: #fff;
+  padding: 0.4em 1.2em;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.main .section-users-table .users-table .users-table-tbody td .button-edit-user:hover {
+  cursor: pointer;
+}
+
+.main .section-edit-user .user-avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: #f8f6ff;
+  text-align: center;
+}
+
+.main .section-edit-user .user-avatar p {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #7851a9;
+  position: relative;
+  top: 40%;
+}
+
+.main .section-edit-user .form-edit-user-info .label {
+  color: #7851a9;
+  font-weight: 700;
+  display: block;
+  margin-top: 2rem;
+}
+
+.main .section-edit-user .form-edit-user-info .input,
+.main .section-edit-user .form-edit-user-info .select {
+  width: 400px;
+  padding: 0.5em;
+  font-size: 0.9rem;
+}
+
+.main .section-edit-user .form-edit-user-info .checkbox {
+  display: inline-block;
+  width: 20%;
+}
+
+.main .section-edit-user .form-edit-user-info .button-save-user-info {
+  display: block;
+  width: 20%;
+  margin-top: 2rem;
+  border: none;
+  background-color: #7851a9;
+  border-radius: 2rem;
+  color: #fff;
+  padding: 0.7rem 0;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+}
+
+.main .section-edit-user .form-edit-user-info .button-save-user-info:hover {
+  cursor: pointer;
+}
+
+.show-password {
+  font-size: 0.8rem;
+  color: #7851a9;
+}
+
+.show-password:hover {
+  cursor: pointer;
+}
+
+.aside {
+  width: 15%;
+  text-align: center;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8rem;
+  margin-bottom: 1em;
+  display: none;
+}
+
+.error-message--minLength .error-message--minLength {
+  display: block;
+}
+
+.error-message--usernameIsAvailable .error-message--usernameIsAvailable {
+  display: block;
+}
+
+.error-message--emailIsValid .error-message--emailIsValid {
+  display: block;
+}
+
+.error-message--includeNumbers .error-message--includeNumbers {
+  display: block;
+}
+
+.error-message--includeLetters .error-message--includeLetters {
+  display: block;
+}
+
+.error-message--passwordsMatch .error-message--passwordsMatch {
+  display: block;
+}
+
+.error-message--loginValid .error-message--loginValid {
+  display: block;
+}
+
+.invalid-input {
+  border: 1px solid red;
+}
+
+.hidden {
+  display: none;
+}
+/*# sourceMappingURL=style.css.map */

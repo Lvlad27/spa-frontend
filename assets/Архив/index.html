@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./styles/style.css" />
+
+    <title>Social app</title>
+  </head>
+
+  <body>
+    <header class="header">
+      <h1></h1>
+    </header>
+
+    <div class="container">
+      <nav class="left-menu">
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </nav>
+
+      <main class="main">
+        <div id="main-header"></div>
+        <div id="root"></div>
+      </main>
+
+      <template id="log-in-template">
+        <div class="forms-container" id="forms-container">
+          <form class="form form-log-in" id="form-log-in">
+            <div class="form-input">
+              <p
+                class="hidden successful-sign-up-message"
+                id="successful-sign-up-message"
+              >
+                <b>Sign up is successful! You can log in now:</b>
+              </p>
+              <label for="username-log-in" class="label"
+                ><b>Username:</b></label
+              >
+              <input
+                type="text"
+                class="input"
+                id="username-log-in"
+                placeholder="Enter your username"
+                required
+              />
+            </div>
+
+            <div class="form-input">
+              <label for="password-log-in" class="label"
+                ><b>Password:</b></label
+              >
+              <input
+                type="password"
+                class="input"
+                id="password-log-in"
+                placeholder="Password"
+                required
+                data-validations="loginValid(username-log-in)"
+              />
+              <span class="show-password">Show</span>
+              <span class="error-message error-message--loginValid"
+                >Your username and/or password is incorrect</span
+              >
+            </div>
+
+            <button class="button button-log-in" id="button-log-in">
+              Log in
+            </button>
+            <div class="sign-up-link">
+              <p>
+                Don't have an account yet?
+                <a href="#signup" id="sign-up-link">Sign up here!</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </template>
+
+      <template id="sign-up-template">
+        <div class="forms-container" id="forms-container">
+          <form class="form form-sign-up" id="form-sign-up">
+            <div class="form-input">
+              <label for="username-sign-up" class="label" minlength="3"
+                ><b>Username: </b><i>(at least 3 characters long)</i></label
+              >
+              <input
+                type="text"
+                class="input"
+                id="username-sign-up"
+                placeholder="Enter your username"
+                required
+                data-validations="minLength(3), usernameIsAvailable()"
+              />
+              <span class="error-message error-message--minLength"
+                >Username must be at least 3 characters long</span
+              >
+              <span class="error-message error-message--usernameIsAvailable"
+                >This username already exists. Please choose a different
+                one.</span
+              >
+            </div>
+
+            <div class="form-input">
+              <label for="email-sign-up" class="label label-email"
+                ><b>Email:</b></label
+              >
+              <input
+                type="email"
+                class="input"
+                id="email-sign-up"
+                placeholder="Enter your email"
+                required
+                data-validations="emailIsValid()"
+              />
+              <span class="error-message error-message--emailIsValid"
+                >Please check your email</span
+              >
+            </div>
+
+            <div class="form-input">
+              <label for="password-sign-up" class="label"
+                ><b>Password: </b
+                ><i
+                  >(at least 6 characters long, include numbers and letters)</i
+                ></label
+              >
+              <input
+                type="password"
+                class="input"
+                id="password-sign-up"
+                placeholder="Enter password"
+                required
+                data-validations="minLength(6), includeNumbers(), includeLetters()"
+              />
+              <span class="show-password">Show</span>
+              <span class="error-message error-message--minLength"
+                >Password must be at least 6 characters long</span
+              >
+              <span class="error-message error-message--includeNumbers"
+                >Password must include at least one number</span
+              >
+              <span class="error-message error-message--includeLetters"
+                >Password must include at least one letter</span
+              >
+            </div>
+
+            <div class="form-input">
+              <label for="password-confirm" class="label label-confirm-password"
+                ><b>Confirm password:</b></label
+              >
+              <input
+                type="password"
+                class="input"
+                id="password-confirm"
+                placeholder="Confirm password"
+                required
+                data-validations="passwordsMatch(password-sign-up)"
+              />
+              <span class="error-message error-message--passwordsMatch"
+                >Passwords do not match</span
+              >
+            </div>
+
+            <button class="button button-sign-up" id="button-sign-up">
+              Sign up
+            </button>
+
+            <div class="log-in-link">
+              <p>Already a user? <a href="" id="log-in-link">Log in</a></p>
+            </div>
+          </form>
+        </div>
+      </template>
+
+      <template id="welcome-logged-user-template">
+        <section class="user-is-logged">
+          <p>
+            Welcome,
+            <span class="welcome-username" id="welcome-username"
+              >{{username}}</span
+            >!
+          </p>
+          <a href="" class="log-out-button" id="log-out-button">Log out</a>
+        </section>
+      </template>
+
+      <script id="users-table-template" type="text/template">
+        <section class="section-users-table" id="section-users-table">
+          <table class="users-table">
+            <thead class="users-table-thead">
+              <tr>
+                <th></th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Gender</th>
+                <th>Country</th>
+                <th>Hobbies</th>
+              </tr>
+            </thead>
+            <tbody class="users-table-tbody" id="users-table-body">
+             
+              {{ for (var index in Object.values(obj)) { }}<tr><td><a
+                    href="#users/{{Object.values(obj)[index].username}}"
+                    class="button-edit-user"
+                    >Edit</a
+                  ></td><td><b>{{Object.values(obj)[index].username}}</b></td><td>{{Object.values(obj)[index].email}}</td><td>{{Object.values(obj)[index].password}}</td><td>{{Object.values(obj)[index].gender}}</td><td>{{Object.values(obj)[index].country}}</td><td>{{Object.values(obj)[index].hobbies}}</td></tr>{{ } }}
+             
+          </table>
+        </section>
+      </script>
+
+      <template id="user-row-template">
+
+        <tr>
+          <td>
+            <a href="#users/{{username}}" class="button-edit-user">Edit</a>
+          </td>
+          <td><b>{{username}}</b></td>
+          <td>{{email}}</td>
+          <td>{{password}}</td>
+          <td>{{gender}}</td>
+          <td>{{country}}</td>
+          <td>{{hobbies}}</td>
+        </tr>
+      </template>
+
+      <template id="edit-user-template">
+        <section class="section-edit-user" id="section-edit-user">
+          <div class="user-avatar" id="user-avatar"><p>{{username}}</p></div>
+          <form class="form-edit-user-info" id="form-edit-user-info">
+            <div class="form-input">
+              <label for="edit-user-email" class="label">Change email:</label>
+              <input
+                type="text"
+                name="email"
+                id="edit-user-email"
+                class="input"
+                data-validations="emailIsValid()"
+                value="{{email}}"
+              />
+              <span class="error-message error-message--emailIsValid"
+                >Please check your email</span
+              >
+            </div>
+
+            <div class="form-input">
+              <label for="edit-user-password" class="label"
+                >Change password:</label
+              >
+              <input
+                type="password"
+                name="password"
+                id="edit-user-password"
+                class="input"
+                data-validations="minLength(6), includeNumbers(), includeLetters()"
+                value="{{password}}"
+              />
+              <span class="show-password">Show</span>
+              <span class="error-message error-message--minLength"
+                >Password must be at least 6 characters long</span
+              >
+              <span class="error-message error-message--includeNumbers"
+                >Password must include at least one number</span
+              >
+              <span class="error-message error-message--includeLetters"
+                >Password must include at least one letter</span
+              >
+            </div>
+
+            <div>
+              <p class="label">Choose your gender:</p>
+              <div class="form-input">
+                {{if (gender === "female") {var female = "checked"} }}
+                <label for="edit-user-gender-female">Female</label>
+                <input
+                  type="radio"
+                  name="gender"
+                  id="edit-user-gender-female"
+                  value="female"
+                  {{female}}
+                />
+              </div>
+              <div class="form-input">
+                {{if (gender === "male") {var male = "checked"} }}
+                <label for="edit-user-gender-male">Male</label>
+                <input
+                  type="radio"
+                  name="gender"
+                  id="edit-user-gender-male"
+                  value="male"
+                  {{male}}
+                />
+              </div>
+            </div>
+
+            <div class="form-input">
+              <label for="edit-user-country" class="label"
+                >Choose your country:
+              </label>
+
+              <select name="country" id="edit-user-country" class="select">
+                {{if (country === "Lithuania") {var lithuania = "selected"} }}
+                {{if (country === "Belarus") {var belarus = "selected"} }} 
+                {{if (country === "Ukraine") {var ukraine = "selected"} }} 
+                {{if (country === "Romania") {var romania = "selected"} }}
+
+                <option value="Lithuania" {{lithuania}}>Lithuania</option>
+                <option value="Belarus" {{belarus}}>Belarus</option>
+                <option value="Ukraine" {{ukraine}}>Ukraine</option>
+                <option value="Romania" {{romania}}>Romania</option>
+              </select>
+            </div>
+
+            <p class="label">Select your hobbies:</p>
+            <div class="checkbox">
+              <label for="user-hobbies-hiking">Hiking</label>
+              {{if (hobbies.includes("hiking")) {var hiking = "checked"} }}
+              <input
+                type="checkbox"
+                value="hiking"
+                id="user-hobbies-hiking"
+                name="hobbies"
+                {{hiking}}
+              />
+            </div>
+
+            <div class="checkbox">
+              <label for="user-hobbies-traveling">Traveling</label>
+              {{if (hobbies.includes("traveling")) {var traveling = "checked"} }}
+              <input
+                type="checkbox"
+                value="traveling"
+                id="user-hobbies-traveling"
+                name="hobbies"
+                {{traveling}}
+              />
+            </div>
+
+            <div class="checkbox">
+              <label for="user-hobbies-gardening">Gardening</label>
+              {{if (hobbies.includes("gardening")) {var gardening = "checked"} }}
+              <input
+                type="checkbox"
+                value="gardening"
+                id="user-hobbies-gardening"
+                name="hobbies"
+                {{gardening}}
+              />
+            </div>
+
+            <div class="checkbox">
+              <label for="user-hobbies-board-games">Board-games</label>
+              {{if (hobbies.includes("board-games")) {var boardgames = "checked"} }}
+              <input
+                type="checkbox"
+                value="board-games"
+                id="user-hobbies-board-games"
+                name="hobbies"
+                {{boardgames}}
+              />
+            </div>
+
+            <div class="checkbox">
+              <label for="user-hobbies-books">Books</label>
+              {{if (hobbies.includes("books")) {var books = "checked"} }}
+              <input
+                type="checkbox"
+                value="books"
+                id="user-hobbies-books"
+                name="hobbies"
+                {{books}}
+              />
+            </div>
+
+            <div class="checkbox">
+              <label for="user-hobbies-movies">Movies</label>
+              {{if (hobbies.includes("movies")) {var movies = "checked"} }}
+              <input
+                type="checkbox"
+                value="movies"
+                id="user-hobbies-movies"
+                name="hobbies"
+                {{movies}}
+              />
+            </div>
+
+            <div class="checkbox">
+              <label for="user-hobbies-cycling">Cycling</label>
+              {{if (hobbies.includes("cycling")) {var cycling = "checked"} }}
+              <input
+                type="checkbox"
+                value="cycling"
+                id="user-hobbies-cycling"
+                name="hobbies"
+                {{cycling}}
+              />
+            </div>
+
+            <div class="checkbox">
+              <label for="user-hobbies-yoga">Yoga</label>
+              {{if (hobbies.includes("yoga")) {var yoga = "checked"} }}
+              <input
+                type="checkbox"
+                value="yoga"
+                id="user-hobbies-yoga"
+                name="hobbies"
+                {{yoga}}
+              />
+            </div>
+
+            <div class="checkbox">
+              <label for="user-hobbies-handcrafts">Handcrafts</label>
+              {{if (hobbies.includes("handcrafts")) {var handcrafts = "checked"} }}
+              <input
+                type="checkbox"
+                value="handcrafts"
+                id="user-hobbies-handcrafts"
+                name="hobbies"
+                {{handcrafts}}
+              />
+            </div>
+
+            <button class="button-save-user-info" id="button-save-user-info">
+              Save
+            </button>
+          </form>
+        </section>
+      </template>
+
+      <aside class="aside">
+        <div></div>
+        <div></div>
+        <div></div>
+      </aside>
+    </div>
+
+    <footer class="footer">
+      <p></p>
+    </footer>
+
+    <script type="module" src="./app/app.js"></script>
+  </body>
+</html>

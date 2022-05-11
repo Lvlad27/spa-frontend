@@ -124,6 +124,7 @@ header {
             border-right: 2px solid $form-color-1;
 
             &-sidebar {
+                padding-left: 2rem;
                 margin-top: 2rem;
                 text-decoration: none;
                 list-style: none;
@@ -149,6 +150,10 @@ header {
                 box-shadow: 0 0 5px 2px $form-color-1;
                 width: 100%;
                 text-align: center;
+
+                .tableHeader {
+                    color: white;
+                }
 
                 tbody {
                     tr:nth-child(odd) {
@@ -181,6 +186,7 @@ header {
                     font-weight: 700;
                 }
             }
+
             .container {
                 &__userdata {
                     overflow: hidden;

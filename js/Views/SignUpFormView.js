@@ -1,7 +1,7 @@
-import BaseView from './BaseView.js';
 import User from '../User.js';
+import BaseFormView from './BaseFormView.js';
 
-class SignUpFormView extends BaseView {
+class SignUpFormView extends BaseFormView {
     constructor(DataService, templateRenderer) {
         super(DataService, templateRenderer);
         this.template = document.getElementById('SignUpFormView');

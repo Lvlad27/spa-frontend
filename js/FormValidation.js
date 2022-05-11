@@ -18,10 +18,10 @@ class FormValidation {
         });
     }
 
-    validateOnSubmit() {
+    validateOnSubmit(formInputs) {
         let inputState = [];
-        for (let i = 0; i < this.formInputs.length; i++) {
-            let input = document.querySelector(`#${this.formInputs[i]}`);
+        for (let i = 0; i < formInputs.length; i++) {
+            let input = document.querySelector(`#${formInputs[i]}`);
             inputState.push(this.validateRegistrationInputs(input));
         }
         let formState = inputState.every((index) => index === true);
@@ -123,25 +123,6 @@ class FormValidation {
             return false;
         }
     }
-
-    // validateLoginInputs(formInput) {
-    //     const storedUserData = this.storage.getUsers();
-    //     const email = storedUserData[loginUserName.value];
-    //     const password = storedUserData[loginUserName.value].password;
-
-    //     if (formInput.type === 'password' && formInput.id === 'loginPassword') {
-    //         if (formInput.value.trim() === '') {
-    //             this.setInputStatus(formInput, `Please fill in ${formInput.placeholder}`, 'error');
-    //         }
-
-    //         if()
-
-    //         else {
-    //             this.setInputStatus(formInput, null, 'success');
-    //             return true;
-    //         }
-    //     }
-    // }
 
     setInputStatus(indexInput, message, status) {
         let errorIcon = indexInput.parentElement.querySelector('.error-icon'),
