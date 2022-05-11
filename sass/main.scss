@@ -108,7 +108,7 @@ header {
 
 .main {
     flex: 1;
-    display: flex;
+    // display: flex;
     background: url('..//assets/img/img-2400x1600.jpg') no-repeat center fixed;
     // background-size: auto;
 
@@ -140,18 +140,18 @@ header {
         }
 
         &__content {
-            flex: 1 0 70vw;
+            width: 60%;
+            margin: auto;
 
             .users-table {
                 border: none;
 
-                margin: auto;
-                border-bottom: 1px solid $form-color-1;
-                box-shadow: 0 0 5px 2px $form-color-1;
-                width: 100%;
+                // margin: auto;
+                // box-shadow: 0 0 5px 2px $form-color-1;
                 text-align: center;
 
                 .tableHeader {
+                    background-color: $form-color-1;
                     color: white;
                 }
 
@@ -183,7 +183,6 @@ header {
 
                 .edit-user {
                     text-decoration: none;
-                    font-weight: 700;
                 }
             }
 

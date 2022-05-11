@@ -6,8 +6,8 @@ class UserTableView extends BaseView {
         this.template = document.getElementById('UserListView');
     }
 
-    getData(param) {
-        return {};
+    getData() {
+        return this.DataService.getUsers();
     }
 }
 

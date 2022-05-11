@@ -9,104 +9,59 @@
         <title>RoboGram</title>
     </head>
 
-    <template id="HomeView">
-        <header>
-            <nav class="nav">
-                <div class="container">
-                    <a class="title" href="#home" id="logoLink">Sky.net</a>
-                    <div class="search-bar">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="search" placeholder="Search..." />
+    <template id="HeaderView">
+        <nav class="nav">
+            <div class="container">
+                <div class="create">
+                    <div class="profile">
+                        <img
+                            src="https://robohash.org/user"
+                            alt="Portrait of a robot"
+                            class="profile-picture"
+                        />
                     </div>
-                    <div class="create">
-                        <button class="btn btn-create">Create</button>
-                        <div class="profile">
-                            <img
-                                src="https://robohash.org/user"
-                                alt="Portrait of a robot"
-                                class="profile-picture"
-                            />
-                        </div>
-                        <small class="hide-element" id="welcomeMessage"></small>
-                    </div>
+                    <h3 class="" id="welcomeMessage">Welcome!</h3>
                 </div>
-            </nav>
-        </header>
-        <main class="main">
-            <nav class="section section__menu" id="sectionMenu"></nav>
-            <section class="section section__content" id="sectionContent"></section>
-            <aside class="section section__ads"></aside>
-        </main>
-        <footer class="footer">
-            <p>Footer</p>
-        </footer>
-        <!-- Font Awesome script -->
-        <script src="https://kit.fontawesome.com/426a99cbec.js" crossorigin="anonymous"></script>
-        <!-- Application script -->
-    </template>
-    <template id="NavView">
-        <ul class="section__menu-sidebar">
-            <li>
-                <a href="#home" class="btn btn-menu active" id="sidebarHomeBtn">
-                    <i class="fa-solid fa-house"></i>
-                    Home
-                </a>
-            </li>
-            <li>
-                <a href="#userlist" class="btn btn-menu" id="sidebarUserTableBtn">
-                    <i class="fa-solid fa-table"></i>
-                    User Table
-                </a>
-            </li>
-            <li>
-                <a href="" class="btn btn-menu" id="sidebarLogoutBtn">
-                    <i class="fa-solid fa-sign-out"></i>
-                    Logout
-                </a>
-            </li>
-        </ul>
+            </div>
+        </nav>
     </template>
     <template id="LoginFormView">
-        <main class="main" id="main">
-            <div class="container container__login" id="loginAccount">
-                <h2 class="container__login-title">Login</h2>
-                <form action="#" class="form form__login">
-                    <!-- Email -->
-                    <div class="form__login-control">
-                        <input
-                            data-validation="emailCheck()"
-                            id="loginUserName"
-                            type="text"
-                            placeholder="Email"
-                        />
-                        <i class="fas fa-exclamation-circle error-icon hide-element"></i>
-                        <i class="far fa-check-circle success-icon hide-element"></i>
-                        <small class="error-message"></small>
-                    </div>
-                    <!-- Password -->
-                    <div class="form__login-control">
-                        <input
-                            id="loginPassword"
-                            type="password"
-                            placeholder="Password"
-                            data-validation="noValuesCheck()"
-                        />
-                        <i class="fas fa-exclamation-circle error-icon hide-element"></i>
-                        <i class="far fa-check-circle success-icon hide-element"></i>
-                        <small class="error-message"></small>
-                    </div>
-                    <!-- Button -->
-                    <button type="submit" class="btn form__login-btn" id="loginBtn">Login</button>
-                    <!-- Message and Link -->
-                    <p class="form__login-text">
-                        Don't have an account?
-                        <a class="form__login-text--link" href="#signup" id="signUpLink"
-                            >Sign Up!</a
-                        >
-                    </p>
-                </form>
-            </div>
-        </main>
+        <div class="container container__login" id="loginAccount">
+            <h2 class="container__login-title">Login</h2>
+            <form action="#" class="form form__login">
+                <!-- Email -->
+                <div class="form__login-control">
+                    <input
+                        data-validation="emailCheck()"
+                        id="loginUserName"
+                        type="text"
+                        placeholder="Email"
+                    />
+                    <i class="fas fa-exclamation-circle error-icon hide-element"></i>
+                    <i class="far fa-check-circle success-icon hide-element"></i>
+                    <small class="error-message"></small>
+                </div>
+                <!-- Password -->
+                <div class="form__login-control">
+                    <input
+                        id="loginPassword"
+                        type="password"
+                        placeholder="Password"
+                        data-validation="noValuesCheck()"
+                    />
+                    <i class="fas fa-exclamation-circle error-icon hide-element"></i>
+                    <i class="far fa-check-circle success-icon hide-element"></i>
+                    <small class="error-message"></small>
+                </div>
+                <!-- Button -->
+                <button type="submit" class="btn form__login-btn" id="loginBtn">Login</button>
+                <!-- Message and Link -->
+                <p class="form__login-text">
+                    Don't have an account?
+                    <a class="form__login-text--link" href="#signup" id="signUpLink">Sign Up!</a>
+                </p>
+            </form>
+        </div>
     </template>
     <template id="SignUpFormView">
         <main class="main" id="main">
@@ -153,7 +108,7 @@
             </div>
         </main>
     </template>
-    <template id="UserListView">
+    <script id="UserListView" type="text/template">
         <table class="users-table" id="userTable">
             <thead class="tableHeader">
                 <tr>
@@ -165,11 +120,33 @@
                     <th scope="col">Birthday</th>
                     <th scope="col">Gender</th>
                     <th scope="col">Hobbies</th>
+                    <th scope="col"></th>
+
                 </tr>
             </thead>
-            <tbody id="userList"></tbody>
+            <tbody id="userList">
+                {{ for (var index in Object.values(obj)) { }}
+                <tr>
+                    <td><b>{{Object.values(obj)[index].userName}}</b></td>
+                    <td>{{Object.values(obj)[index].password}}</td>
+                    <td>{{Object.values(obj)[index].firstName}}</td>
+                    <td>{{Object.values(obj)[index].surname}}</td>
+                    <td>{{Object.values(obj)[index].country}}</td>
+                    <td>{{Object.values(obj)[index].birthday}}</td>
+                    <td>{{Object.values(obj)[index].gender}}</td>
+                    <td>{{Object.values(obj)[index].hobbies}}</td>
+                    <td>
+                        <a
+                            href="#userlist/{{Object.values(obj)[index].username}}"
+                            class="btn edit-user" id="editUserBtn"
+                            >Edit</a
+                        >
+                    </td>
+                </tr>
+                {{ } }}
+            </tbody>
         </table>
-    </template>
+    </script>
     <template id="UserRowView">
         <td>{{username}}</td>
         <td>{{password}}</td>
@@ -334,6 +311,19 @@
     </template>
 
     <body id="body">
+        <header id="header"></header>
+        <main class="main" id="main">
+            <section class="section section__content" id="sectionContent"></section>
+            <div id="mainHeader"></div>
+        </main>
+        <aside class="section section__ads"></aside>
+        <footer class="footer">
+            <p>Footer</p>
+        </footer>
+
+        <!-- Font Awesome script -->
+        <script src="https://kit.fontawesome.com/426a99cbec.js" crossorigin="anonymous"></script>
+        <!-- Application script -->
         <script type="module" src="./js/main.js"></script>
     </body>
 </html>

@@ -1,12 +1,12 @@
 export const id = (id) => document.getElementById(id);
 
-export function templateRenderer(template, data) {
-    return template.replace(/{{(.*?)}}/g, (match) => {
-        return data[match.split(/{{|}}/).filter(Boolean)[0]];
-    });
-}
+// export function templateRenderer(template, data) {
+//     return template.replace(/{{(.*?)}}/g, (match) => {
+//         return data[match.split(/{{|}}/).filter(Boolean)[0]];
+//     });
+// }
 
-export function templateRendererWithJS(html, options) {
+export function templateRenderer(html, options) {
     var re = /{{(.*?)}}/g,
         reExp = /(^( )?(var|if|for|else|switch|case|break|{|}|;))(.*)?/g,
         code = 'with(obj) { var r=[];\n',

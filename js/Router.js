@@ -10,6 +10,7 @@ class Router {
 
     onHashChange() {
         const url = location.hash.split('/')[0],
+            param = location.hash.split('/')[1],
             route = this.routes[url];
 
         if (!route) {
@@ -18,15 +19,10 @@ class Router {
 
         const component = route.component;
 
-        if (this.dataService.isUserLoggedIn() && ['', '#login', '#signup'].includes(url)) {
-            this.goTo('#home');
-            this.switchView();
-        } else if (!this.dataService.isUserLoggedIn() && route.isProtected) {
-            console.log('call');
-            this.goTo('#login');
-            this.switchView(component);
+        if (!this.dataService.isUserLoggedIn() && route.isProtected) {
+            this.goTo('');
         } else {
-            this.switchView(component);
+            this.switchView(component, param);
         }
     }
 

@@ -122,7 +122,6 @@ header .nav {
 
 .main {
   flex: 1;
-  display: flex;
   background: url("..//assets/img/img-2400x1600.jpg") no-repeat center fixed; }
   .main .container__login {
     z-index: 99;
@@ -375,14 +374,14 @@ header .nav {
         .main .section__menu-sidebar .btn-menu i {
           margin-right: 0.5rem; }
   .main .section__content {
-    flex: 1 0 70vw; }
+    width: 60%;
+    margin: auto; }
     .main .section__content .users-table {
       border: none;
-      margin: auto;
-      border-bottom: 1px solid #122439;
-      box-shadow: 0 0 5px 2px #122439;
-      width: 100%;
       text-align: center; }
+      .main .section__content .users-table .tableHeader {
+        background-color: #122439;
+        color: white; }
       .main .section__content .users-table tbody tr:nth-child(odd) {
         background-color: #798aa6;
         padding: 2rem 0; }
@@ -431,8 +430,7 @@ header .nav {
         .main .section__content .users-table .btn:focus:not(:active) {
           box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 0.125em; }
       .main .section__content .users-table .edit-user {
-        text-decoration: none;
-        font-weight: 700; }
+        text-decoration: none; }
     .main .section__content .container__userdata {
       overflow: hidden;
       display: flex;

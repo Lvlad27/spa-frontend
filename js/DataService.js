@@ -69,6 +69,11 @@ class DataService {
         return JSON.parse(sessionStorage.getItem('loggedUser'));
     }
 
+    getLoggedUserObj() {
+        const username = localStorage.getItem('loggedUser');
+        return this.getUser(username);
+    }
+
     isUserLoggedIn() {
         if (this.getLoggedUser() !== null) {
             return true;

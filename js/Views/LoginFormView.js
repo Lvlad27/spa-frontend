@@ -23,25 +23,13 @@ class LoginFormView extends BaseFormView {
         const formInputs = ['loginUserName', 'loginPassword'];
         if (this.DataService.checkLogin()) {
             console.log('checkLogin');
-            window.router.goTo('#home');
+            window.router.goTo('#userlist');
             return true;
         } else {
             // alert('Wrong username or password!');
             return false;
         }
     }
-
-    // validateOnEntry() {
-    //     this.formInputs.forEach((index) => {
-    //         let input = document.querySelector(`#${index}`);
-    //         input.addEventListener(
-    //             'input',
-    //             function () {
-    //                 this.validateRegistrationInputs(input);
-    //             }.bind(this)
-    //         );
-    //     });
-    // }
 }
 
 export default LoginFormView;
