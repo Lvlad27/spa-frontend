@@ -15,8 +15,9 @@ class DataService {
                 userName: userName,
                 password: password,
                 firstName: '',
-                surName: '',
+                surname: '',
                 country: '',
+                birthday: '',
                 gender: '',
                 hobbies: '',
             };
@@ -26,8 +27,9 @@ class DataService {
                 userName: userName,
                 password: password,
                 firstName: '',
-                surName: '',
+                surname: '',
                 country: '',
+                birthday: '',
                 gender: '',
                 hobbies: '',
             };
@@ -50,7 +52,6 @@ class DataService {
     getUser(userName) {
         let storedUserData = JSON.parse(localStorage.getItem('storedUserData'));
         if (storedUserData) {
-            console.log('storedUserData', storedUserData);
             userName = userName.replaceAll('"', '');
             return storedUserData[userName];
         } else return undefined;
@@ -71,14 +72,15 @@ class DataService {
         }
     }
 
-    updateUser(userName, password, firstName, surName, country, gender, hobbies) {
-        let storedUserData = JSON.parse(localStorage.getItem('users'));
-        users[userName] = {
+    updateUser(userName, password, firstName, surname, country, birthday, gender, hobbies) {
+        let storedUserData = JSON.parse(localStorage.getItem('storedUserData'));
+        storedUserData[userName] = {
             userName: userName,
             password: password,
             firstName: firstName,
-            surName: surName,
+            surname: surname,
             country: country,
+            birthday: birthday,
             gender: gender,
             hobbies: hobbies,
         };

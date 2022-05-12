@@ -148,13 +148,13 @@ header {
 
                     &-profile {
                         margin: auto;
-                        background-color: $form-color-3;
+                        background-color: $color-light;
                         width: 21rem;
                         aspect-ratio: 1/1;
                         overflow: hidden;
                         border-radius: 50%;
 
-                        & > input {
+                        .image-input {
                             display: none;
                         }
 
@@ -162,7 +162,7 @@ header {
                             display: block;
                             width: 100%;
                             cursor: pointer;
-                            transition: 0.2s ease;
+                            transition: 0.1s ease-in;
                             backface-visibility: hidden;
                         }
 

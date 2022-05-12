@@ -22,7 +22,6 @@ class LoginFormView extends BaseFormView {
     checkLogin() {
         const formInputs = ['loginUserName', 'loginPassword'];
         if (this.DataService.checkLogin()) {
-            console.log('checkLogin');
             window.router.goTo('#userlist');
             return true;
         } else {

@@ -22,7 +22,7 @@
                         />
                     </div>
                 </div>
-                <a href="" class="btn btn-menu" id="sidebarLogoutBtn">
+                <a href="" class="btn btn-menu" id="logoutBtn">
                     <i class="fa-solid fa-sign-out"></i>
                     Logout
                 </a>
@@ -165,9 +165,9 @@
     <template id="UserFormView">
         <div class="container container__userdata hide-element" id="userdataContainer">
             <form action="#" autocomplete="off" class="form form__userdata" id="userdataForm">
-                <h2 class="container__userdata-title">Edit User Data</h2>
+                <h2 class="container__userdata-title" id="profileName">{{userName}}</h2>
                 <div class="container__userdata-profile">
-                    <label for="file-input">
+                    <label for="imageInput">
                         <img
                             src="https://robohash.org/user"
                             alt="Profile picture"
@@ -176,15 +176,20 @@
                         <div class="middle">
                             <i class="fas fa-camera"></i>
                         </div>
-                    </label>
-                    <input id="file-input" type="file" />
+                    <input class="image-input" id="imageInput" type="file" accept="image/png, image/jpg" />
                 </div>
 
                 <div class="container-0">
                     <!-- Email -->
                     <div class="form__userdata-control">
                         <label class="email" for="email" id="email-label">Email</label>
-                        <input type="email" name="email" id="emailInput" class="input" readonly />
+                        <input 
+                        type="email" 
+                        name="email" 
+                        id="emailInput" 
+                        class="input"
+                        value="{{userName}}" 
+                        readonly />
                     </div>
 
                     <!-- Password -->
@@ -195,6 +200,7 @@
                             name="password"
                             id="passwordInput"
                             class="input"
+                            value="{{password}}"
                             readonly
                         />
                     </div>
@@ -209,6 +215,8 @@
                             id="firstName"
                             class="input"
                             placeholder="Enter your name"
+                            value="{{firstName}}"
+
                         />
                     </div>
                     <!-- Last Name -->
@@ -220,6 +228,8 @@
                             id="surname"
                             class="input"
                             placeholder="Enter your surname"
+                            value="{{surname}}"
+
                         />
                     </div>
                 </div>
@@ -234,6 +244,8 @@
                             id="country"
                             class="input"
                             placeholder="Enter your country"
+                            value="{{country}}"
+
                         />
                     </div>
                     <!-- Date of birth -->
@@ -246,6 +258,8 @@
                             min="1950-01-01"
                             max="2022-12-31"
                             class="input"
+                            value="{{birthday}}"
+
                         />
                     </div>
                 </div>
@@ -256,17 +270,25 @@
                         <p>What is your gender?</p>
                         <div class="container-gender">
                             <div class="alignment">
+                                {{if (gender === "Male") {var male = "checked"} }}
                                 <input
                                     type="radio"
                                     name="gender"
                                     value="Male"
                                     class="radio"
-                                    checked="checked"
+                                    {{Male}}
                                 />
                                 <label>Male</label>
                             </div>
                             <div class="alignment">
-                                <input type="radio" name="gender" value="Female" class="radio" />
+                                {{if (gender === "Female") {var female = "checked"} }}
+                                <input 
+                                type="radio" 
+                                name="gender" 
+                                value="Female" 
+                                class="radio"
+                                {{Female}}
+                                />
                                 <label>Female</label>
                             </div>
                         </div>
@@ -276,55 +298,65 @@
                         <p>What kind of hobbies are you interested in?</p>
                         <div class="container-hobbies">
                             <div class="alignment">
+                                {{if (hobbies.includes("sports")) {var sports = "checked"} else {var sports = ""} }}
                                 <input
                                     type="checkbox"
-                                    name="prefer"
+                                    name="hobby"
                                     value="sports"
                                     class="checkbox"
+                                    {{sports}}
                                 />
                                 <label>Sports</label>
                             </div>
                             <div class="alignment">
+                            {{if (hobbies.includes("gaming")) {var gaming = "checked"} else {var gaming = ""} }}
                                 <input
                                     type="checkbox"
-                                    name="prefer"
+                                    name="hobby"
                                     value="gaming"
                                     class="checkbox"
+                                    {{gaming}}
                                 />
                                 <label>Gaming</label>
                             </div>
                             <div class="alignment">
+                            {{if (hobbies.includes("arts")) {var arts = "checked"} else {var arts = ""} }}
                                 <input
                                     type="checkbox"
-                                    name="prefer"
+                                    name="hobby"
                                     value="arts"
                                     class="checkbox"
+                                    {{arts}}
                                 />
                                 <label>Arts</label>
                             </div>
                             <div class="alignment">
+                            {{if (hobbies.includes("traveling")) {var traveling = "checked"} else {var traveling = ""} }}
+
                                 <input
                                     type="checkbox"
-                                    name="prefer"
+                                    name="hobby"
                                     value="traveling"
                                     class="checkbox"
+                                    {{traveling}}
                                 />
                                 <label>Traveling</label>
                             </div>
                         </div>
                     </div>
                 </div>
+                
 
                 <div class="wrapper">
-                    <button type="submit" id="submit-userdata" class="form__userdata-btn">
+                    <button type="button" id="submitBtn" class="form__userdata-btn">
                         Update
                     </button>
-                    <button type="button" id="cancel-userdata" class="form__userdata-btn">
+                    <button type="button" id="cancelBtn" class="form__userdata-btn">
                         Cancel
                     </button>
                 </div>
             </form>
-        </div>
+        
     </template>
 
     <body id="body">

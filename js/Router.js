@@ -18,8 +18,11 @@ class Router {
         }
 
         const component = route.component;
+        const urlPass = ['', '#login', '#signup'];
 
-        if (!this.dataService.isUserLoggedIn() && route.isProtected) {
+        if (this.dataService.isUserLoggedIn() && urlPass.includes(url)) {
+            this.goTo('#userlist');
+        } else if (!this.dataService.isUserLoggedIn() && route.isProtected) {
             this.goTo('');
         } else {
             this.switchView(component, param);

@@ -4,6 +4,8 @@ class HeaderView extends BaseView {
     constructor(DataService, templateRenderer) {
         super(DataService, templateRenderer);
         this.template = document.getElementById('HeaderView');
+
+        document.addEventListener('click', this.$logoutBtn.bind(this));
     }
 
     getData() {
