@@ -27,6 +27,15 @@ header {
             justify-content: space-around;
             align-items: center;
 
+            @include btn($color-light, $form-color-1);
+
+            .btn-menu {
+                margin: 1rem;
+                i {
+                    margin-right: 0.5rem;
+                }
+            }
+
             .title {
                 margin: 2rem;
                 font-size: $medium-font-size;
@@ -35,38 +44,9 @@ header {
                 color: $form-color-1;
             }
 
-            .search-bar {
-                input[type='search'] {
-                    width: 30vw;
-                    margin-left: 1rem;
-                    border: 1px solid transparent;
-                    border-radius: 8px;
-                    background-color: $form-color-3;
-                    color: $form-color-1;
-
-                    &::placeholder {
-                        color: $form-color-1;
-                    }
-
-                    &:active {
-                        border: none;
-                    }
-
-                    &:focus {
-                        outline: none;
-                        border: 1px solid $form-color-1;
-                    }
-                }
-                .fa-magnifying-glass {
-                    color: $color-light;
-                }
-            }
-
             .create {
                 display: flex;
                 align-items: center;
-
-                @include btn($color-light, $form-color-1);
 
                 .profile {
                     margin: 1rem 2rem 1rem;
@@ -89,23 +69,6 @@ header {
 //////////////////////////////////////////
 @import '__animations';
 
-.hide-element {
-    // opacity: 0;
-    border: 0;
-    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-    clip: rect(1px, 1px, 1px, 1px);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-}
-
-.show-element {
-    opacity: 1;
-}
-
 .main {
     flex: 1;
     // display: flex;
@@ -113,32 +76,11 @@ header {
     // background-size: auto;
 
     .container {
-        @include form(login, 99);
-        @include form(registration, 99);
+        @include form(login, auto);
+        @include form(registration, auto);
     }
 
     .section {
-        &__menu {
-            flex: 0 0 15vw;
-            color: $color-light;
-            border-right: 2px solid $form-color-1;
-
-            &-sidebar {
-                padding-left: 2rem;
-                margin-top: 2rem;
-                text-decoration: none;
-                list-style: none;
-
-                @include btn($form-color-1, $color-light);
-                .btn-menu {
-                    margin: 1rem;
-                    i {
-                        margin-right: 0.5rem;
-                    }
-                }
-            }
-        }
-
         &__content {
             width: 60%;
             margin: auto;
@@ -188,6 +130,10 @@ header {
 
             .container {
                 &__userdata {
+                    backdrop-filter: blur(10px);
+                    border-radius: 5px;
+                    border: 1px solid $form-color-1;
+
                     overflow: hidden;
                     display: flex;
                     justify-content: center;
@@ -196,8 +142,53 @@ header {
 
                     &-title {
                         text-align: center;
-                        margin-bottom: 3rem;
-                        color: $color-dark;
+                        margin-bottom: 2rem;
+                        color: $form-color-1;
+                    }
+
+                    &-profile {
+                        margin: auto;
+                        background-color: $form-color-3;
+                        width: 21rem;
+                        aspect-ratio: 1/1;
+                        overflow: hidden;
+                        border-radius: 50%;
+
+                        & > input {
+                            display: none;
+                        }
+
+                        .profile-picture {
+                            display: block;
+                            width: 100%;
+                            cursor: pointer;
+                            transition: 0.2s ease;
+                            backface-visibility: hidden;
+                        }
+
+                        &:hover .profile-picture {
+                            opacity: 0.3;
+                        }
+
+                        &:hover .middle {
+                            opacity: 1;
+                        }
+
+                        .middle {
+                            // position: relative;
+                            transition: 0.5s ease;
+                            opacity: 0;
+                            position: absolute;
+                            top: 18%;
+                            left: 48%;
+                            text-align: center;
+                            cursor: pointer;
+
+                            .fa-camera {
+                                font-size: 5rem;
+                                color: $form-color-1;
+                            }
+                        }
                     }
 
                     .form {
@@ -231,24 +222,24 @@ header {
                             &-control {
                                 margin: 2rem 0 2rem;
                                 width: 30rem;
-                                color: $color-dark;
+                                color: $form-color-1;
 
                                 input {
                                     background-color: transparent;
                                     border: 0;
-                                    border-bottom: 2px $color-2 solid;
+                                    border-bottom: 2px $form-color-2 solid;
                                     width: 100%;
                                     // padding: 5px 0 5px;
                                     font-size: $medium-font-size;
-                                    color: $color-dark;
+                                    color: $form-color-1;
 
                                     &:focus {
                                         outline: none;
-                                        border-bottom-color: $color-3;
+                                        border-bottom-color: $form-color-1;
                                     }
 
                                     &::placeholder {
-                                        color: $color-1;
+                                        color: $form-color-1;
                                         font-size: $default-font-size;
                                         font-weight: 100;
                                     }
@@ -270,12 +261,12 @@ header {
                                     width: 30%;
                                     padding: 1rem;
                                     cursor: pointer;
-                                    background: $color-2;
+                                    background: $form-color-1;
                                     font-family: inherit;
                                     font-weight: 600;
                                     border: 0;
                                     border-radius: 5px;
-                                    color: $color-dark;
+                                    color: white;
 
                                     &:focus {
                                         outline: 0;

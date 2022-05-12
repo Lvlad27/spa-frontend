@@ -1,4 +1,3 @@
-import User from '../User.js';
 import BaseView from './BaseView.js';
 
 class UserFormView extends BaseView {
@@ -12,7 +11,14 @@ class UserFormView extends BaseView {
         return this.DataService.getUser(name);
     }
 
-    $;
+    $editUserBtn(event) {
+        if (event.target.matches('#editUserBtn')) {
+            const userdataForm = document.getElementById('userdataForm');
+            const inputs = userdataForm.querySelectorAll('input');
+
+            // const selectedUser =
+        }
+    }
 }
 
 export default UserFormView;

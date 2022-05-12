@@ -8,15 +8,15 @@ class LoginFormView extends BaseFormView {
         document.addEventListener('click', this.$loginBtn.bind(this));
     }
 
+    getData() {
+        return {};
+    }
+
     $loginBtn(event) {
         if (event.target.matches('#loginBtn')) {
             event.preventDefault();
             this.checkLogin();
         }
-    }
-
-    getData() {
-        return {};
     }
 
     checkLogin() {

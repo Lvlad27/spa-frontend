@@ -1,5 +1,3 @@
-import User from './User.js';
-
 class DataService {
     getUsers() {
         let storedUserData = {};
@@ -9,9 +7,31 @@ class DataService {
         return storedUserData;
     }
 
-    storeUser(user) {
-        let storedUserData = this.getUsers();
-        storedUserData[user.userName] = user;
+    storeUser(userName, password) {
+        let storedUserData;
+        if (this.getUsers()) {
+            storedUserData = this.getUsers();
+            storedUserData[userName] = {
+                userName: userName,
+                password: password,
+                firstName: '',
+                surName: '',
+                country: '',
+                gender: '',
+                hobbies: '',
+            };
+        } else {
+            storedUserData = {};
+            storedUserData[userName] = {
+                userName: userName,
+                password: password,
+                firstName: '',
+                surName: '',
+                country: '',
+                gender: '',
+                hobbies: '',
+            };
+        }
         localStorage.setItem('storedUserData', JSON.stringify(storedUserData));
     }
 
@@ -25,6 +45,15 @@ class DataService {
             }.bind(this)
         );
         return usersArray;
+    }
+
+    getUser(userName) {
+        let storedUserData = JSON.parse(localStorage.getItem('storedUserData'));
+        if (storedUserData) {
+            console.log('storedUserData', storedUserData);
+            userName = userName.replaceAll('"', '');
+            return storedUserData[userName];
+        } else return undefined;
     }
 
     checkLogin() {
@@ -42,23 +71,18 @@ class DataService {
         }
     }
 
-    updateUser(username, data) {
-        let usersArray = this.getUsersArray();
-        usersArray.forEach((_, index) => {
-            if (usersArray[index].userName === username) {
-                let user = new User(
-                    usersArray[index].userName,
-                    data.password,
-                    data.firstName,
-                    data.surname,
-                    data.country,
-                    data.birthday,
-                    data.gender,
-                    data.hobbies
-                );
-                return this.storeUser(user);
-            }
-        });
+    updateUser(userName, password, firstName, surName, country, gender, hobbies) {
+        let storedUserData = JSON.parse(localStorage.getItem('users'));
+        users[userName] = {
+            userName: userName,
+            password: password,
+            firstName: firstName,
+            surName: surName,
+            country: country,
+            gender: gender,
+            hobbies: hobbies,
+        };
+        localStorage.setItem('storedUserData', JSON.stringify(storedUserData));
     }
 
     saveUserSession(username) {
@@ -70,8 +94,8 @@ class DataService {
     }
 
     getLoggedUserObj() {
-        const username = localStorage.getItem('loggedUser');
-        return this.getUser(username);
+        const userName = sessionStorage.getItem('loggedUser');
+        return this.getUser(userName);
     }
 
     isUserLoggedIn() {

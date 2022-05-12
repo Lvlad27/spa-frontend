@@ -7,7 +7,13 @@ class HeaderView extends BaseView {
     }
 
     getData() {
-        return {};
+        return this.DataService.getLoggedUserObj();
+    }
+
+    $logoutBtn(event) {
+        if (event.target.matches('#logoutBtn')) {
+            this.DataService.deleteUserSession();
+        }
     }
 }
 

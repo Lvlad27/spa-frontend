@@ -1,4 +1,3 @@
-import User from '../User.js';
 import BaseFormView from './BaseFormView.js';
 
 class SignUpFormView extends BaseFormView {
@@ -6,34 +5,23 @@ class SignUpFormView extends BaseFormView {
         super(DataService, templateRenderer);
         this.template = document.getElementById('SignUpFormView');
 
-        // document.addEventListener('click', this.loginLink.bind(this));
-        // document.addEventListener('submit', this.registrationForm.bind(this));
-        // document.addEventListener('click', this.createAccountBtn.bind(this));
+        document.addEventListener('click', this.$createAccountBtn.bind(this));
     }
 
     getData(param) {
         return {};
     }
 
-    registrationForm(event) {
-        if (event.target.matches('#registerAccount')) {
-            this._addUser();
-        }
-    }
-
-    createAccountBtn(event) {
+    $createAccountBtn(event) {
         if (event.target.matches('#createAccountBtn')) {
-            this._checkRegistrationData();
-            this._addUser();
-        }
-    }
+            const registerFormContainer = document.getElementById('signUpForm');
+            const userName = document.getElementById('signUpEmail').value.trim();
+            const password = document.getElementById('signUpPass').value.trim();
 
-    loginLink(event) {
-        if (event.target.matches('#loginLink')) {
-            this.animateFadeOut(registerFormContainer);
-            this.hideForm(registerFormContainer);
-            this.animateFadeIn(loginFormContainer);
-            this.showForm(loginFormContainer);
+            const inputs = signUpForm.querySelectorAll('input');
+
+            this.DataService.storeUser(userName, password);
+            window.router.goTo('#userlist');
         }
     }
 
@@ -44,22 +32,22 @@ class SignUpFormView extends BaseFormView {
         }
     }
 
-    addUser() {
-        let user = new User(
-            userName.value,
-            password.value,
-            firstName.value,
-            surname.value,
-            country.value,
-            birthday.value,
-            gender.value,
-            checkedHobbies
-        );
+    readUpdateUserFormData() {
+        const userdataForm = document.getElementById('userdataForm');
+        let formData = {
+            email: document.getElementById('emailInput').value.trim(),
+            password: document.getElementById('passwordInput').value.trim(),
+            firstName: document.getElementById('firstName').value.trim(),
+            surname: document.getElementById('surname').value.trim(),
+            country: document.getElementById('country').value.trim(),
+            birthday: document.getElementById('birthday').value,
+            gender: document.querySelector('input[name=gender]:checked').value,
+            hobbies: Array.from(userdataForm.querySelectorAll('input[name="prefer"]:checked'))
+                .map((checkbox) => checkbox.value)
+                .toString(),
+        };
 
-        if (this.signUpFormValidation.validateOnSubmit()) {
-            this.userInterface.addUserToTable(user);
-            this.storage.storeUser(user);
-        }
+        return formData;
     }
 }
 

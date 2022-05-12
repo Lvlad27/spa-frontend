@@ -13,6 +13,7 @@
         <nav class="nav">
             <div class="container">
                 <div class="create">
+                    <h3 class="" id="welcomeMessage">Welcome! <br /><i>{{userName}}</i></h3>
                     <div class="profile">
                         <img
                             src="https://robohash.org/user"
@@ -20,8 +21,11 @@
                             class="profile-picture"
                         />
                     </div>
-                    <h3 class="" id="welcomeMessage">Welcome!</h3>
                 </div>
+                <a href="" class="btn btn-menu" id="sidebarLogoutBtn">
+                    <i class="fa-solid fa-sign-out"></i>
+                    Logout
+                </a>
             </div>
         </nav>
     </template>
@@ -67,7 +71,7 @@
         <main class="main" id="main">
             <div class="container container__registration" id="registerAccount">
                 <h2 class="container__registration-title">Sign Up</h2>
-                <form action="#" class="form form__registration">
+                <form action="#" class="form form__registration" id="signUpForm">
                     <!-- Email -->
                     <div class="form__registration-control">
                         <input id="signUpEmail" type="text" placeholder="Email" />
@@ -137,7 +141,7 @@
                     <td>{{Object.values(obj)[index].hobbies}}</td>
                     <td>
                         <a
-                            href="#userlist/{{Object.values(obj)[index].username}}"
+                            href="#users/{{Object.values(obj)[index].userName}}"
                             class="btn edit-user" id="editUserBtn"
                             >Edit</a
                         >
@@ -162,6 +166,19 @@
         <div class="container container__userdata hide-element" id="userdataContainer">
             <form action="#" autocomplete="off" class="form form__userdata" id="userdataForm">
                 <h2 class="container__userdata-title">Edit User Data</h2>
+                <div class="container__userdata-profile">
+                    <label for="file-input">
+                        <img
+                            src="https://robohash.org/user"
+                            alt="Profile picture"
+                            class="profile-picture"
+                        />
+                        <div class="middle">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </label>
+                    <input id="file-input" type="file" />
+                </div>
 
                 <div class="container-0">
                     <!-- Email -->
@@ -318,7 +335,7 @@
         </main>
         <aside class="section section__ads"></aside>
         <footer class="footer">
-            <p>Footer</p>
+            <p>Sky.net</p>
         </footer>
 
         <!-- Font Awesome script -->
