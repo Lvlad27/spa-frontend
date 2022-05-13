@@ -6,6 +6,7 @@ class UserFormView extends BaseView {
         this.template = document.getElementById('UserFormView');
 
         document.addEventListener('click', this.$submitBtn.bind(this));
+        // document.addEventListener('click', this.$readFile.bind(this));
     }
 
     getData(param) {
@@ -54,9 +55,19 @@ class UserFormView extends BaseView {
         }
     }
 
-    readFile() {
-        const btnUpload = document.getElementById();
-    }
+    // $readFile(event) {
+    //     const file = document.getElementById('imageInput');
+    //     const output = document.getElementById('uplProgress');
+
+    //     if (event.target.matches('#imageInput')) {
+    //         const fileReader = new FileReader();
+    //         const imageMeta = file.files[0];
+    //         fileReader.onloadend = (event) => {
+    //             console.log('Read successfully!');
+    //         };
+    //         fileReader.readAsArrayBuffer(imageMeta);
+    //     }
+    // }
 }
 
 export default UserFormView;

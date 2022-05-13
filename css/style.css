@@ -373,12 +373,10 @@ header .nav {
       .main .section__content .container__userdata-profile {
         margin: auto;
         background-color: white;
-        width: 21rem;
+        width: 15rem;
         aspect-ratio: 1/1;
         overflow: hidden;
         border-radius: 50%; }
-        .main .section__content .container__userdata-profile .image-input {
-          display: none; }
         .main .section__content .container__userdata-profile .profile-picture {
           display: block;
           width: 100%;
@@ -400,6 +398,8 @@ header .nav {
           .main .section__content .container__userdata-profile .middle .fa-camera {
             font-size: 5rem;
             color: #122439; }
+      .main .section__content .container__userdata input.image-input {
+        display: none; }
       .main .section__content .container__userdata .form__userdata .container-0,
       .main .section__content .container__userdata .form__userdata .container-1,
       .main .section__content .container__userdata .form__userdata .container-2,

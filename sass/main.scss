@@ -149,14 +149,10 @@ header {
                     &-profile {
                         margin: auto;
                         background-color: $color-light;
-                        width: 21rem;
+                        width: 15rem;
                         aspect-ratio: 1/1;
                         overflow: hidden;
                         border-radius: 50%;
-
-                        .image-input {
-                            display: none;
-                        }
 
                         .profile-picture {
                             display: block;
@@ -190,6 +186,21 @@ header {
                             }
                         }
                     }
+                    input.image-input {
+                        display: none;
+                    }
+
+                    // .wrapper {
+                    //     margin-top: 1rem;
+
+                    //     @include btn($color-light, $form-color-1);
+
+                    //     .btn-save {
+                    //         font-size: 1rem;
+                    //         display: block;
+                    //         margin: auto;
+                    //     }
+                    // }
 
                     .form {
                         &__userdata {

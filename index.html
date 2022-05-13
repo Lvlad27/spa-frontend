@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <link rel="stylesheet" href="/css/style.css" />
-        <title>RoboGram</title>
+        <title>SkyNet</title>
     </head>
 
     <template id="HeaderView">
@@ -163,8 +163,15 @@
         <td><a href="#userform" class="btn edit-user">Edit</a></td>
     </template>
     <template id="UserFormView">
-        <div class="container container__userdata hide-element" id="userdataContainer">
-            <form action="#" autocomplete="off" class="form form__userdata" id="userdataForm">
+        <div class="container container__userdata" id="userdataContainer">
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+                action="upload"
+                autocomplete="off"
+                class="form form__userdata"
+                id="userdataForm"
+            >
                 <h2 class="container__userdata-title" id="profileName">{{userName}}</h2>
                 <div class="container__userdata-profile">
                     <label for="imageInput">
@@ -175,21 +182,26 @@
                         />
                         <div class="middle">
                             <i class="fas fa-camera"></i>
+                            <p id="uplProgress"></p>
                         </div>
-                    <input class="image-input" id="imageInput" type="file" accept="image/png, image/jpg" />
+                    </label>
                 </div>
-
+                <input class="image-input" name="profileImg" id="imageInput" type="file" />
+                <div class="wrapper">
+                    <input class="btn btn-save" type="submit" value="Test" />
+                </div>
                 <div class="container-0">
                     <!-- Email -->
                     <div class="form__userdata-control">
                         <label class="email" for="email" id="email-label">Email</label>
-                        <input 
-                        type="email" 
-                        name="email" 
-                        id="emailInput" 
-                        class="input"
-                        value="{{userName}}" 
-                        readonly />
+                        <input
+                            type="email"
+                            name="email"
+                            id="emailInput"
+                            class="input"
+                            value="{{userName}}"
+                            readonly
+                        />
                     </div>
 
                     <!-- Password -->
@@ -216,7 +228,6 @@
                             class="input"
                             placeholder="Enter your name"
                             value="{{firstName}}"
-
                         />
                     </div>
                     <!-- Last Name -->
@@ -229,7 +240,6 @@
                             class="input"
                             placeholder="Enter your surname"
                             value="{{surname}}"
-
                         />
                     </div>
                 </div>
@@ -245,7 +255,6 @@
                             class="input"
                             placeholder="Enter your country"
                             value="{{country}}"
-
                         />
                     </div>
                     <!-- Date of birth -->
@@ -259,7 +268,6 @@
                             max="2022-12-31"
                             class="input"
                             value="{{birthday}}"
-
                         />
                     </div>
                 </div>
@@ -282,12 +290,12 @@
                             </div>
                             <div class="alignment">
                                 {{if (gender.includes("Female")) {var female = "checked"} }}
-                                <input 
-                                type="radio" 
-                                name="gender" 
-                                value="Female" 
-                                class="radio"
-                                {{Female}}
+                                <input
+                                    type="radio"
+                                    name="gender"
+                                    value="Female"
+                                    class="radio"
+                                    {{Female}}
                                 />
                                 <label>Female</label>
                             </div>
@@ -309,7 +317,7 @@
                                 <label>Sports</label>
                             </div>
                             <div class="alignment">
-                            {{if (hobbies.includes("gaming")) {var gaming = "checked"} }}
+                                {{if (hobbies.includes("gaming")) {var gaming = "checked"} }}
                                 <input
                                     type="checkbox"
                                     name="hobby"
@@ -320,7 +328,7 @@
                                 <label>Gaming</label>
                             </div>
                             <div class="alignment">
-                            {{if (hobbies.includes("arts")) {var arts = "checked"} }}
+                                {{if (hobbies.includes("arts")) {var arts = "checked"} }}
                                 <input
                                     type="checkbox"
                                     name="hobby"
@@ -331,7 +339,7 @@
                                 <label>Arts</label>
                             </div>
                             <div class="alignment">
-                            {{if (hobbies.includes("traveling")) {var traveling = "checked"} }}
+                                {{if (hobbies.includes("traveling")) {var traveling = "checked"} }}
 
                                 <input
                                     type="checkbox"
@@ -345,7 +353,6 @@
                         </div>
                     </div>
                 </div>
-                
 
                 <div class="wrapper">
                     <button type="button" id="submitBtn" class="form__userdata-btn">
@@ -356,7 +363,7 @@
                     </button>
                 </div>
             </form>
-        
+        </div>
     </template>
 
     <body id="body">
