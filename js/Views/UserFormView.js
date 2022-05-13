@@ -25,7 +25,7 @@ class UserFormView extends BaseView {
                 updateBirthday = document.getElementById('birthday').value.trim();
             const updateGender = document.getElementsByName('gender');
 
-            let selectedGender;
+            let selectedGender = [];
             updateGender.forEach((index) => {
                 if (index.checked) {
                     selectedGender = index.value;
@@ -47,8 +47,8 @@ class UserFormView extends BaseView {
                 updateSurname,
                 updateCountry,
                 updateBirthday,
-                updateGender,
-                updateHobbies
+                selectedGender,
+                selectedHobbies
             );
             window.router.goTo('#userlist');
         }

@@ -201,11 +201,11 @@
                     </thead>
                     <tbody class="users-table-tbody" id="users-table-body">
 
-                      {{ for (var index in Object.values(obj)) { }}<tr><td><a
+                      {{for (var index in Object.values(obj)){}}<tr><td><a
                             href="#users/{{Object.values(obj)[index].username}}"
                             class="button-edit-user"
                             >Edit</a
-                          ></td><td><b>{{Object.values(obj)[index].username}}</b></td><td>{{Object.values(obj)[index].email}}</td><td>{{Object.values(obj)[index].password}}</td><td>{{Object.values(obj)[index].gender}}</td><td>{{Object.values(obj)[index].country}}</td><td>{{Object.values(obj)[index].hobbies}}</td></tr>{{ } }}
+                          ></td><td><b>{{Object.values(obj)[index].username}}</b></td><td>{{Object.values(obj)[index].email}}</td><td>{{Object.values(obj)[index].password}}</td><td>{{Object.values(obj)[index].gender}}</td><td>{{Object.values(obj)[index].country}}</td><td>{{Object.values(obj)[index].hobbies}}</td></tr>{{}}}
 
                   </table>
                 </section>
@@ -269,7 +269,7 @@
                         <div>
                             <p class="label">Choose your gender:</p>
                             <div class="form-input">
-                                {{if (gender === "female") {var female = "checked"} }}
+                                {{if (gender === "female") {var female = "checked"}}}
                                 <label for="edit-user-gender-female">Female</label>
                                 <input
                                     type="radio"
@@ -280,7 +280,7 @@
                                 />
                             </div>
                             <div class="form-input">
-                                {{if (gender === "male") {var male = "checked"} }}
+                                {{if (gender === "male") {var male = "checked"}}}
                                 <label for="edit-user-gender-male">Male</label>
                                 <input
                                     type="radio"
@@ -298,7 +298,7 @@
                             </label>
 
                             <select name="country" id="edit-user-country" class="select">
-                                {{if (country === "Lithuania") {var lithuania = "selected"} }} {{if
+                                {{if (country === "Lithuania") {var lithuania = "selected"}}} {{if
                                 (country === "Belarus") {var belarus = "selected"} }} {{if (country
                                 === "Ukraine") {var ukraine = "selected"} }} {{if (country ===
                                 "Romania") {var romania = "selected"} }}

@@ -270,7 +270,7 @@
                         <p>What is your gender?</p>
                         <div class="container-gender">
                             <div class="alignment">
-                                {{if (gender === "Male") {var male = "checked"} }}
+                                {{if (gender.includes("Male")) {var male = "checked"} }}
                                 <input
                                     type="radio"
                                     name="gender"
@@ -281,7 +281,7 @@
                                 <label>Male</label>
                             </div>
                             <div class="alignment">
-                                {{if (gender === "Female") {var female = "checked"} }}
+                                {{if (gender.includes("Female")) {var female = "checked"} }}
                                 <input 
                                 type="radio" 
                                 name="gender" 
@@ -298,7 +298,7 @@
                         <p>What kind of hobbies are you interested in?</p>
                         <div class="container-hobbies">
                             <div class="alignment">
-                                {{if (hobbies.includes("sports")) {var sports = "checked"} else {var sports = ""} }}
+                                {{if (hobbies.includes("sports")) {var sports = "checked"} }}
                                 <input
                                     type="checkbox"
                                     name="hobby"
@@ -309,7 +309,7 @@
                                 <label>Sports</label>
                             </div>
                             <div class="alignment">
-                            {{if (hobbies.includes("gaming")) {var gaming = "checked"} else {var gaming = ""} }}
+                            {{if (hobbies.includes("gaming")) {var gaming = "checked"} }}
                                 <input
                                     type="checkbox"
                                     name="hobby"
@@ -320,7 +320,7 @@
                                 <label>Gaming</label>
                             </div>
                             <div class="alignment">
-                            {{if (hobbies.includes("arts")) {var arts = "checked"} else {var arts = ""} }}
+                            {{if (hobbies.includes("arts")) {var arts = "checked"} }}
                                 <input
                                     type="checkbox"
                                     name="hobby"
@@ -331,7 +331,7 @@
                                 <label>Arts</label>
                             </div>
                             <div class="alignment">
-                            {{if (hobbies.includes("traveling")) {var traveling = "checked"} else {var traveling = ""} }}
+                            {{if (hobbies.includes("traveling")) {var traveling = "checked"} }}
 
                                 <input
                                     type="checkbox"
