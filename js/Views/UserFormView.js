@@ -53,6 +53,10 @@ class UserFormView extends BaseView {
             window.router.goTo('#userlist');
         }
     }
+
+    readFile() {
+        const btnUpload = document.getElementById();
+    }
 }
 
 export default UserFormView;
