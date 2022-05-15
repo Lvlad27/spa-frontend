@@ -11,15 +11,19 @@ const app = express();
 // Passing fileUpload as a middleware
 app.use(fileUpload());
 
+app.get('/', (req, res) => {
+    res.send('Welcome to your server');
+});
+
 // For handling the upload request
 app.post('/upload', function (req, res) {
     // When a file has been uploaded
     if (req.files && Object.keys(req.files).length !== 0) {
         // Uploaded path
-        const uploadedFile = req.files.uploadFile;
+        const uploadedFile = req.files.profileImg;
 
         // Logging uploading file
-        console.log(uploadedFile);
+        console.log(profileImg);
 
         // Upload path
         const uploadPath = __dirname + '/uploads/' + uploadedFile.name;
@@ -38,7 +42,3 @@ app.post('/upload', function (req, res) {
 app.listen(3000, function (req, res) {
     console.log('Started listening to port 3000');
 });
-
-// app.listen(8080, '127.0.0.1');
-
-// when saving the file to the storage, we are creating new file with the name of the exactly uploaded file

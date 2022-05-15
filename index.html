@@ -58,7 +58,9 @@
                     <small class="error-message"></small>
                 </div>
                 <!-- Button -->
-                <button type="submit" class="btn form__login-btn" id="loginBtn">Login</button>
+                <button type="submit" class="btn form__login-btn" id="loginBtn">
+                    Login
+                </button>
                 <!-- Message and Link -->
                 <p class="form__login-text">
                     Don't have an account?
@@ -167,12 +169,14 @@
             <form
                 method="POST"
                 enctype="multipart/form-data"
-                action="upload"
+                action="http://localhost:3000/upload"
                 autocomplete="off"
                 class="form form__userdata"
                 id="userdataForm"
             >
-                <h2 class="container__userdata-title" id="profileName">{{userName}}</h2>
+                <h2 class="container__userdata-title" id="profileName">
+                    {{userName}}
+                </h2>
                 <div class="container__userdata-profile">
                     <label for="imageInput">
                         <img
@@ -186,10 +190,13 @@
                         </div>
                     </label>
                 </div>
-                <input class="image-input" name="profileImg" id="imageInput" type="file" />
-                <div class="wrapper">
-                    <input class="btn btn-save" type="submit" value="Test" />
-                </div>
+                <input
+                    class="image-input"
+                    name="profileImg"
+                    id="imageInput"
+                    type="file"
+                    accept="image/*"
+                />
                 <div class="container-0">
                     <!-- Email -->
                     <div class="form__userdata-control">
@@ -339,7 +346,7 @@
                                 <label>Arts</label>
                             </div>
                             <div class="alignment">
-                                {{if (hobbies.includes("traveling")) {var traveling = "checked"} }}
+                                {{if (hobbies.includes("traveling")) {var traveling ="checked"} }}
 
                                 <input
                                     type="checkbox"
@@ -355,7 +362,7 @@
                 </div>
 
                 <div class="wrapper">
-                    <button type="button" id="submitBtn" class="form__userdata-btn">
+                    <button type="submit" id="submitBtn" class="form__userdata-btn">
                         Update
                     </button>
                     <button type="button" id="cancelBtn" class="form__userdata-btn">
@@ -380,6 +387,6 @@
         <!-- Font Awesome script -->
         <script src="https://kit.fontawesome.com/426a99cbec.js" crossorigin="anonymous"></script>
         <!-- Application script -->
-        <script type="module" src="./js/main.js"></script>
+        <script type="module" src="/js/main.js"></script>
     </body>
 </html>
