@@ -87,6 +87,14 @@ class DataService {
         localStorage.setItem('storedUserData', JSON.stringify(storedUserData));
     }
 
+    addProfileImg(userName, profileImgName) {
+        let storedUserData = JSON.parse(localStorage.getItem('storedUserData'));
+        storedUserData[userName] = {
+            profileImgName: profileImgName,
+        };
+        localStorage.setItem('storedUserData', JSON.stringify(storedUserData));
+    }
+
     saveUserSession(username) {
         sessionStorage.setItem('loggedUser', JSON.stringify(username));
     }

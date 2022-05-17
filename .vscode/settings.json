@@ -5,6 +5,7 @@
         "firstname",
         "hideform",
         "lastname",
+        "originalname",
         "prefill",
         "Robo",
         "updateform",

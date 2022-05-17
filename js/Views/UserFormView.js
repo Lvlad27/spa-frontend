@@ -52,23 +52,56 @@ class UserFormView extends BaseView {
         );
     }
 
-    async imgUpload(event) {
-        let formData = new FormData();
-        formData.append('img', event.target.profileImg.files[0]);
+    uploadProfileImg(event) {
+        const file = document.getElementById('imageInput');
+        const formData = new FormData();
+        formData.append('file', file.files[0]);
+        console.log('formData', formData);
 
-        //network request using POST method of fetch
-        await fetch('http://localhost:3000/upload', {
+        fetch('http://localhost:3000/upload', {
             method: 'POST',
+            mode: 'no-cors',
             body: formData,
-        });
-        alert('You have successfully upload the file!');
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log('data', data.filename);
+            })
+            .catch((error) => console.log('ERROR'));
+    }
+
+    getProfileImg(event) {
+        const imgContainer = document.getElementById('imgContainer');
+
+        fetch(`http://localhost:3000/upload`, {
+            method: 'GET',
+            mode: 'no-cors',
+        })
+            .then((res) => {
+                console.log('res.json', res.text());
+                return res.json();
+            })
+            .then((data) => console.log('data', data))
+            .catch((error) => console.log('ERROR'));
+        //     .then((data) => {
+        //         console.log('data.filename', data.filename);
+        //         return data.filename;
+        //     });
+
+        // imgContainer.innerHTML = `
+        //     <img
+        //         src="/uploads/${data.filename}"
+        //         alt="Profile picture"
+        //         class="profile-picture"
+        //     />`;
     }
 
     $submitBtn(event) {
         if (event.target.matches('#userdataForm')) {
-            // event.preventDefault();
+            event.preventDefault();
             this.updateData();
-            // this.imgUpload(event);
+            this.uploadProfileImg(event);
+            // this.getProfileImg(event);
             window.router.goTo('#userlist');
         }
     }
