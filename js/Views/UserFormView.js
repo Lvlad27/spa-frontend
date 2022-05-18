@@ -55,13 +55,12 @@ class UserFormView extends BaseView {
     async uploadProfileImg(event) {
         const file = document.getElementById('imageInput');
         const formData = new FormData();
-        formData.append('img', file.files[0]);
+        formData.append('profileImg', file.files[0]);
 
         let url = 'http://localhost:3000/upload';
 
         await fetch(url, {
             method: 'POST',
-            mode: 'no-cors',
             body: formData,
         })
             .then((res) => res.json())
@@ -69,56 +68,14 @@ class UserFormView extends BaseView {
             .catch((error) => console.error('Error: ', error));
     }
 
-    getProfileImg(event) {
-        const imgContainer = document.getElementById('imgContainer');
-        let url = 'http://localhost:3000/upload';
-
-        fetch(url, {
-            method: 'GET',
-            mode: 'no-cors',
-        })
-            .then((res) => {
-                console.log('res.json', res.text());
-                return res.json();
-            })
-            .then((data) => console.log('data', data))
-            .catch((error) => console.log('ERROR'));
-        //     .then((data) => {
-        //         console.log('data.filename', data.filename);
-        //         return data.filename;
-        //     });
-
-        // imgContainer.innerHTML = `
-        //     <img
-        //         src="/uploads/${data.filename}"
-        //         alt="Profile picture"
-        //         class="profile-picture"
-        //     />`;
-    }
-
     $submitBtn(event) {
-        if (event.target.matches('#userdataForm')) {
+        if (event.target.matches('#submitBtn')) {
             event.preventDefault();
             this.updateData();
             this.uploadProfileImg(event);
-            // this.getProfileImg(event);
             window.router.goTo('#userlist');
         }
     }
-
-    // $readFile(event) {
-    //     const file = document.getElementById('imageInput');
-    //     const output = document.getElementById('uplProgress');
-
-    //     if (event.target.matches('#imageInput')) {
-    //         const fileReader = new FileReader();
-    //         const imageMeta = file.files[0];
-    //         fileReader.onloadend = (event) => {
-    //             console.log('Read successfully!');
-    //         };
-    //         fileReader.readAsArrayBuffer(imageMeta);
-    //     }
-    // }
 }
 
 export default UserFormView;

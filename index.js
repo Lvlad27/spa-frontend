@@ -1,8 +1,15 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
+const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.use(
+    cors({
+        origin: 'http://127.0.0.1:8080',
+    })
+);
 
 app.use(express.static('uploads'));
 
