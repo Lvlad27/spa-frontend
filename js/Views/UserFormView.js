@@ -52,28 +52,28 @@ class UserFormView extends BaseView {
         );
     }
 
-    uploadProfileImg(event) {
+    async uploadProfileImg(event) {
         const file = document.getElementById('imageInput');
         const formData = new FormData();
-        formData.append('file', file.files[0]);
-        console.log('formData', formData);
+        formData.append('img', file.files[0]);
 
-        fetch('http://localhost:3000/upload', {
+        let url = 'http://localhost:3000/upload';
+
+        await fetch(url, {
             method: 'POST',
             mode: 'no-cors',
             body: formData,
         })
             .then((res) => res.json())
-            .then((data) => {
-                console.log('data', data.filename);
-            })
-            .catch((error) => console.log('ERROR'));
+            .then((result) => console.log('Success: ', result))
+            .catch((error) => console.error('Error: ', error));
     }
 
     getProfileImg(event) {
         const imgContainer = document.getElementById('imgContainer');
+        let url = 'http://localhost:3000/upload';
 
-        fetch(`http://localhost:3000/upload`, {
+        fetch(url, {
             method: 'GET',
             mode: 'no-cors',
         })

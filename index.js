@@ -1,13 +1,11 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
-
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.static('uploads'));
 
-// Check if server is working
 app.get('/', (req, res) => {
     res.send('Server is up and working');
 });
