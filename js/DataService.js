@@ -20,7 +20,7 @@ class DataService {
                 birthday: '',
                 gender: '',
                 hobbies: '',
-                profileImg: '',
+                profileImgName: '',
             };
         } else {
             storedUserData = {};
@@ -33,6 +33,7 @@ class DataService {
                 birthday: '',
                 gender: '',
                 hobbies: '',
+                profileImgName: '',
             };
         }
         localStorage.setItem('storedUserData', JSON.stringify(storedUserData));
@@ -82,7 +83,7 @@ class DataService {
         birthday,
         gender,
         hobbies,
-        profileImg
+        profileImgName
     ) {
         let storedUserData = JSON.parse(localStorage.getItem('storedUserData'));
         storedUserData[userName] = {
@@ -94,18 +95,16 @@ class DataService {
             birthday: birthday,
             gender: gender,
             hobbies: hobbies,
-            profileImg: profileImg,
-        };
-        localStorage.setItem('storedUserData', JSON.stringify(storedUserData));
-    }
-
-    addProfileImg(userName, profileImgName) {
-        let storedUserData = JSON.parse(localStorage.getItem('storedUserData'));
-        storedUserData[userName] = {
             profileImgName: profileImgName,
         };
         localStorage.setItem('storedUserData', JSON.stringify(storedUserData));
     }
+
+    // updateUserImg(userName, imgName) {
+    //     let storedUserData = localStorage.getItem('storedUserData');
+    //     storedUserData[userName].profileImgName = imgName;
+    //     localStorage.setItem('storedUserData', JSON.stringify(storedUserData));
+    // }
 
     saveUserSession(username) {
         sessionStorage.setItem('loggedUser', JSON.stringify(username));
