@@ -20,6 +20,7 @@ class DataService {
                 birthday: '',
                 gender: '',
                 hobbies: '',
+                profileImg: '',
             };
         } else {
             storedUserData = {};
@@ -72,7 +73,17 @@ class DataService {
         }
     }
 
-    updateUser(userName, password, firstName, surname, country, birthday, gender, hobbies) {
+    updateUser(
+        userName,
+        password,
+        firstName,
+        surname,
+        country,
+        birthday,
+        gender,
+        hobbies,
+        profileImg
+    ) {
         let storedUserData = JSON.parse(localStorage.getItem('storedUserData'));
         storedUserData[userName] = {
             userName: userName,
@@ -83,6 +94,7 @@ class DataService {
             birthday: birthday,
             gender: gender,
             hobbies: hobbies,
+            profileImg: profileImg,
         };
         localStorage.setItem('storedUserData', JSON.stringify(storedUserData));
     }
