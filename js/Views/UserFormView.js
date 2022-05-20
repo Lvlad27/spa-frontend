@@ -14,7 +14,45 @@ class UserFormView extends BaseView {
         return this.DataService.getUser(name);
     }
 
-    async updateData() {
+    updateData() {
+        const selectedUser = document.getElementById('emailInput').value.trim(),
+            updatePass = document.getElementById('passwordInput').value.trim(),
+            updateFirstName = document.getElementById('firstName').value.trim(),
+            updateSurname = document.getElementById('surname').value.trim(),
+            updateCountry = document.getElementById('country').value.trim(),
+            updateBirthday = document.getElementById('birthday').value.trim(),
+            updateGender = document.getElementsByName('gender'),
+            updateHobbies = document.getElementsByName('hobby'),
+            profileImgName = '';
+
+        let selectedGender = [];
+        updateGender.forEach((index) => {
+            if (index.checked) {
+                selectedGender.push(index.value);
+            }
+        });
+
+        let selectedHobbies = [];
+        updateHobbies.forEach((index) => {
+            if (index.checked) {
+                selectedHobbies.push(index.value);
+            }
+        });
+
+        return this.DataService.updateUser(
+            selectedUser,
+            updatePass,
+            updateFirstName,
+            updateSurname,
+            updateCountry,
+            updateBirthday,
+            selectedGender,
+            selectedHobbies,
+            profileImgName
+        );
+    }
+
+    async imgFetch() {
         const selectedUser = document.getElementById('emailInput').value.trim(),
             updatePass = document.getElementById('passwordInput').value.trim(),
             updateFirstName = document.getElementById('firstName').value.trim(),
@@ -38,22 +76,17 @@ class UserFormView extends BaseView {
             }
         });
 
-        const imgFetch = async () => {
-            // console.log('username', username);
-            const file = document.getElementById('imageInput');
-            const formData = new FormData();
-            formData.append('profileImg', file.files[0]);
+        const file = document.getElementById('imageInput');
+        const formData = new FormData();
+        formData.append('profileImg', file.files[0]);
 
-            let url = 'http://localhost:3000/upload';
-            let options = { method: 'POST', body: formData };
+        let url = 'http://localhost:3000/upload';
+        let options = { method: 'POST', body: formData };
 
-            const res = await fetch(url, options);
-            const data = await res.json();
-            return data.filename;
-        };
+        const res = await fetch(url, options);
+        const data = await res.json();
 
-        const profileImgName = await imgFetch();
-
+        console.log('data.filename', data.filename);
         return this.DataService.updateUser(
             selectedUser,
             updatePass,
@@ -63,7 +96,7 @@ class UserFormView extends BaseView {
             updateBirthday,
             selectedGender,
             selectedHobbies,
-            profileImgName
+            data.filename
         );
     }
 
@@ -71,6 +104,7 @@ class UserFormView extends BaseView {
         if (event.target.matches('#submitBtn')) {
             event.preventDefault();
             this.updateData();
+            this.imgFetch();
             window.router.goTo('#userlist');
         }
     }
