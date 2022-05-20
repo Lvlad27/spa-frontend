@@ -32,3 +32,28 @@ export function templateRenderer(html, options) {
     }
     return result;
 }
+
+export const imgFetch = async () => {
+    const file = document.getElementById('imageInput');
+    const formData = new FormData();
+
+    if (file.files[0]) {
+        formData.append('profileImg', file.files[0]);
+
+        let url = 'http://localhost:3000/upload';
+        let options = {
+            method: 'POST',
+            body: formData,
+        };
+
+        try {
+            const res = await fetch(url, options);
+            const data = await res.json();
+            return data.filename;
+        } catch (error) {
+            console.log(error);
+        }
+    } else {
+        return '';
+    }
+};
