@@ -26,8 +26,6 @@ class UserFormView extends BaseView {
             updateHobbies = document.getElementsByName('hobby');
         let profileImgName = '';
 
-        console.log('updateHobbies');
-
         let selectedGender = [];
         updateGender.forEach((index) => {
             if (index.checked) {
