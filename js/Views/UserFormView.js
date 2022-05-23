@@ -11,6 +11,7 @@ class UserFormView extends BaseView {
 
         document.addEventListener('click', this.$cancelBtn.bind(this));
         document.addEventListener('click', this.$submitBtn.bind(this));
+        // document.addEventListener('change', this.$fileInput.bind(this));
     }
 
     getData(param) {
@@ -56,39 +57,32 @@ class UserFormView extends BaseView {
                     imgName = element.profileImgName;
                 }
             });
-            return imgName;
+            imgName;
         } else {
             imgName = '';
         }
 
-        if (imgName !== '') {
-            return this.DataService.updateUser(
-                selectedUser,
-                updatePass,
-                updateFirstName,
-                updateSurname,
-                updateCountry,
-                updateBirthday,
-                selectedGender,
-                selectedHobbies,
-                imgName
-            );
-        } else {
-            console.log('imgName', imgName);
-
-            return this.DataService.updateUser(
-                selectedUser,
-                updatePass,
-                updateFirstName,
-                updateSurname,
-                updateCountry,
-                updateBirthday,
-                selectedGender,
-                selectedHobbies,
-                imgName
-            );
-        }
+        return this.DataService.updateUser(
+            selectedUser,
+            updatePass,
+            updateFirstName,
+            updateSurname,
+            updateCountry,
+            updateBirthday,
+            selectedGender,
+            selectedHobbies,
+            imgName
+        );
     }
+
+    // $fileInput(event) {
+    //     if (event.target.matches('#imageInput')) {
+    //         const file = event.files;
+    //         if (file) {
+    //             imageId.src = URL.createObjectURL(file);
+    //         }
+    //     }
+    // }
 
     $submitBtn(event) {
         if (event.target.matches('#submitBtn')) {
