@@ -1,5 +1,8 @@
 import BaseView from './BaseView.js';
 import { imgFetch } from '../helpers.js';
+import DataService from '../DataService.js';
+
+// const dataService = new DataService();
 
 class UserFormView extends BaseView {
     constructor(DataService, templateRenderer) {
@@ -24,7 +27,7 @@ class UserFormView extends BaseView {
             updateBirthday = document.getElementById('birthday').value.trim(),
             updateGender = document.getElementsByName('gender'),
             updateHobbies = document.getElementsByName('hobby');
-        let profileImgName = '';
+        let imgName;
 
         let selectedGender = [];
         updateGender.forEach((index) => {
@@ -40,19 +43,51 @@ class UserFormView extends BaseView {
             }
         });
 
-        profileImgName = await imgFetch();
+        const file = document.getElementById('imageInput');
+        const formData = new FormData();
+        formData.append('profileImg', file.files[0]);
 
-        return this.DataService.updateUser(
-            selectedUser,
-            updatePass,
-            updateFirstName,
-            updateSurname,
-            updateCountry,
-            updateBirthday,
-            selectedGender,
-            selectedHobbies,
-            profileImgName
-        );
+        if (file.files[0]) {
+            imgName = await imgFetch(formData);
+        } else if (!file.files[0]) {
+            let userArray = this.DataService.getUsersArray();
+            userArray.forEach((element) => {
+                if (element.userName === selectedUser) {
+                    imgName = element.profileImgName;
+                }
+            });
+            return imgName;
+        } else {
+            imgName = '';
+        }
+
+        if (imgName !== '') {
+            return this.DataService.updateUser(
+                selectedUser,
+                updatePass,
+                updateFirstName,
+                updateSurname,
+                updateCountry,
+                updateBirthday,
+                selectedGender,
+                selectedHobbies,
+                imgName
+            );
+        } else {
+            console.log('imgName', imgName);
+
+            return this.DataService.updateUser(
+                selectedUser,
+                updatePass,
+                updateFirstName,
+                updateSurname,
+                updateCountry,
+                updateBirthday,
+                selectedGender,
+                selectedHobbies,
+                imgName
+            );
+        }
     }
 
     $submitBtn(event) {

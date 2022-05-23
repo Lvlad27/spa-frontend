@@ -63,10 +63,10 @@ class DataService {
         const loginUserName = document.getElementById('loginUserName').value,
             loginPassword = document.getElementById('loginPassword').value;
         const userArray = this.getUsersArray(),
-            AllUserNames = userArray.map((user) => user.userName),
-            AllUserPasswords = userArray.map((user) => user.password);
+            allUserNames = userArray.map((user) => user.userName),
+            allUserPasswords = userArray.map((user) => user.password);
 
-        if (AllUserNames.includes(loginUserName) && AllUserPasswords.includes(loginPassword)) {
+        if (allUserNames.includes(loginUserName) && allUserPasswords.includes(loginPassword)) {
             this.saveUserSession(loginUserName);
             return true;
         } else {
@@ -99,12 +99,6 @@ class DataService {
         };
         localStorage.setItem('storedUserData', JSON.stringify(storedUserData));
     }
-
-    // updateUserImg(userName, imgName) {
-    //     let storedUserData = localStorage.getItem('storedUserData');
-    //     storedUserData[userName].profileImgName = imgName;
-    //     localStorage.setItem('storedUserData', JSON.stringify(storedUserData));
-    // }
 
     saveUserSession(username) {
         sessionStorage.setItem('loggedUser', JSON.stringify(username));
