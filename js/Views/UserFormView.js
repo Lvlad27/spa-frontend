@@ -1,8 +1,4 @@
 import BaseView from './BaseView.js';
-import { imgFetch } from '../helpers.js';
-import DataService from '../DataService.js';
-
-// const dataService = new DataService();
 
 class UserFormView extends BaseView {
     constructor(DataService, templateRenderer) {
@@ -49,7 +45,7 @@ class UserFormView extends BaseView {
         formData.append('profileImg', file.files[0]);
 
         if (file.files[0]) {
-            imgName = await imgFetch(formData);
+            imgName = await this.DataService.getProfileImg(formData);
         } else if (!file.files[0]) {
             let userArray = this.DataService.getUsersArray();
             userArray.forEach((element) => {

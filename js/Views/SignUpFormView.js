@@ -14,45 +14,25 @@ class SignUpFormView extends BaseFormView {
 
     $createAccountBtn(event) {
         if (event.target.matches('#createAccountBtn')) {
-            const registerFormContainer = document.getElementById('signUpForm');
-            const userName = document.getElementById('signUpEmail').value.trim();
-            const password = document.getElementById('signUpPass').value.trim();
+            const email = document.getElementById('signUpEmail').value;
+            const password = document.getElementById('signUpPass').value;
 
-            const inputs = signUpForm.querySelectorAll('input');
+            const user = {
+                email: email,
+                password: password,
+                firstName: '',
+                lastName: '',
+                country: '',
+                birthday: '',
+                gender: '',
+                hobbies: '',
+                profileImgName: '',
+            };
 
-            this.DataService.storeUser(userName, password);
+            this.DataService.storeUser(user);
             window.router.goTo('#userlist');
         }
-    }
-
-    checkRegistrationData() {
-        if (this.signUpFormValidation.validateOnSubmit()) {
-            alert('Your account has been registered!');
-            document.querySelector('form').reset();
-        }
-    }
-
-    readUpdateUserFormData() {
-        const userdataForm = document.getElementById('userdataForm');
-        let formData = {
-            email: document.getElementById('emailInput').value.trim(),
-            password: document.getElementById('passwordInput').value.trim(),
-            firstName: document.getElementById('firstName').value.trim(),
-            surname: document.getElementById('surname').value.trim(),
-            country: document.getElementById('country').value.trim(),
-            birthday: document.getElementById('birthday').value,
-            gender: document.querySelector('input[name=gender]:checked').value,
-            hobbies: Array.from(userdataForm.querySelectorAll('input[name="prefer"]:checked'))
-                .map((checkbox) => checkbox.value)
-                .toString(),
-        };
-
-        return formData;
     }
 }
 
 export default SignUpFormView;
-
-/*
-
-*/

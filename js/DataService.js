@@ -1,64 +1,22 @@
 class DataService {
-    getUsers() {
-        let storedUserData = {};
-        if (localStorage.getItem('storedUserData') !== null) {
-            storedUserData = JSON.parse(localStorage.getItem('storedUserData'));
+    async getUsers() {}
+    async getUsersArray() {}
+    async storeUser(user) {
+        let url = 'http://localhost:3000/dataservice/create';
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(user),
+            headers: { 'Content-Type': 'application/json' },
+        };
+
+        try {
+            const res = await fetch(url, options);
+            const data = await res.json();
+            return data;
+        } catch (error) {
+            console.error(error);
         }
-        return storedUserData;
     }
-
-    storeUser(userName, password) {
-        let storedUserData;
-        if (this.getUsers()) {
-            storedUserData = this.getUsers();
-            storedUserData[userName] = {
-                userName: userName,
-                password: password,
-                firstName: '',
-                surname: '',
-                country: '',
-                birthday: '',
-                gender: '',
-                hobbies: '',
-                profileImgName: '',
-            };
-        } else {
-            storedUserData = {};
-            storedUserData[userName] = {
-                userName: userName,
-                password: password,
-                firstName: '',
-                surname: '',
-                country: '',
-                birthday: '',
-                gender: '',
-                hobbies: '',
-                profileImgName: '',
-            };
-        }
-        localStorage.setItem('storedUserData', JSON.stringify(storedUserData));
-    }
-
-    getUsersArray() {
-        let storedUserData = this.getUsers();
-
-        let usersArray = [];
-        Object.keys(storedUserData).forEach(
-            function (key) {
-                usersArray.push(storedUserData[key]);
-            }.bind(this)
-        );
-        return usersArray;
-    }
-
-    getUser(userName) {
-        let storedUserData = JSON.parse(localStorage.getItem('storedUserData'));
-        if (storedUserData) {
-            userName = userName.replaceAll('"', '');
-            return storedUserData[userName];
-        } else return undefined;
-    }
-
     checkLogin() {
         const loginUserName = document.getElementById('loginUserName').value,
             loginPassword = document.getElementById('loginPassword').value;
@@ -73,56 +31,38 @@ class DataService {
             return false;
         }
     }
+    async updateUser() {}
 
-    updateUser(
-        userName,
-        password,
-        firstName,
-        surname,
-        country,
-        birthday,
-        gender,
-        hobbies,
-        profileImgName
-    ) {
-        let storedUserData = JSON.parse(localStorage.getItem('storedUserData'));
-        storedUserData[userName] = {
-            userName: userName,
-            password: password,
-            firstName: firstName,
-            surname: surname,
-            country: country,
-            birthday: birthday,
-            gender: gender,
-            hobbies: hobbies,
-            profileImgName: profileImgName,
+    async getUser(id) {
+        let url = `http://localhost:3000/dataservice/${id}`;
+        const user = await fetch(url);
+        return user;
+    }
+    saveUserSession() {}
+    getLoggedUser() {}
+    getLoggedUserObj() {}
+
+    async login(userName) {
+        const id = await this.getUserId(userName);
+        localStorage.setItem('loggedUser', id);
+    }
+
+    isUserLoggedIn() {}
+
+    async getProfileImg(formData) {
+        let url = 'http://localhost:3000/dataservice/uploadProfileImg';
+        let options = {
+            method: 'POST',
+            body: formData,
         };
-        localStorage.setItem('storedUserData', JSON.stringify(storedUserData));
-    }
 
-    saveUserSession(username) {
-        sessionStorage.setItem('loggedUser', JSON.stringify(username));
-    }
-
-    getLoggedUser() {
-        return JSON.parse(sessionStorage.getItem('loggedUser'));
-    }
-
-    getLoggedUserObj() {
-        const userName = sessionStorage.getItem('loggedUser');
-        return this.getUser(userName);
-    }
-
-    isUserLoggedIn() {
-        if (this.getLoggedUser() !== null) {
-            return true;
-        } else {
-            return false;
+        try {
+            const res = await fetch(url, options);
+            const data = await res.json();
+            return data.filename;
+        } catch (error) {
+            console.error(error);
         }
-    }
-
-    deleteUserSession() {
-        sessionStorage.removeItem('loggedUser');
     }
 }
 

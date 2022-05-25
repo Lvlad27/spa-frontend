@@ -1,5 +1,4 @@
 export const id = (id) => document.getElementById(id);
-import DataService from './DataService.js';
 
 // export function templateRenderer(template, data) {
 //     return template.replace(/{{(.*?)}}/g, (match) => {
@@ -33,23 +32,3 @@ export function templateRenderer(html, options) {
     }
     return result;
 }
-
-// if
-
-export const imgFetch = async (formData) => {
-    let url = 'http://localhost:3000/upload';
-    let options = {
-        method: 'POST',
-        body: formData,
-    };
-
-    try {
-        const res = await fetch(url, options);
-        const data = await res.json();
-        return data.filename;
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-// TODO image preview
