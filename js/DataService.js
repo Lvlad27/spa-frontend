@@ -27,23 +27,23 @@ class DataService {
 
         if (allUserNames.includes(loginUserName) && allUserPasswords.includes(loginPassword)) {
             await this._saveUserSession(loginUserName);
+            console.log('true');
             return true;
         } else {
+            console.log('false');
             return false;
         }
     }
 
     async _saveUserSession(username) {
         const id = await this._getUserId(username);
-        console.log('id', id);
         sessionStorage.setItem('loggedUser', id);
     }
 
     async _getUserId(username) {
         const USERS = await this._getUsers();
-        return USERS.find((user) => {
-            user.email === username ? user._id : false;
-        });
+        const found = USERS.find((element) => element.email === username);
+        return found._id;
     }
 
     async _getUsers() {
@@ -53,8 +53,8 @@ class DataService {
         return data;
     }
 
-    getLoggedUser() {
-        return JSON.parse(sessionStorage.getItem('loggedUser'));
+    _getLoggedUser() {
+        return sessionStorage.getItem('loggedUser');
     }
 
     getLoggedUserObj() {
@@ -63,7 +63,7 @@ class DataService {
     }
 
     isUserLoggedIn() {
-        this.getLoggedUser() !== null ? true : false;
+        this._getLoggedUser() !== null ? true : false;
     }
 
     deleteUserSession() {

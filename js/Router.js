@@ -21,10 +21,13 @@ class Router {
         const urlPass = ['', '#login', '#signup'];
 
         if (this.dataService.isUserLoggedIn() && urlPass.includes(url)) {
+            console.log('log in passed');
             this.goTo('#userlist');
         } else if (!this.dataService.isUserLoggedIn() && route.isProtected) {
+            console.log('goTo()');
             this.goTo('');
         } else {
+            console.log('switchView');
             this.switchView(component, param);
         }
     }
