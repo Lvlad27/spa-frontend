@@ -1,6 +1,4 @@
 class DataService {
-    async getUsers() {}
-    async getUsersArray() {}
     async storeUser(user) {
         let url = 'http://localhost:3000/dataservice/create';
         const options = {
@@ -17,37 +15,60 @@ class DataService {
             console.error(error);
         }
     }
-    checkLogin() {
+
+    async updateUser() {}
+
+    async checkLogin() {
         const loginUserName = document.getElementById('loginUserName').value,
             loginPassword = document.getElementById('loginPassword').value;
-        const userArray = this.getUsersArray(),
-            allUserNames = userArray.map((user) => user.userName),
-            allUserPasswords = userArray.map((user) => user.password);
+        const userArray = await this._getUsers();
+        const allUserNames = userArray.map((user) => user.email);
+        const allUserPasswords = userArray.map((user) => user.password);
 
         if (allUserNames.includes(loginUserName) && allUserPasswords.includes(loginPassword)) {
-            this.saveUserSession(loginUserName);
+            await this._saveUserSession(loginUserName);
             return true;
         } else {
             return false;
         }
     }
-    async updateUser() {}
 
-    async getUser(id) {
-        let url = `http://localhost:3000/dataservice/${id}`;
-        const user = await fetch(url);
-        return user;
-    }
-    saveUserSession() {}
-    getLoggedUser() {}
-    getLoggedUserObj() {}
-
-    async login(userName) {
-        const id = await this.getUserId(userName);
-        localStorage.setItem('loggedUser', id);
+    async _saveUserSession(username) {
+        const id = await this._getUserId(username);
+        console.log('id', id);
+        sessionStorage.setItem('loggedUser', id);
     }
 
-    isUserLoggedIn() {}
+    async _getUserId(username) {
+        const USERS = await this._getUsers();
+        return USERS.find((user) => {
+            user.email === username ? user._id : false;
+        });
+    }
+
+    async _getUsers() {
+        const url = 'http://localhost:3000/dataservice';
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+    }
+
+    getLoggedUser() {
+        return JSON.parse(sessionStorage.getItem('loggedUser'));
+    }
+
+    getLoggedUserObj() {
+        const userName = sessionStorage.getItem('loggedUser');
+        return this.getUser(userName);
+    }
+
+    isUserLoggedIn() {
+        this.getLoggedUser() !== null ? true : false;
+    }
+
+    deleteUserSession() {
+        sessionStorage.removeItem('loggedUser');
+    }
 
     async getProfileImg(formData) {
         let url = 'http://localhost:3000/dataservice/uploadProfileImg';
@@ -64,6 +85,15 @@ class DataService {
             console.error(error);
         }
     }
+
+    // async _getUserById(id) {
+    //     console.log('_getUserById call');
+    //     let url = `http://localhost:3000/dataservice/${id}`;
+    //     const res = await fetch(url);
+    //     const data = await res.json();
+    //     console.log('data', data);
+    //     return data;
+    // }
 }
 
 export default DataService;

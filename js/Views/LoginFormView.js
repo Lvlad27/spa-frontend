@@ -20,12 +20,11 @@ class LoginFormView extends BaseFormView {
     }
 
     checkLogin() {
-        const formInputs = ['loginUserName', 'loginPassword'];
         if (this.DataService.checkLogin()) {
             window.router.goTo('#userlist');
             return true;
         } else {
-            // alert('Wrong username or password!');
+            alert('Wrong username or password!');
             return false;
         }
     }
