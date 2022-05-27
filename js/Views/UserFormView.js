@@ -7,7 +7,7 @@ class UserFormView extends BaseView {
 
         document.addEventListener('click', this.$cancelBtn.bind(this));
         document.addEventListener('click', this.$submitBtn.bind(this));
-        // document.addEventListener('change', this.$fileInput.bind(this));
+        document.addEventListener('change', this.$fileInput.bind(this));
     }
 
     async getData(param) {
@@ -18,7 +18,6 @@ class UserFormView extends BaseView {
 
     async updateData() {
         const selectedUser = document.getElementById('emailInput').value.trim(),
-            // updatePass = document.getElementById('passwordInput').value.trim(),
             updateFirstName = document.getElementById('firstName').value.trim(),
             updateSurname = document.getElementById('surname').value.trim(),
             updateCountry = document.getElementById('country').value.trim(),
@@ -73,14 +72,14 @@ class UserFormView extends BaseView {
         return update;
     }
 
-    // $fileInput(event) {
-    //     if (event.target.matches('#imageInput')) {
-    //         const file = event.files;
-    //         if (file) {
-    //             imageId.src = URL.createObjectURL(file);
-    //         }
-    //     }
-    // }
+    $fileInput(event) {
+        if (event.target.matches('#imageInput')) {
+            const file = event.files;
+            if (file) {
+                imageId.src = URL.createObjectURL(file);
+            }
+        }
+    }
 
     async $submitBtn(event) {
         if (event.target.matches('#submitBtn')) {

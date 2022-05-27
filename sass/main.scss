@@ -129,6 +129,12 @@ header {
                 .edit-user {
                     text-decoration: none;
                 }
+
+                @include btn($color-light, $form-color-1);
+
+                .delete-user {
+                    text-decoration: none;
+                }
             }
 
             .container {

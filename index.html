@@ -13,9 +13,14 @@
         <nav class="nav">
             <div class="container">
                 <div class="create">
-                    <h3 class="" id="welcomeMessage">Welcome! <br /><i>{{obj.email}}</i></h3>
+                    <h3 class="" id="welcomeMessage">Welcome! <br /><i>{{email}}</i></h3>
                     <div class="profile">
-                        <img id="headerImg" alt="Profile picture" class="profile-picture" />
+                        <img
+                            id="headerImg"
+                            src="http://localhost:3000/dataService/{{profileImgName}}"
+                            alt="Profile picture"
+                            class="profile-picture"
+                        />
                     </div>
                 </div>
                 <a href="" class="btn btn-menu" id="logoutBtn">
@@ -123,7 +128,7 @@
                     <th scope="col">Gender</th>
                     <th scope="col">Hobbies</th>
                     <th scope="col"></th>
-
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody id="userList">
@@ -144,13 +149,20 @@
                             >Edit</a
                         >
                     </td>
+                    <td>
+                        <a
+                            href="#userlist"
+                            class="btn delete-user" id="deleteUserBtn"
+                            >Delete</a
+                        >
+                    </td>
                 </tr>
                 {{ } }}
             </tbody>
         </table>
     </script>
     <template id="UserRowView">
-        <td>{{email}}</td>
+        <td id="{{Object.values(obj)[index].email}}">{{email}}</td>
         <td>{{password}}</td>
         <td>{{firstName}}</td>
         <td>{{surname}}</td>
@@ -158,7 +170,6 @@
         <td>{{birthday}}</td>
         <td>{{gender}}</td>
         <td>{{hobbies}}</td>
-        <td><a href="#userform" class="btn edit-user">Edit</a></td>
     </template>
     <template id="UserFormView">
         <div class="container container__userdata" id="userdataContainer">
@@ -169,7 +180,7 @@
                 <div class="container__userdata-profile">
                     <label for="imageInput" id="imgContainer">
                         <img
-                            src="http://localhost:3000/{{profileImgName}}"
+                            src="http://localhost:3000/dataService/{{profileImgName}}"
                             alt="Profile picture"
                             class="profile-picture"
                             id="imageId"

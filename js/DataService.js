@@ -109,7 +109,7 @@ class DataService {
     }
 
     async getProfileImg(formData) {
-        let url = 'http://localhost:3000/dataservice/uploadProfileImg';
+        let url = 'http://localhost:3000/dataService/uploadProfileImg';
         let options = {
             method: 'POST',
             body: formData,
@@ -122,6 +122,17 @@ class DataService {
         } catch (error) {
             console.error(error);
         }
+    }
+
+    async deleteUser(email) {
+        const id = await this._getUserId(email);
+        const url = `http://localhost:3000/dataservice/${id}`;
+        const options = {
+            method: 'DELETE',
+        };
+        const res = await fetch(url, options);
+        const data = await res.json();
+        return data;
     }
 }
 
