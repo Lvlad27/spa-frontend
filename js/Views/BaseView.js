@@ -9,10 +9,14 @@ class BaseView {
         return this.templateRenderer(templateHTML, data);
     }
 
-    getElement(param) {
-        const data = this.getData(param);
-        const html = this.render(data);
-        return html;
+    async getElement(param) {
+        try {
+            const data = await this.getData(param);
+            const html = await this.render(data);
+            return html;
+        } catch (error) {
+            console.error(error);
+        }
     }
 }
 

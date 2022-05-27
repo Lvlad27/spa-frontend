@@ -10,14 +10,15 @@ class UserFormView extends BaseView {
         // document.addEventListener('change', this.$fileInput.bind(this));
     }
 
-    getData(param) {
+    async getData(param) {
         const name = param;
-        return this.DataService.getUser(name);
+        const data = await this.DataService.getUser(name);
+        return data;
     }
 
     async updateData() {
         const selectedUser = document.getElementById('emailInput').value.trim(),
-            updatePass = document.getElementById('passwordInput').value.trim(),
+            // updatePass = document.getElementById('passwordInput').value.trim(),
             updateFirstName = document.getElementById('firstName').value.trim(),
             updateSurname = document.getElementById('surname').value.trim(),
             updateCountry = document.getElementById('country').value.trim(),
@@ -47,7 +48,7 @@ class UserFormView extends BaseView {
         if (file.files[0]) {
             imgName = await this.DataService.getProfileImg(formData);
         } else if (!file.files[0]) {
-            let userArray = this.DataService.getUsersArray();
+            let userArray = await this.DataService.getUsers();
             userArray.forEach((element) => {
                 if (element.userName === selectedUser) {
                     imgName = element.profileImgName;
@@ -58,17 +59,18 @@ class UserFormView extends BaseView {
             imgName = '';
         }
 
-        return this.DataService.updateUser(
-            selectedUser,
-            updatePass,
+        const updatedUser = {
             updateFirstName,
             updateSurname,
             updateCountry,
             updateBirthday,
             selectedGender,
             selectedHobbies,
-            imgName
-        );
+            imgName,
+        };
+        const id = await this.DataService._getUserId(selectedUser);
+        const update = await this.DataService.updateUser(id, updatedUser);
+        return update;
     }
 
     // $fileInput(event) {
@@ -80,10 +82,10 @@ class UserFormView extends BaseView {
     //     }
     // }
 
-    $submitBtn(event) {
+    async $submitBtn(event) {
         if (event.target.matches('#submitBtn')) {
             event.preventDefault();
-            this.updateData();
+            await this.updateData();
             window.router.goTo('#userlist');
         }
     }

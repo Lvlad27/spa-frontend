@@ -15,12 +15,28 @@ class LoginFormView extends BaseFormView {
     $loginBtn(event) {
         if (event.target.matches('#loginBtn')) {
             event.preventDefault();
-            this.checkLogin();
+            this.login();
         }
     }
 
-    checkLogin() {
-        if (this.DataService.checkLogin()) {
+    async checkLogin() {
+        const loginUserName = document.getElementById('loginUserName').value,
+            loginPassword = document.getElementById('loginPassword').value;
+        const userArray = await this.DataService.getUsers();
+        const allUserNames = userArray.map((user) => user.email);
+        const allUserPasswords = userArray.map((user) => user.password);
+
+        if (allUserNames.includes(loginUserName) && allUserPasswords.includes(loginPassword)) {
+            await this.DataService._saveUserSession(loginUserName);
+            return true;
+        } else {
+            alert('Please sign up before logging in!');
+            return false;
+        }
+    }
+
+    async login() {
+        if (await this.checkLogin()) {
             window.router.goTo('#userlist');
             return true;
         } else {

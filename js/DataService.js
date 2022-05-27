@@ -16,54 +16,92 @@ class DataService {
         }
     }
 
-    async updateUser() {}
+    async updateUser(id, user) {
+        let url = `http://localhost:3000/dataservice/${id}`;
+        const options = {
+            method: 'PATCH',
+            body: JSON.stringify(user),
+            headers: { 'Content-Type': 'application/json' },
+        };
 
-    async checkLogin() {
-        const loginUserName = document.getElementById('loginUserName').value,
-            loginPassword = document.getElementById('loginPassword').value;
-        const userArray = await this._getUsers();
-        const allUserNames = userArray.map((user) => user.email);
-        const allUserPasswords = userArray.map((user) => user.password);
-
-        if (allUserNames.includes(loginUserName) && allUserPasswords.includes(loginPassword)) {
-            await this._saveUserSession(loginUserName);
-            console.log('true');
-            return true;
-        } else {
-            console.log('false');
-            return false;
+        try {
+            const res = await fetch(url, options);
+            const data = await res.json();
+            return data;
+        } catch (error) {
+            console.error(error);
         }
     }
 
     async _saveUserSession(username) {
-        const id = await this._getUserId(username);
-        sessionStorage.setItem('loggedUser', id);
+        try {
+            const id = await this._getUserId(username);
+            sessionStorage.setItem('loggedUser', id);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     async _getUserId(username) {
-        const USERS = await this._getUsers();
-        const found = USERS.find((element) => element.email === username);
-        return found._id;
+        try {
+            const USERS = await this.getUsers();
+            const found = USERS.find((element) => element.email === username);
+            return found._id;
+        } catch (error) {
+            console.error(error);
+        }
     }
 
-    async _getUsers() {
-        const url = 'http://localhost:3000/dataservice';
-        const res = await fetch(url);
-        const data = await res.json();
-        return data;
+    async getUsers() {
+        try {
+            const url = 'http://localhost:3000/dataservice';
+            const res = await fetch(url);
+            let data = await res.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+        }
     }
 
-    _getLoggedUser() {
+    _getLoggedUserId() {
         return sessionStorage.getItem('loggedUser');
     }
 
-    getLoggedUserObj() {
-        const userName = sessionStorage.getItem('loggedUser');
-        return this.getUser(userName);
+    async _getUserById(id) {
+        try {
+            const url = `http://localhost:3000/dataservice/${id}`;
+            const res = await fetch(url);
+            const data = await res.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async getUser(email) {
+        try {
+            const id = await this._getUserId(email);
+            const url = `http://localhost:3000/dataservice/${id}`;
+            const res = await fetch(url);
+            const data = await res.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async getLoggedUserObj() {
+        try {
+            const id = this._getLoggedUserId();
+            const user = await this._getUserById(id);
+            return user;
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     isUserLoggedIn() {
-        this._getLoggedUser() !== null ? true : false;
+        return this._getLoggedUserId() !== null ? true : false;
     }
 
     deleteUserSession() {
@@ -85,15 +123,6 @@ class DataService {
             console.error(error);
         }
     }
-
-    // async _getUserById(id) {
-    //     console.log('_getUserById call');
-    //     let url = `http://localhost:3000/dataservice/${id}`;
-    //     const res = await fetch(url);
-    //     const data = await res.json();
-    //     console.log('data', data);
-    //     return data;
-    // }
 }
 
 export default DataService;

@@ -21,7 +21,7 @@ class SignUpFormView extends BaseFormView {
                 email: email,
                 password: password,
                 firstName: '',
-                lastName: '',
+                surname: '',
                 country: '',
                 birthday: '',
                 gender: '',
@@ -30,7 +30,7 @@ class SignUpFormView extends BaseFormView {
             };
 
             this.DataService.storeUser(user);
-            window.router.goTo('#userlist');
+            window.router.goTo('#login');
         }
     }
 }

@@ -13,13 +13,9 @@
         <nav class="nav">
             <div class="container">
                 <div class="create">
-                    <h3 class="" id="welcomeMessage">Welcome! <br /><i>{{userName}}</i></h3>
+                    <h3 class="" id="welcomeMessage">Welcome! <br /><i>{{obj.email}}</i></h3>
                     <div class="profile">
-                        <img
-                            src="http://localhost:3000/{{profileImgName}}"
-                            alt="Profile picture"
-                            class="profile-picture"
-                        />
+                        <img id="headerImg" alt="Profile picture" class="profile-picture" />
                     </div>
                 </div>
                 <a href="" class="btn btn-menu" id="logoutBtn">
@@ -32,7 +28,7 @@
     <template id="LoginFormView">
         <div class="container container__login" id="loginAccount">
             <h2 class="container__login-title">Login</h2>
-            <form action="#" class="form form__login">
+            <form class="form form__login">
                 <!-- Email -->
                 <div class="form__login-control">
                     <input
@@ -73,7 +69,7 @@
         <main class="main" id="main">
             <div class="container container__registration" id="registerAccount">
                 <h2 class="container__registration-title">Sign Up</h2>
-                <form action="#" class="form form__registration" id="signUpForm">
+                <form class="form form__registration" id="signUpForm">
                     <!-- Email -->
                     <div class="form__registration-control">
                         <input id="signUpEmail" type="text" placeholder="Email" />
@@ -133,7 +129,7 @@
             <tbody id="userList">
                 {{ for (var index in Object.values(obj)) { }}
                 <tr>
-                    <td><b>{{Object.values(obj)[index].userName}}</b></td>
+                    <td><b>{{Object.values(obj)[index].email}}</b></td>
                     <td>{{Object.values(obj)[index].password}}</td>
                     <td>{{Object.values(obj)[index].firstName}}</td>
                     <td>{{Object.values(obj)[index].surname}}</td>
@@ -143,7 +139,7 @@
                     <td>{{Object.values(obj)[index].hobbies}}</td>
                     <td>
                         <a
-                            href="#users/{{Object.values(obj)[index].userName}}"
+                            href="#users/{{Object.values(obj)[index].email}}"
                             class="btn edit-user" id="editUserBtn"
                             >Edit</a
                         >
@@ -154,7 +150,7 @@
         </table>
     </script>
     <template id="UserRowView">
-        <td>{{username}}</td>
+        <td>{{email}}</td>
         <td>{{password}}</td>
         <td>{{firstName}}</td>
         <td>{{surname}}</td>
@@ -168,7 +164,7 @@
         <div class="container container__userdata" id="userdataContainer">
             <form autocomplete="off" class="form form__userdata" id="userdataForm">
                 <h2 class="container__userdata-title" id="profileName">
-                    {{userName}}
+                    {{email}}
                 </h2>
                 <div class="container__userdata-profile">
                     <label for="imageInput" id="imgContainer">
@@ -199,7 +195,7 @@
                             name="email"
                             id="emailInput"
                             class="input"
-                            value="{{userName}}"
+                            value="{{email}}"
                             readonly
                         />
                     </div>

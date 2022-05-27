@@ -8,8 +8,13 @@ class HeaderView extends BaseView {
         document.addEventListener('click', this.$logoutBtn.bind(this));
     }
 
-    getData() {
-        return this.DataService.getLoggedUserObj();
+    async getData() {
+        try {
+            const data = await this.DataService.getLoggedUserObj();
+            return data;
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     $logoutBtn(event) {
