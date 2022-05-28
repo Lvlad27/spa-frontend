@@ -128,7 +128,6 @@
                     <th scope="col">Gender</th>
                     <th scope="col">Hobbies</th>
                     <th scope="col"></th>
-                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody id="userList">
@@ -147,13 +146,6 @@
                             href="#users/{{Object.values(obj)[index].email}}"
                             class="btn edit-user" id="editUserBtn"
                             >Edit</a
-                        >
-                    </td>
-                    <td>
-                        <a
-                            href="#userlist"
-                            class="btn delete-user" id="deleteUserBtn"
-                            >Delete</a
                         >
                     </td>
                 </tr>
@@ -197,6 +189,7 @@
                     type="file"
                     accept="image/*"
                 />
+
                 <div class="container-0">
                     <!-- Email -->
                     <div class="form__userdata-control">
@@ -370,6 +363,53 @@
                     </button>
                 </div>
             </form>
+
+            <div class="container__photos">
+                <div class="gallery">
+                    <figure class="gallery__item gallery__item--1">
+                        <img src="https://robohash.org/1" alt="Photo" />
+                    </figure>
+                    <figure class="gallery__item gallery__item--1">
+                        <img src="https://robohash.org/2" alt="Photo" />
+                    </figure>
+                    <figure class="gallery__item gallery__item--1">
+                        <img src="https://robohash.org/3" alt="Photo" />
+                    </figure>
+                    <figure class="gallery__item gallery__item--1">
+                        <img src="https://robohash.org/4" alt="Photo" />
+                    </figure>
+                    <figure class="gallery__item gallery__item--1">
+                        <img src="https://robohash.org/4" alt="Photo" />
+                    </figure>
+                    <figure class="gallery__item gallery__item--1">
+                        <img src="https://robohash.org/4" alt="Photo" />
+                    </figure>
+                    <figure class="gallery__item gallery__item--1">
+                        <img src="https://robohash.org/4" alt="Photo" />
+                    </figure>
+                    <figure class="gallery__item gallery__item--1">
+                        <img src="https://robohash.org/1" alt="Photo" />
+                    </figure>
+                    <figure class="gallery__item gallery__item--1">
+                        <img src="https://robohash.org/2" alt="Photo" />
+                    </figure>
+                    <figure class="gallery__item gallery__item--1">
+                        <img src="https://robohash.org/3" alt="Photo" />
+                    </figure>
+                    <figure class="gallery__item gallery__item--1">
+                        <img src="https://robohash.org/4" alt="Photo" />
+                    </figure>
+                    <figure class="gallery__item gallery__item--1">
+                        <img src="https://robohash.org/4" alt="Photo" />
+                    </figure>
+                    <figure class="gallery__item gallery__item--1">
+                        <img src="https://robohash.org/4" alt="Photo" />
+                    </figure>
+                    <figure class="gallery__item gallery__item--1">
+                        <img src="https://robohash.org/4" alt="Photo" />
+                    </figure>
+                </div>
+            </div>
         </div>
     </template>
 

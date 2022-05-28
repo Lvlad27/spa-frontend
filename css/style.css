@@ -7,8 +7,7 @@ body {
   display: flex;
   flex-direction: column;
   font-family: "Inter", Courier, sans-serif;
-  font-size: 1.6rem;
-  overflow: hidden; }
+  font-size: 1.6rem; }
 
 header .nav {
   background-color: white;
@@ -400,8 +399,6 @@ header .nav {
       backdrop-filter: blur(10px);
       border-radius: 5px;
       border: 1px solid #122439;
-      overflow: hidden;
-      display: flex;
       justify-content: center;
       padding: 2rem 4rem; }
       .main .section__content .container__userdata-title {
@@ -445,7 +442,8 @@ header .nav {
       .main .section__content .container__userdata .form__userdata .container-2,
       .main .section__content .container__userdata .form__userdata .container-3 {
         display: flex;
-        gap: 4rem; }
+        gap: 4rem;
+        justify-content: center; }
       .main .section__content .container__userdata .form__userdata .container-gender,
       .main .section__content .container__userdata .form__userdata .container-hobbies {
         display: flex;
@@ -501,6 +499,16 @@ header .nav {
             outline: 0; }
           .main .section__content .container__userdata .form__userdata .wrapper .form__userdata-btn:active {
             transform: scale(0.98); }
+    .main .section__content .container__photos .gallery {
+      outline: 1px solid red;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+      grid-gap: 1rem;
+      justify-items: center;
+      column-gap: 4rem;
+      row-gap: 2rem;
+      margin-top: 3rem;
+      margin-bottom: 5rem; }
   .main .section__ads {
     flex: 0 0 15vw;
     border-left: 2px solid #122439;
