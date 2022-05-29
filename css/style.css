@@ -427,7 +427,7 @@ header .nav {
           transition: 0.5s ease;
           opacity: 0;
           position: absolute;
-          top: 18%;
+          top: 11%;
           left: 50%;
           transform: translate(-50%, -50%);
           text-align: center;
@@ -500,7 +500,6 @@ header .nav {
           .main .section__content .container__userdata .form__userdata .wrapper .form__userdata-btn:active {
             transform: scale(0.98); }
     .main .section__content .container__photos .gallery {
-      outline: 1px solid red;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
       grid-gap: 1rem;
@@ -509,6 +508,10 @@ header .nav {
       row-gap: 2rem;
       margin-top: 3rem;
       margin-bottom: 5rem; }
+      .main .section__content .container__photos .gallery .gallery__item {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; }
   .main .section__ads {
     flex: 0 0 15vw;
     border-left: 2px solid #122439;

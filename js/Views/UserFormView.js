@@ -58,7 +58,10 @@ class UserFormView extends BaseView {
             imgName = '';
         }
 
+        const id = await this.DataService._getUserId(selectedUser);
+
         const updatedUser = {
+            id,
             updateFirstName,
             updateSurname,
             updateCountry,
@@ -67,8 +70,8 @@ class UserFormView extends BaseView {
             selectedHobbies,
             imgName,
         };
-        const id = await this.DataService._getUserId(selectedUser);
-        const update = await this.DataService.updateUser(id, updatedUser);
+
+        const update = await this.DataService.updateUser(updatedUser);
         return update;
     }
 

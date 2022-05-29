@@ -142,11 +142,7 @@ header {
                     backdrop-filter: blur(10px);
                     border-radius: 5px;
                     border: 1px solid $form-color-1;
-
-                    // overflow: hidden;
-                    // display: flex;
                     justify-content: center;
-                    // z-index: 99;
                     padding: 2rem 4rem;
 
                     &-title {
@@ -185,7 +181,7 @@ header {
                             transition: 0.5s ease;
                             opacity: 0;
                             position: absolute;
-                            top: 18%;
+                            top: 11%;
                             left: 50%;
                             transform: translate(-50%, -50%);
                             text-align: center;
@@ -293,7 +289,7 @@ header {
                 }
                 &__photos {
                     .gallery {
-                        outline: 1px solid red;
+                        // outline: 1px solid red;
                         display: grid;
                         grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
                         grid-gap: 1rem;
@@ -303,12 +299,12 @@ header {
                         margin-top: 3rem;
                         margin-bottom: 5rem;
 
-                        // .gallery__img {
-                        //     outline: 1px solid red;
-                        //     width: 100%;
-                        //     height: 100%;
-                        //     object-fit: cover;
-                        // }
+                        .gallery__item {
+                            // outline: 1px solid red;
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
                     }
                 }
             }

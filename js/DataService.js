@@ -16,8 +16,8 @@ class DataService {
         }
     }
 
-    async updateUser(id, user) {
-        let url = `http://localhost:3000/dataservice/${id}`;
+    async updateUser(user) {
+        let url = `http://localhost:3000/dataservice/update`;
         const options = {
             method: 'PATCH',
             body: JSON.stringify(user),
