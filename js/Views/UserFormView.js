@@ -7,7 +7,8 @@ class UserFormView extends BaseView {
 
         document.addEventListener('click', this.$cancelBtn.bind(this));
         document.addEventListener('click', this.$submitBtn.bind(this));
-        document.addEventListener('change', this.$fileInput.bind(this));
+        // document.addEventListener('change', this.$fileInput.bind(this));
+        document.addEventListener('change', this.$postImgInput.bind(this));
     }
 
     async getData(param) {
@@ -45,7 +46,7 @@ class UserFormView extends BaseView {
         formData.append('profileImg', file.files[0]);
 
         if (file.files[0]) {
-            imgName = await this.DataService.getProfileImg(formData);
+            imgName = await this.DataService.upload(formData, '/uploadProfileImg');
         } else if (!file.files[0]) {
             let userArray = await this.DataService.getUsers();
             userArray.forEach((element) => {
@@ -75,19 +76,68 @@ class UserFormView extends BaseView {
         return update;
     }
 
-    $fileInput(event) {
+    $postImgInput(event) {
         if (event.target.matches('#imageInput')) {
-            const file = event.files;
-            if (file) {
-                imageId.src = URL.createObjectURL(file);
-            }
+            this.readPost();
         }
     }
+
+    readPost() {
+        const file = document.getElementById('postImageInput');
+        const formData = new FormData();
+        formData.append('postImageInput', file.files[0]);
+    }
+
+    renderPost(postName) {
+        const addPostDiv = document.getElementById('addPostDiv');
+        const html = `
+        <div class="post">
+            <img
+                src="http://localhost:3000/dataService/posts/{{${postName}}}"
+                alt=""
+                class="post-picture"
+            />
+            <div class="post-options-container">
+                <label for="editPostImgInput">
+                    <i class="fas fas far fa-edit" title="Edit post"></i>
+                </label>
+                <input
+                    class="image-input"
+                    name="editPostImgInput"
+                    id="editPostImgInput"
+                    type="file"
+                    accept="image/*"
+                />
+                <button
+                    type="button"
+                    class="post-options"
+                    id="deletePostBtn"
+                    title="Delete post"
+                >
+                    <i class="fas fas far fas fa-window-close"></i>
+                </button>
+            </div>
+        </div>`;
+        addPostDiv.before(html);
+    }
+
+    async $deletePostBtn(event) {}
+    async $uploadPost(event) {}
+
+    // $avatarImgInput(event) {
+    //     if (event.target.matches('#postImageInput')) {
+    //         const file = event.files;
+    //         if (file) {
+    //             imageId.src = URL.createObjectURL(file);
+    //         }
+    //     }
+    // }
 
     async $submitBtn(event) {
         if (event.target.matches('#submitBtn')) {
             event.preventDefault();
             await this.updateData();
+            // await this.$uploadPost();
             window.router.goTo('#userlist');
         }
     }

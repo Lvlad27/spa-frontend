@@ -57,6 +57,7 @@ header {
                     border-radius: 50%;
 
                     .profile-picture {
+                        background-color: transparent;
                         object-fit: cover;
                         width: 100%;
                         height: 100%;
@@ -139,6 +140,8 @@ header {
 
             .container {
                 &__userdata {
+                    width: 70%;
+                    margin: auto;
                     backdrop-filter: blur(10px);
                     border-radius: 5px;
                     border: 1px solid $form-color-1;
@@ -153,7 +156,6 @@ header {
 
                     &-profile {
                         margin: auto;
-                        background-color: $color-light;
                         width: 15rem;
                         aspect-ratio: 1/1;
                         overflow: hidden;
@@ -181,7 +183,7 @@ header {
                             transition: 0.5s ease;
                             opacity: 0;
                             position: absolute;
-                            top: 11%;
+                            top: 15%;
                             left: 50%;
                             transform: translate(-50%, -50%);
                             text-align: center;
@@ -289,21 +291,63 @@ header {
                 }
                 &__photos {
                     .gallery {
-                        // outline: 1px solid red;
-                        display: grid;
-                        grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-                        grid-gap: 1rem;
+                        display: flex;
                         justify-items: center;
-                        column-gap: 4rem;
-                        row-gap: 2rem;
+                        align-items: center;
+                        gap: 2rem;
                         margin-top: 3rem;
-                        margin-bottom: 5rem;
 
-                        .gallery__item {
+                        .post {
                             // outline: 1px solid red;
-                            width: 100%;
-                            height: 100%;
-                            object-fit: cover;
+
+                            .post-picture {
+                                width: 20rem;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+
+                            .post-options-container {
+                                margin-top: 2rem;
+                                display: flex;
+                                justify-content: space-evenly;
+                                align-items: center;
+
+                                .post-options {
+                                    background-color: transparent;
+                                    border: none;
+                                    color: white;
+                                    padding: 0;
+                                }
+
+                                .fas {
+                                    color: $form-color-2;
+                                    font-size: 3rem;
+                                    cursor: pointer;
+                                }
+
+                                .fas:hover {
+                                    color: $form-color-1;
+                                }
+
+                                input.image-input {
+                                    display: none;
+                                }
+                            }
+                        }
+
+                        .add-post {
+                            .fa-plus-square {
+                                // outline: solid 1px red;
+                                padding: 4rem;
+                                font-size: 10rem;
+                                color: $form-color-1;
+                            }
+
+                            .fa-plus-square:hover {
+                                transform: scale(1.2);
+                                cursor: pointer;
+                                transition: ease-in-out 0.1s;
+                            }
                         }
                     }
                 }

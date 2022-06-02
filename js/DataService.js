@@ -108,22 +108,6 @@ class DataService {
         sessionStorage.removeItem('loggedUser');
     }
 
-    async getProfileImg(formData) {
-        let url = 'http://localhost:3000/dataService/uploadProfileImg';
-        let options = {
-            method: 'POST',
-            body: formData,
-        };
-
-        try {
-            const res = await fetch(url, options);
-            const data = await res.json();
-            return data.filename;
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
     async deleteUser(email) {
         const id = await this._getUserId(email);
         const url = `http://localhost:3000/dataservice/${id}`;
@@ -134,6 +118,70 @@ class DataService {
         const data = await res.json();
         return data;
     }
+
+    async upload(body, url) {
+        let options = {
+            method: 'POST',
+            body: body,
+        };
+        try {
+            const res = await fetch(`http://localhost:3000/dataService/${url}`, options);
+            const data = await res.json();
+            return data.filename;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async storePost(post) {
+        let url = 'http://localhost:3000/dataservice/posts/create';
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(user),
+            headers: { 'Content-Type': 'application/json' },
+        };
+
+        try {
+            const res = await fetch(url, options);
+            const data = await res.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async getPosts(email) {
+        try {
+            const id = await this._getUserId(email);
+            const url = `http://localhost:3000/dataservice/posts/${id}`;
+            const res = await fetch(url);
+            const data = await res.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    async getAllPosts() {
+        try {
+            const url = `http://localhost:3000/dataservice/posts/`;
+            const res = await fetch(url);
+            const data = await res.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    // async deletePost(post) {
+    //     const allPosts = await this.getAllPosts();
+    //     const id =
+    //     const url = `http://localhost:3000/dataservice/posts/${id}`;
+    //     const options = {
+    //         method: 'DELETE',
+    //     };
+    //     const res = await fetch(url, options);
+    //     const data = await res.json();
+    //     return data;
+    // }
 }
 
 export default DataService;
