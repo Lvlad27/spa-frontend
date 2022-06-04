@@ -125,7 +125,7 @@ class DataService {
             body: body,
         };
         try {
-            const res = await fetch(`http://localhost:3000/dataService/${url}`, options);
+            const res = await fetch(`http://localhost:3000/dataservice/${url}`, options);
             const data = await res.json();
             return data.filename;
         } catch (error) {

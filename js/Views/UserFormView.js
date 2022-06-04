@@ -46,7 +46,7 @@ class UserFormView extends BaseView {
         formData.append('profileImg', file.files[0]);
 
         if (file.files[0]) {
-            imgName = await this.DataService.upload(formData, '/uploadProfileImg');
+            imgName = await this.DataService.upload(formData, 'uploadProfileImg');
         } else if (!file.files[0]) {
             let userArray = await this.DataService.getUsers();
             userArray.forEach((element) => {
@@ -76,16 +76,16 @@ class UserFormView extends BaseView {
         return update;
     }
 
-    $postImgInput(event) {
-        if (event.target.matches('#imageInput')) {
-            this.readPost();
-        }
-    }
-
-    readPost() {
-        const file = document.getElementById('postImageInput');
-        const formData = new FormData();
+    async reqPost() {
+        const selectedUser = document.getElementById('emailInput').value.trim(),
+            file = document.getElementById('postImageInput'),
+            userId = await this.DataService._getUserId(selectedUser),
+            formData = new FormData();
         formData.append('postImageInput', file.files[0]);
+        formData.append('userId', userId);
+
+        const postName = await this.DataService.upload(formData, 'posts/upload');
+        return postName;
     }
 
     renderPost(postName) {
@@ -137,7 +137,6 @@ class UserFormView extends BaseView {
         if (event.target.matches('#submitBtn')) {
             event.preventDefault();
             await this.updateData();
-            // await this.$uploadPost();
             window.router.goTo('#userlist');
         }
     }
@@ -145,6 +144,12 @@ class UserFormView extends BaseView {
     $cancelBtn(event) {
         if (event.target.matches('#cancelBtn')) {
             window.router.goTo('#userlist');
+        }
+    }
+
+    $postImgInput(event) {
+        if (event.target.matches('#postImageInput')) {
+            this.reqPost();
         }
     }
 }
