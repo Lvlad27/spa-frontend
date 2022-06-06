@@ -292,6 +292,7 @@ header {
                 &__photos {
                     .gallery {
                         display: flex;
+                        flex-wrap: wrap;
                         justify-items: center;
                         align-items: center;
                         gap: 2rem;

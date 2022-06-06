@@ -137,7 +137,7 @@ class DataService {
         let url = 'http://localhost:3000/dataservice/posts/create';
         const options = {
             method: 'POST',
-            body: JSON.stringify(user),
+            body: JSON.stringify(post),
             headers: { 'Content-Type': 'application/json' },
         };
 
@@ -161,9 +161,10 @@ class DataService {
             console.error(error);
         }
     }
+
     async getAllPosts() {
         try {
-            const url = `http://localhost:3000/dataservice/posts/`;
+            const url = `http://localhost:3000/dataservice/posts`;
             const res = await fetch(url);
             const data = await res.json();
             return data;

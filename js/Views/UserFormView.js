@@ -84,8 +84,11 @@ class UserFormView extends BaseView {
         formData.append('postImageInput', file.files[0]);
         formData.append('userId', userId);
 
-        const postName = await this.DataService.upload(formData, 'posts/upload');
-        return postName;
+        let postName = await this.DataService.upload(formData, 'posts/upload');
+        postName = postName.substr(0, postName.lastIndexOf('.'));
+        const post = { userId, postName };
+        const storedPost = await this.DataService.storePost(post);
+        console.log(storedPost);
     }
 
     renderPost(postName) {
@@ -118,11 +121,11 @@ class UserFormView extends BaseView {
                 </button>
             </div>
         </div>`;
-        addPostDiv.before(html);
+        0;
+        addPostDiv.insertAdjacentHTML('beforebegin', html);
     }
 
     async $deletePostBtn(event) {}
-    async $uploadPost(event) {}
 
     // $avatarImgInput(event) {
     //     if (event.target.matches('#postImageInput')) {
@@ -150,6 +153,7 @@ class UserFormView extends BaseView {
     $postImgInput(event) {
         if (event.target.matches('#postImageInput')) {
             this.reqPost();
+            this.renderPost();
         }
     }
 }

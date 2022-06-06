@@ -503,6 +503,7 @@ header .nav {
             transform: scale(0.98); }
     .main .section__content .container__photos .gallery {
       display: flex;
+      flex-wrap: wrap;
       justify-items: center;
       align-items: center;
       gap: 2rem;
